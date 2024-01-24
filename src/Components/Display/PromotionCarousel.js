@@ -1,21 +1,30 @@
-import React from "react";
-import Carousel from "react-material-ui-carousel";
+import React, { useRef, useState } from "react";
 
-function PromotionCarousel() {
-  const colors = ["blue", "green", "yellow", "red", "orange"];
+import { Pagination, Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/pagination";
+
+export default function PromotionCarousel() {
   return (
-    <Carousel navButtonsAlwaysInvisible interval={1500} animation="slide">
-      {Array.from({ length: 5 }, (v, i) => i).map((item, index) => (
-        <div
-          className="w-full h-[17rem]"
-          style={{ backgroundColor: colors[index] }}
-          key={item}
-        >
-          <p className="text-5xl text-center">Item {item}</p>
-        </div>
+    <Swiper
+      pagination={true}
+      loop={true}
+      autoplay={{
+        delay: 1500,
+        disableOnInteraction: false,
+      }}
+      modules={[Pagination, Autoplay]}
+      className="mySwiper"
+    >
+      {Array.from({ length: 7 }, (v, i) => i).map((item, index) => (
+        <SwiperSlide className="border-2 border-blue-600">
+          <div className="h-[25rem]" key={index}>
+            PROMOTION {index}
+          </div>
+        </SwiperSlide>
       ))}
-    </Carousel>
+    </Swiper>
   );
 }
-
-export default PromotionCarousel;

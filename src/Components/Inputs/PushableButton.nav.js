@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-function PushableButtonNav({ text, link }) {
+function PushableButtonNav({ text, link, icon }) {
   const navigate = useNavigate();
   const location = useLocation();
   const selected = location.pathname === link;
@@ -24,7 +24,7 @@ function PushableButtonNav({ text, link }) {
         disableRipple
         style={{
           width: "100%",
-          padding: "7px 30px",
+          padding: "10px 10px",
           borderRadius: "12px",
           fontSize: ".75rem",
           color: selected ? "white" : "hsl(210deg 100% 30%)",
@@ -36,7 +36,10 @@ function PushableButtonNav({ text, link }) {
           navigate(link);
         }}
       >
-        {text}
+        <div className="flex gap-2 justify-center items-center">
+          <p className="text-[.95rem]">{icon}</p>
+          <p className="text-base font-bold capitalize">{text}</p>
+        </div>
       </Button>
     </div>
   );

@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navigation from "./Layouts/Navigation";
 import Home from "./Pages/Home";
-import Bingo from "./Pages/Bingo";
+import Sports from "./Pages/Sports";
 import Slots from "./Pages/Slots";
 import Casino from "./Pages/Casino";
 import Promotions from "./Pages/Promotions";
@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigation />}>
           <Route index element={<Home />} />
-          <Route path="bingo" element={<Bingo />} />
+          <Route path="sports" element={<Sports />} />
           <Route path="slots" element={<Slots />} />
           <Route path="casino" element={<Casino />} />
           <Route path="promotions" element={<Promotions />} />
