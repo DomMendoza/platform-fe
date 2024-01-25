@@ -6,7 +6,7 @@ import GameCategorySection from "../Components/Display/GameCategorySection";
 
 function Home() {
   return (
-    <div className="h-[100rem] flex flex-col justify-center items-center bg-green-200">
+    <div className="h-[100rem] flex flex-col justify-center items-center bg-gray-400">
       <div className="w-[85rem] h-full flex flex-col gap-16 border-2 border-red-600">
         <div className="home-one border-2 border-green-600">
           <PromotionCarousel />
@@ -19,7 +19,7 @@ function Home() {
             <MarqueeTextSlider />
           </div>
         </div>
-        <div className="home-three px-5 py-2 bg-blue-400 flex flex-col gap-4 rounded-lg">
+        <div className="home-three px-5 py-2 flex flex-col gap-4 rounded-lg">
           <GameCategorySection />
         </div>
       </div>

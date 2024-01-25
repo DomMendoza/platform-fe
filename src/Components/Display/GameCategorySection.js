@@ -24,6 +24,14 @@ function GameCategorySection() {
     { name: "superAce", image: superAce },
     { name: "superAce", image: superAce },
     { name: "superAce", image: superAce },
+    { name: "superAce", image: superAce },
+    { name: "superAce", image: superAce },
+    { name: "superAce", image: superAce },
+    { name: "superAce", image: superAce },
+    { name: "superAce", image: superAce },
+    { name: "superAce", image: superAce },
+    { name: "superAce", image: superAce },
+    { name: "superAce", image: superAce },
   ];
 
   const [selectedProvider, setSelectedProvider] = useState();
@@ -45,21 +53,20 @@ function GameCategorySection() {
             modules={[Navigation]}
           >
             {slots.map((item, index) => (
-              <SwiperSlide
-                className={`rounded-lg ${
-                  selectedProvider === item ? "border-2 border-red-600" : ""
-                }`}
-                onClick={() => setSelectedProvider(item)}
-              >
+              <SwiperSlide onClick={() => setSelectedProvider(item)}>
                 <div
-                  className={`flex justify-center items-center h-[5rem] rounded-lg transition duration-150 ease-in-out cursor-pointer ${
+                  className={`flex justify-center items-center h-[5rem] rounded-lg transition duration-150 ease-out cursor-pointer ${
                     selectedProvider !== item ? "hover:scale-125" : ""
                   }`}
                 >
                   <img
                     src={item}
                     key={index}
-                    className="h-full w-full object-contain p-3 "
+                    className={`h-full w-full object-contain p-3 ${
+                      selectedProvider === item
+                        ? "border-b-4 border-blue-600 "
+                        : ""
+                    }`}
                   />
                 </div>
               </SwiperSlide>
@@ -67,8 +74,18 @@ function GameCategorySection() {
           </Swiper>
         </div>
       </div>
-      <div className="game-grid border-2 border-red-600">
-        {/* TODO: MAKE THE  */}
+      <div className="game-grid grid grid-cols-7 place-items-center gap-5 ">
+        {games.map((item, index) => (
+          <div
+            key={index}
+            className=" rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] "
+          >
+            <img
+              src={item.image}
+              className="objectg-contain rounded-lg hover:blur-sm"
+            />
+          </div>
+        ))}
       </div>
     </>
   );
