@@ -19,10 +19,8 @@ function Home() {
             <MarqueeTextSlider />
           </div>
         </div>
-        <div className="home-three border-2 border-red-600">
-          <div className="bg-white p-5 rounded-lg border-2 border-green-600">
-            <GameCategorySection />
-          </div>
+        <div className="home-three px-5 py-2 bg-blue-400 flex flex-col gap-4 rounded-lg">
+          <GameCategorySection />
         </div>
       </div>
     </div>

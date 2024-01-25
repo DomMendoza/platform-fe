@@ -2,3 +2,6 @@
 .swiper-button-next:after {
   display: none;
 }
+.swiper-pagination-bullet{
+    background-color: white !important;
+}
