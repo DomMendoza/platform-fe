@@ -40,10 +40,11 @@ function PopularGamesSwiper() {
           modules={[Navigation]}
         >
           {Array.from({ length: 7 }, (v, i) => i).map((item, index) => (
-            <SwiperSlide className="border-2 border-blue-600 rounded-lg">
-              <div className="h-[12rem]" key={index}>
-                Game {index}
-              </div>
+            <SwiperSlide
+              className="border-2 border-blue-600 rounded-lg"
+              key={index}
+            >
+              <div className="h-[12rem]">Game {index}</div>
             </SwiperSlide>
           ))}
         </Swiper>

@@ -64,7 +64,10 @@ function SideNavigation() {
         <div className="promo-nav flex flex-col gap-10">
           <div className="promo-container flex flex-col gap-1 ">
             {promotions.map((item, index) => (
-              <div className="w-full flex-1 flex gap-2 py-1 px-2 justify-center items-center border-2 border-blue-600 rounded-lg">
+              <div
+                className="w-full flex-1 flex gap-2 py-1 px-2 justify-center items-center border-2 border-blue-600 rounded-lg"
+                key={index}
+              >
                 <div className="icon-container">
                   {/* <CardGiftcardIcon style={{ fontSize: "2rem" }} /> */}
                   {item.icon}

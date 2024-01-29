@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 
+import { Button } from "@mui/material";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+
 //Providers
-import jili from "../../Assets/jili.webp";
-import cq9 from "../../Assets/cq9.webp";
-import fachai from "../../Assets/fachai.webp";
-import jdb from "../../Assets/jdb.webp";
-import playtech_1 from "../../Assets/playtech_1.webp";
+import jili from "../Assets/jili.webp";
+import cq9 from "../Assets/cq9.webp";
+import fachai from "../Assets/fachai.webp";
+import jdb from "../Assets/jdb.webp";
+import playtech_1 from "../Assets/playtech_1.webp";
 
 //Games
-import superAce from "../../Assets/superAce.webp";
+import superAce from "../Assets/superAce.webp";
 
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,7 +20,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-function GameCategorySection() {
+function SlotsGames() {
   const slots = [jili, cq9, fachai, jdb, playtech_1];
   const games = [
     { name: "superAce", image: superAce },
@@ -41,19 +45,24 @@ function GameCategorySection() {
   }, []);
 
   return (
-    <>
-      <div className="text-container flex justify-between items-center gap-5 ">
+    <div className="border-2 border-red-600 flex flex-col gap-5">
+      <div className="text-container flex justify-between items-center gap-5">
         <p className="text-2xl font-bold uppercase ">Slot Games</p>
-        <div className="swiper-container w-1/2 ">
+        <div className="swiper-container w-[55%] px-10 relative">
           <Swiper
-            // spaceBetween={25}
             slidesPerView={5}
             onSlideChange={() => console.log("slide change")}
-            navigation={true}
+            navigation={{
+              nextEl: ".next",
+              prevEl: ".prev",
+            }}
             modules={[Navigation]}
           >
             {slots.map((item, index) => (
-              <SwiperSlide onClick={() => setSelectedProvider(item)}>
+              <SwiperSlide
+                onClick={() => setSelectedProvider(item)}
+                key={index}
+              >
                 <div
                   className={`flex justify-center items-center h-[5rem] rounded-lg transition duration-150 ease-out cursor-pointer ${
                     selectedProvider !== item ? "hover:scale-125" : ""
@@ -61,10 +70,9 @@ function GameCategorySection() {
                 >
                   <img
                     src={item}
-                    key={index}
                     className={`h-full w-full object-contain p-3 ${
                       selectedProvider === item
-                        ? "border-b-4 border-blue-600 "
+                        ? "border-b-4 border-blue-600 ease-in-out duration-300"
                         : ""
                     }`}
                   />
@@ -72,23 +80,37 @@ function GameCategorySection() {
               </SwiperSlide>
             ))}
           </Swiper>
+          <div className="absolute inset-0 flex justify-between items-center">
+            <div className=" prev flex justify-center items-center w-8 h-8 pl-2 rounded-full cursor-pointer">
+              <ArrowBackIosIcon fontSize=".9rem" style={{ color: "white" }} />
+            </div>
+            <div className="border-2 border-red-600 next flex justify-center items-center w-8 h-8 rounded-full cursor-pointer">
+              <ArrowForwardIosIcon
+                fontSize=".9rem"
+                style={{ color: "white" }}
+              />
+            </div>
+          </div>
         </div>
       </div>
       <div className="game-grid grid grid-cols-7 place-items-center gap-5 ">
         {games.map((item, index) => (
           <div
             key={index}
-            className=" rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] "
+            className=" rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] relative"
           >
             <img
               src={item.image}
-              className="objectg-contain rounded-lg hover:blur-sm"
+              className="objectg-contain rounded-lg hover:brightness-50 ease-in-out duration-300"
             />
+            <div className="hidden absolute inset-0 hover:flex justify-center items-center">
+              <Button variant="contained">PLAY NOW</Button>
+            </div>
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
-export default GameCategorySection;
+export default SlotsGames;

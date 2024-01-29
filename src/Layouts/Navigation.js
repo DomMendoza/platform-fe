@@ -7,7 +7,7 @@ function Navigation() {
   return (
     <div className="flex border-2 border-red-600">
       <SideNavigation />
-      <div className="flex-1 flex flex-col ">
+      <div className="flex-1 flex flex-col border-2 border-red-600">
         <TopNavigation />
         <Outlet />
       </div>

@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import React, { useState } from "react";
 
-function PushableButtonAuth({ text }) {
+function PushableButtonAuth({ text, handleOpen }) {
   return (
     <div
       style={{
@@ -12,7 +12,7 @@ function PushableButtonAuth({ text }) {
       }}
     >
       <Button
-        className="-translate-y-1 active:-translate-y-0"
+        className="-translate-y-1 active:-translate-y-0 "
         disableRipple
         style={{
           width: "100%",
@@ -22,6 +22,7 @@ function PushableButtonAuth({ text }) {
           color: "white",
           background: "hsl(210deg 100% 30%)",
         }}
+        onClick={handleOpen}
       >
         {text}
       </Button>
