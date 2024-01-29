@@ -21,7 +21,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-function SlotsGames() {
+function CasinoGames() {
   const slots = [jili, cq9, fachai, jdb, playtech_1];
   const games = [
     { name: "superAce", image: superAce },
@@ -73,8 +73,9 @@ function SlotsGames() {
   return (
     <div className=" flex flex-col gap-5">
       <div className="text-container flex justify-between items-center gap-5">
-        <p className="text-2xl font-bold uppercase ">Slot Games</p>
+        <p className="text-2xl font-bold uppercase ">Casino Games</p>
         <div className="swiper-container w-[55%] px-10 relative">
+          {/* TODO: MAKE THIS CONDITIONAL */}
           <Swiper
             slidesPerView={5}
             onSlideChange={() => console.log("slide change")}
@@ -162,4 +163,4 @@ function SlotsGames() {
   );
 }
 
-export default SlotsGames;
+export default CasinoGames;

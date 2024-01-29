@@ -16,11 +16,6 @@ function SideNavigation() {
       icon: <FontAwesomeIcon icon={faHouse} />,
     },
     {
-      name: "Sports",
-      link: "/sports",
-      icon: <FontAwesomeIcon icon={faBasketball} />,
-    },
-    {
       name: "Slots",
       link: "/slots",
       icon: <FontAwesomeIcon icon={faCheckToSlot} />,
@@ -29,6 +24,11 @@ function SideNavigation() {
       name: "Casino",
       link: "/casino",
       icon: <FontAwesomeIcon icon={faDice} />,
+    },
+    {
+      name: "Sports",
+      link: "/sports",
+      icon: <FontAwesomeIcon icon={faBasketball} />,
     },
     {
       name: "Promotions",
