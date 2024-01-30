@@ -13,7 +13,7 @@ function PopularGamesSwiper() {
   return (
     <>
       <div className="text-container flex justify-between items-center">
-        <p className="text-2xl font-bold capitalize">popular games</p>
+        <p className="text-2xl font-bold capitalize">hot games</p>
         <div className="navigation-buttons-container flex">
           <div className="flex gap-2">
             <Button variant="outlined" className="prev">

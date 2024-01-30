@@ -147,7 +147,7 @@ function CasinoGames() {
         ))}
         <div
           className="bg-red-400 w-40 h-40 rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] cursor-pointer"
-          onClick={() => navigate("/slots")}
+          onClick={() => navigate("/casino")}
         >
           <div className="w-full h-full flex flex-col justify-center items-center gap-2 rounded-lg">
             <div className="flex justify-center items-center gap-2">

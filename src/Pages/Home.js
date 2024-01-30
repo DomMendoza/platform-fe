@@ -5,10 +5,11 @@ import MarqueeTextSlider from "../Components/Display/MarqueeTextSlider";
 
 import SlotsGames from "../Layouts/SlotsGames";
 import CasinoGames from "../Layouts/CasinoGames";
+import Footer from "../Layouts/Footer";
 
 function Home() {
   return (
-    <div className="w-full flex flex-col justify-center items-center bg-gray-400">
+    <div className="w-full flex flex-col gap-16 justify-center items-center bg-gray-400">
       <div className="w-[65rem] 2xl:w-[85rem] h-full flex flex-col gap-16 border-2 border-red-600">
         <div className="home-one swiper-container border-2 border-green-600">
           <PromotionCarousel />
@@ -26,6 +27,7 @@ function Home() {
           <CasinoGames />
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
