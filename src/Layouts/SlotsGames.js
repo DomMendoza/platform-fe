@@ -41,25 +41,6 @@ function SlotsGames() {
 
   const navigate = useNavigate();
   const [selectedProvider, setSelectedProvider] = useState();
-  const [hoverStates, setHoverStates] = useState(
-    Array(games.length).fill(false)
-  );
-
-  const handleMouseEnter = (index) => {
-    setHoverStates((prev) => {
-      const newState = [...prev];
-      newState[index] = true;
-      return newState;
-    });
-  };
-
-  const handleMouseLeave = (index) => {
-    setHoverStates((prev) => {
-      const newState = [...prev];
-      newState[index] = false;
-      return newState;
-    });
-  };
 
   const handleButtonClick = (index) => {
     console.log("Button clicked for index:", index);
@@ -123,22 +104,17 @@ function SlotsGames() {
         {games.slice(0, 13).map((item, index) => (
           <div
             key={index}
-            className="w-40 h-40 rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] flex justify-center items-center relative"
-            onMouseEnter={() => handleMouseEnter(index)}
-            onMouseLeave={() => handleMouseLeave(index)}
+            className="group w-40 h-40 rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] flex justify-center items-center relative "
           >
             <img
               src={item.image}
-              className={`w-full h-full object-contain rounded-lg ${
-                hoverStates[index] ? "brightness-50" : ""
-              } ease-in-out duration-300`}
+              className="w-full h-full object-contain rounded-lg group-hover:brightness-50 duration-300 ease-in-out"
             />
             <Button
               variant="contained"
-              className={`bg-black hover:bg-black absolute ${
-                hoverStates[index] ? "block" : "hidden"
-              } ease-in-out duration-1000`}
+              className="bg-black hover:bg-black absolute group-hover:block hidden "
               onClick={() => handleButtonClick(index)}
+              style={{ animation: "fadeMe 500ms" }}
             >
               PLAY NOW
             </Button>

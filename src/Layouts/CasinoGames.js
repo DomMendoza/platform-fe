@@ -111,7 +111,7 @@ function CasinoGames() {
             <div className=" prev flex justify-center items-center w-8 h-8 pl-2 rounded-full cursor-pointer">
               <ArrowBackIosIcon fontSize=".9rem" style={{ color: "white" }} />
             </div>
-            <div className="border-2 border-red-600 next flex justify-center items-center w-8 h-8 rounded-full cursor-pointer">
+            <div className=" next flex justify-center items-center w-8 h-8 rounded-full cursor-pointer">
               <ArrowForwardIosIcon
                 fontSize=".9rem"
                 style={{ color: "white" }}
@@ -124,22 +124,17 @@ function CasinoGames() {
         {games.slice(0, 13).map((item, index) => (
           <div
             key={index}
-            className="w-40 h-40 rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] flex justify-center items-center relative"
-            onMouseEnter={() => handleMouseEnter(index)}
-            onMouseLeave={() => handleMouseLeave(index)}
+            className="group w-40 h-40 rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] flex justify-center items-center relative  "
           >
             <img
               src={item.image}
-              className={`w-full h-full object-contain rounded-lg ${
-                hoverStates[index] ? "brightness-50" : ""
-              } ease-in-out duration-300`}
+              className="w-full h-full object-contain rounded-lg group-hover:brightness-50 duration-300 ease-in-out"
             />
             <Button
               variant="contained"
-              className={`bg-black hover:bg-black absolute ${
-                hoverStates[index] ? "block" : "hidden"
-              } ease-in-out duration-1000`}
+              className="bg-black hover:bg-black absolute group-hover:block hidden "
               onClick={() => handleButtonClick(index)}
+              style={{ animation: "fadeMe 500ms" }}
             >
               PLAY NOW
             </Button>
