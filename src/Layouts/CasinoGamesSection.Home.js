@@ -21,8 +21,19 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-function SlotsGames() {
-  const slots = [jili, cq9, fachai, jdb, playtech_1];
+function CasinoGames() {
+  const slots = [
+    jili,
+    cq9,
+    fachai,
+    jdb,
+    playtech_1,
+    jili,
+    cq9,
+    fachai,
+    jdb,
+    playtech_1,
+  ];
   const games = [
     { name: "superAce", image: superAce },
     { name: "superAce", image: superAce },
@@ -41,6 +52,25 @@ function SlotsGames() {
 
   const navigate = useNavigate();
   const [selectedProvider, setSelectedProvider] = useState();
+  const [hoverStates, setHoverStates] = useState(
+    Array(games.length).fill(false)
+  );
+
+  const handleMouseEnter = (index) => {
+    setHoverStates((prev) => {
+      const newState = [...prev];
+      newState[index] = true;
+      return newState;
+    });
+  };
+
+  const handleMouseLeave = (index) => {
+    setHoverStates((prev) => {
+      const newState = [...prev];
+      newState[index] = false;
+      return newState;
+    });
+  };
 
   const handleButtonClick = (index) => {
     console.log("Button clicked for index:", index);
@@ -54,14 +84,15 @@ function SlotsGames() {
   return (
     <div className=" flex flex-col gap-5">
       <div className="text-container flex justify-between items-center gap-5">
-        <p className="text-2xl font-bold uppercase ">Slot Games</p>
+        <p className="text-2xl font-bold uppercase ">Casino Games</p>
         <div className="swiper-container w-[55%] px-10 relative">
+          {/* TODO: MAKE THIS CONDITIONAL */}
           <Swiper
             slidesPerView={5}
             onSlideChange={() => console.log("slide change")}
             navigation={{
-              nextEl: ".next",
-              prevEl: ".prev",
+              nextEl: ".casinoNext",
+              prevEl: ".casinoPrev",
             }}
             modules={[Navigation]}
           >
@@ -88,10 +119,10 @@ function SlotsGames() {
             ))}
           </Swiper>
           <div className="absolute inset-0 flex justify-between items-center">
-            <div className=" prev flex justify-center items-center w-8 h-8 pl-2 rounded-full cursor-pointer">
+            <div className="border-2 border-red-600 casinoPrev flex justify-center items-center w-8 h-8 pl-2 rounded-full cursor-pointer">
               <ArrowBackIosIcon fontSize=".9rem" style={{ color: "white" }} />
             </div>
-            <div className="border-2 border-red-600 next flex justify-center items-center w-8 h-8 rounded-full cursor-pointer">
+            <div className="border-2 border-red-600 casinoNext flex justify-center items-center w-8 h-8 rounded-full cursor-pointer">
               <ArrowForwardIosIcon
                 fontSize=".9rem"
                 style={{ color: "white" }}
@@ -104,7 +135,7 @@ function SlotsGames() {
         {games.slice(0, 13).map((item, index) => (
           <div
             key={index}
-            className="group w-40 h-40 rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] flex justify-center items-center relative "
+            className="group w-40 h-40 rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] flex justify-center items-center relative  "
           >
             <img
               src={item.image}
@@ -122,7 +153,7 @@ function SlotsGames() {
         ))}
         <div
           className="bg-red-400 w-40 h-40 rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] cursor-pointer"
-          onClick={() => navigate("/slots")}
+          onClick={() => navigate("/casino")}
         >
           <div className="w-full h-full flex flex-col justify-center items-center gap-2 rounded-lg">
             <div className="flex justify-center items-center gap-2">
@@ -138,4 +169,4 @@ function SlotsGames() {
   );
 }
 
-export default SlotsGames;
+export default CasinoGames;

@@ -3,8 +3,8 @@ import PromotionCarousel from "../Components/Display/PromotionCarousel";
 import PopularGamesSwiper from "../Components/Display/PopularGamesSwiper";
 import MarqueeTextSlider from "../Components/Display/MarqueeTextSlider";
 
-import SlotsGames from "../Layouts/SlotsGames";
-import CasinoGames from "../Layouts/CasinoGames";
+import SlotsGames from "../Layouts/SlotsGamesSection.Home";
+import CasinoGames from "../Layouts/CasinoGamesSection.Home";
 import Footer from "../Layouts/Footer";
 
 function Home() {

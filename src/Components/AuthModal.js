@@ -30,6 +30,7 @@ export default function AuthModal({ type }) {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        className="backdrop-blur-sm"
       >
         {type === "login" ? (
           <Box sx={style}>
