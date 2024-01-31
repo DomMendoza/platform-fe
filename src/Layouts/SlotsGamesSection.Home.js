@@ -5,62 +5,19 @@ import { Button } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-//Providers
-import jili from "../Assets/jili.webp";
-import cq9 from "../Assets/cq9.webp";
-import fachai from "../Assets/fachai.webp";
-import jdb from "../Assets/jdb.webp";
-import playtech_1 from "../Assets/playtech_1.webp";
-
-//Games
-import superAce from "../Assets/superAce.webp";
-
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/navigation";
 
-function SlotsGames() {
-  const slots = [
-    jili,
-    cq9,
-    fachai,
-    jdb,
-    playtech_1,
-    jili,
-    cq9,
-    fachai,
-    jdb,
-    playtech_1,
-  ];
-  const games = [
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-  ];
-
+function SlotsGames({
+  slotGameData,
+  slotsActiveProvider,
+  setSlotsActiveProvider,
+  slotsProviderData,
+}) {
   const navigate = useNavigate();
-  const [selectedProvider, setSelectedProvider] = useState();
-
-  const handleButtonClick = (index) => {
-    console.log("Button clicked for index:", index);
-    // Add your logic here based on the index
-  };
-
-  useEffect(() => {
-    setSelectedProvider(slots[0]);
-  }, []);
 
   return (
     <div className=" flex flex-col gap-5">
@@ -75,20 +32,22 @@ function SlotsGames() {
             }}
             modules={[Navigation]}
           >
-            {slots.map((item, index) => (
+            {slotGameData.map((item, index) => (
               <SwiperSlide
-                onClick={() => setSelectedProvider(item)}
+                onClick={() => setSlotsActiveProvider(item.provider)}
                 key={index}
               >
                 <div
                   className={`flex justify-center items-center h-[5rem] rounded-lg transition duration-150 ease-out cursor-pointer ${
-                    selectedProvider !== item ? "hover:scale-125" : ""
+                    slotsActiveProvider !== item.provider
+                      ? "hover:scale-125"
+                      : ""
                   }`}
                 >
                   <img
-                    src={item}
+                    src={item.logo}
                     className={`h-full w-full object-contain p-3 ${
-                      selectedProvider === item
+                      slotsActiveProvider === item.provider
                         ? "border-b-4 border-blue-600 ease-in-out duration-300"
                         : ""
                     }`}
@@ -111,7 +70,7 @@ function SlotsGames() {
         </div>
       </div>
       <div className="game-grid grid grid-cols-7 grid-rows-2 place-items-center gap-5 ">
-        {games.slice(0, 13).map((item, index) => (
+        {slotsProviderData.games.slice(0, 13).map((item, index) => (
           <div
             key={index}
             className="group rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] flex justify-center items-center relative"
@@ -123,7 +82,6 @@ function SlotsGames() {
             <Button
               variant="contained"
               className="bg-black hover:bg-black absolute group-hover:block hidden "
-              onClick={() => handleButtonClick(index)}
               style={{ animation: "fadeMe 500ms" }}
             >
               PLAY NOW
