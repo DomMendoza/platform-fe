@@ -1,46 +1,75 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, IconButton } from "@mui/material";
 
 //Games
 import superAce from "../Assets/superAce.webp";
 
-function SlotsGamesSection() {
-  const games = [
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-    { name: "superAce", image: superAce },
-  ];
+function SlotsGamesSection({ providerData }) {
+  // const games = [
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  //   { name: "superAce", image: superAce },
+  // ];
+
+  const [limit, setLimit] = useState(13);
 
   const handleButtonClick = (index) => {
     console.log("Button clicked for index:", index);
     // Add your logic here based on the index
   };
 
+  useEffect(() => {
+    console.log("limit: ", limit);
+  }, [limit]);
+
   return (
     <div className=" flex flex-col gap-5">
       <p className="text-2xl font-bold uppercase ">Slot Games</p>
       <div className="game-grid grid grid-cols-7 grid-rows-2 place-items-center gap-5 ">
-        {games.map((item, index) => (
+        {providerData.games.slice(0, limit).map((item, index) => (
           <div
             key={index}
             className="group rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] flex justify-center items-center relative"
@@ -59,6 +88,23 @@ function SlotsGamesSection() {
             </Button>
           </div>
         ))}
+        {limit < providerData.games.length ? (
+          <div
+            className="bg-red-400 w-full h-full rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] cursor-pointer"
+            onClick={() => setLimit(limit + 14)}
+          >
+            <div className="w-full h-full flex flex-col justify-center items-center gap-2 rounded-lg">
+              <div className="flex justify-center items-center gap-2">
+                <div className="bg-white rounded-full w-3 h-3"></div>
+                <div className="bg-white rounded-full w-3 h-3"></div>
+                <div className="bg-white rounded-full w-3 h-3"></div>
+              </div>
+              <p className="font-bold text-lg font-[Poppins] text-white">
+                More
+              </p>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );

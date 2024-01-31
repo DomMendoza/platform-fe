@@ -135,7 +135,7 @@ function CasinoGames() {
         {games.slice(0, 13).map((item, index) => (
           <div
             key={index}
-            className="group w-40 h-40 rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] flex justify-center items-center relative  "
+            className="group rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] flex justify-center items-center relative"
           >
             <img
               src={item.image}
@@ -152,7 +152,7 @@ function CasinoGames() {
           </div>
         ))}
         <div
-          className="bg-red-400 w-40 h-40 rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] cursor-pointer"
+          className="bg-red-400 w-full h-full rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] cursor-pointer"
           onClick={() => navigate("/casino")}
         >
           <div className="w-full h-full flex flex-col justify-center items-center gap-2 rounded-lg">

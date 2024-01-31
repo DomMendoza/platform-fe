@@ -9,27 +9,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-//Providers
-import jili from "../Assets/jili.webp";
-import cq9 from "../Assets/cq9.webp";
-import fachai from "../Assets/fachai.webp";
-import jdb from "../Assets/jdb.webp";
-import playtech_1 from "../Assets/playtech_1.webp";
-
-function ProviderSection() {
-  const slots = [
-    jili,
-    cq9,
-    fachai,
-    jdb,
-    playtech_1,
-    jili,
-    cq9,
-    fachai,
-    jdb,
-    playtech_1,
-  ];
-
+function ProviderSection({ gameData, activeProvider, setActiveProvider }) {
   return (
     <div className="h-full flex justify-center items-center gap-2 px-4">
       <IconButton className="bg-red-600 rounded-full slotsNavPrev">
@@ -43,14 +23,21 @@ function ProviderSection() {
           nextEl: ".slotsNavNext",
           prevEl: ".slotsNavPrev",
         }}
-        className="mySwiper border-2 border-red-600 h-[65%]"
+        className="mySwiper h-[100%] "
       >
-        {slots.map((item, index) => (
+        {gameData.map((item, index) => (
           <SwiperSlide
-            className="border-2 border-blue-600 p-2 rounded-lg"
+            className="p-5 rounded-lg" //adjust this padding to change the dimension of logo providers
             key={index}
           >
-            <img src={item} className="h-full w-full" />
+            <div
+              className={`h-full flex justify-center items-center p-3 border-2 border-red-600 rounded-lg cursor-pointer ease-in-out duration-300 ${
+                activeProvider === item.provider ? "-translate-y-3" : ""
+              }`}
+              onClick={() => setActiveProvider(item.provider)}
+            >
+              <img src={item.logo} />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>

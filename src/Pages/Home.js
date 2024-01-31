@@ -18,7 +18,7 @@ function Home() {
           <div className="bg-white flex flex-col gap-2 p-5 rounded-lg border-2 border-green-600">
             <PopularGamesSwiper />
           </div>
-          <div className="bg-white p-5 rounded-lg border-2 border-green-600">
+          <div className="bg-white px-1 rounded-full shadow-[inset_0px_0px_8px_1px_#000000]">
             <MarqueeTextSlider />
           </div>
         </div>
