@@ -61,9 +61,9 @@ function SlotsGamesSection({ providerData }) {
     // Add your logic here based on the index
   };
 
-  useEffect(() => {
-    console.log("limit: ", limit);
-  }, [limit]);
+  // useEffect(() => {
+  //   console.log("limit: ", limit);
+  // }, [limit]);
 
   return (
     <div className=" flex flex-col gap-5">

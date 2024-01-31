@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Skeleton from "@mui/material/Skeleton";
 
 //Providers
 import jili from "../Assets/jili.webp";
@@ -109,7 +110,6 @@ function Slots() {
   const [providerData, setProviderData] = useState(); //data of the selected game provider
 
   useEffect(() => {
-    console.log("activeProvider: ", activeProvider);
     const currentProvider = gameData.filter(
       (item) => item.provider === activeProvider
     );
@@ -124,22 +124,66 @@ function Slots() {
           <div className="bg-gray-300 rounded-lg h-[10rem] 2xl:h-[12rem]">
             <div className="border-2 border-red-600 w-full h-full flex justify-center items-center">
               <div className="border-2 border-blue-600 w-[70%]">
-                {providerData && <JackpotPrize providerData={providerData} />}
+                {providerData ? (
+                  <JackpotPrize providerData={providerData} />
+                ) : (
+                  <div className="border-2 border-blue-600 p-5 rounded-lg flex justify-center items-center gap-2">
+                    {Array.from({ length: 9 }, (v, i) => i).map((item) => (
+                      <Skeleton
+                        variant="rectangular"
+                        className="rounded-lg w-12 2xl:w-14 h-16 2xl:h-20"
+                        key={item}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
         <div className="home-three swiper-container border-2 border-green-600">
           <div className="bg-gray-300 rounded-lg h-[7rem] 2xl:h-[10rem]">
-            <ProviderSection
-              gameData={gameData}
-              activeProvider={activeProvider}
-              setActiveProvider={setActiveProvider}
-            />
+            {gameData ? (
+              <ProviderSection
+                gameData={gameData}
+                activeProvider={activeProvider}
+                setActiveProvider={setActiveProvider}
+              />
+            ) : (
+              <div className="border-2 border-red-600 h-full flex justify-center items-center gap-5 px-4">
+                {Array.from({ length: 5 }, (v, i) => i).map((item) => (
+                  <Skeleton
+                    variant="rectangular"
+                    className="rounded-lg w-36 h-20"
+                    key={item}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
         <div className="home-three swiper-container border-2 border-green-600">
-          {providerData && <SlotsGamesSection providerData={providerData} />}
+          {providerData ? (
+            <SlotsGamesSection providerData={providerData} />
+          ) : (
+            <div className=" flex flex-col gap-5">
+              <Skeleton
+                variant="text"
+                className="text-2xl"
+                width={150}
+                height={37}
+              />
+              <div className="game-grid grid grid-cols-7 grid-rows-2 place-items-center gap-5 ">
+                {Array.from({ length: 14 }, (v, i) => i).map((item) => (
+                  <Skeleton
+                    variant="rectangular"
+                    className="rounded-lg w-32 2xl:w-40 h-32 2xl:h-36"
+                    key={item}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <Footer />
