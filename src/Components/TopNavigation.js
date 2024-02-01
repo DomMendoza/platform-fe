@@ -12,9 +12,9 @@ function TopNavigation() {
         <AuthModal type={"register"} />
       </div> */}
       <div className=" flex justify-center items-center gap-2">
-        <div className="border-2 border-red-600 flex">
-          <div className="border-2 border-red-600 px-10 flex justify-center items-center">
-            <p>120,000</p>
+        <div className="flex gap-2">
+          <div className="bg-white rounded-lg px-10 flex justify-center items-center shadow-[inset_0px_0px_8px_1px_#000000]">
+            <p className="font-bold text-lg font-[Poppins]">120,000</p>
           </div>
           <PushableButton
             text={"Deposit"}
