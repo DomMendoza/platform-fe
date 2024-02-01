@@ -1,6 +1,10 @@
 import React from "react";
 
-function JackpotPrize({ providerData }) {
+//Redux
+import { useSelector } from "react-redux";
+
+function JackpotPrize() {
+  const providerData = useSelector((state) => state.slots.providerData);
   const formattedNumber = providerData.jackpot.toLocaleString();
 
   return (

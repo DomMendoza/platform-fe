@@ -1,69 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Button, IconButton } from "@mui/material";
 
-//Games
-import superAce from "../Assets/superAce.webp";
+//Redux
+import { useSelector } from "react-redux";
 
-function SlotsGamesSection({ providerData }) {
-  // const games = [
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  //   { name: "superAce", image: superAce },
-  // ];
+function SlotsGamesSection() {
+  const providerData = useSelector((state) => state.slots.providerData);
 
   const [limit, setLimit] = useState(13);
 
   const handleButtonClick = (index) => {
     console.log("Button clicked for index:", index);
-    // Add your logic here based on the index
   };
-
-  // useEffect(() => {
-  //   console.log("limit: ", limit);
-  // }, [limit]);
 
   return (
     <div className=" flex flex-col gap-5">

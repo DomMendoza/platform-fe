@@ -9,7 +9,15 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-function ProviderSection({ gameData, activeProvider, setActiveProvider }) {
+//Redux
+import { useSelector, useDispatch } from "react-redux";
+import { setActiveProvider } from "../Slice/SlotSlice";
+
+function ProviderSection() {
+  const dispatch = useDispatch();
+  const slots = useSelector((state) => state.slots.slotsGameData);
+  const activeProvider = useSelector((state) => state.slots.activeProvider);
+
   return (
     <div className="h-full flex justify-center items-center gap-2 px-4">
       <IconButton className="bg-red-600 rounded-full slotsNavPrev">
@@ -25,7 +33,7 @@ function ProviderSection({ gameData, activeProvider, setActiveProvider }) {
         }}
         className="mySwiper h-[100%] "
       >
-        {gameData.map((item, index) => (
+        {slots.map((item, index) => (
           <SwiperSlide
             className="p-5 rounded-lg" //adjust this padding to change the dimension of logo providers
             key={index}
@@ -34,7 +42,7 @@ function ProviderSection({ gameData, activeProvider, setActiveProvider }) {
               className={`h-full flex justify-center items-center p-3 border-2 border-red-600 rounded-lg cursor-pointer ease-in-out duration-300 ${
                 activeProvider === item.provider ? "-translate-y-3" : ""
               }`}
-              onClick={() => setActiveProvider(item.provider)}
+              onClick={() => dispatch(setActiveProvider(item.provider))}
             >
               <img src={item.logo} />
             </div>
