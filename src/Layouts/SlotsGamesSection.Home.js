@@ -11,13 +11,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-function SlotsGames({
-  slotGameData,
-  slotsActiveProvider,
-  setSlotsActiveProvider,
-  slotsProviderData,
-}) {
+//Redux
+import { useSelector, useDispatch } from "react-redux";
+import { setActiveProvider } from "../Slice/SlotSlice";
+
+function SlotsGames() {
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const slots = useSelector((state) => state.slots.slotsGameData);
+  const providerData = useSelector((state) => state.slots.providerData);
+  const activeProvider = useSelector((state) => state.slots.activeProvider);
 
   return (
     <div className=" flex flex-col gap-5">
@@ -32,22 +36,20 @@ function SlotsGames({
             }}
             modules={[Navigation]}
           >
-            {slotGameData.map((item, index) => (
+            {slots.map((item, index) => (
               <SwiperSlide
-                onClick={() => setSlotsActiveProvider(item.provider)}
+                onClick={() => dispatch(setActiveProvider(item.provider))}
                 key={index}
               >
                 <div
                   className={`flex justify-center items-center h-[5rem] rounded-lg transition duration-150 ease-out cursor-pointer ${
-                    slotsActiveProvider !== item.provider
-                      ? "hover:scale-125"
-                      : ""
+                    activeProvider !== item.provider ? "hover:scale-125" : ""
                   }`}
                 >
                   <img
                     src={item.logo}
                     className={`h-full w-full object-contain p-3 ${
-                      slotsActiveProvider === item.provider
+                      activeProvider === item.provider
                         ? "border-b-4 border-blue-600 ease-in-out duration-300"
                         : ""
                     }`}
@@ -70,7 +72,7 @@ function SlotsGames({
         </div>
       </div>
       <div className="game-grid grid grid-cols-7 grid-rows-2 place-items-center gap-5 ">
-        {slotsProviderData.games.slice(0, 13).map((item, index) => (
+        {providerData.games.slice(0, 13).map((item, index) => (
           <div
             key={index}
             className="group rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] flex justify-center items-center relative"
