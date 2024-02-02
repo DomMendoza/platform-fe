@@ -1,14 +1,20 @@
 import * as React from "react";
+import Cookies from "js-cookie";
+
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import userAvatar from "../../Assets/userAvatar.png";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import userAvatar from "../../Assets/userAvatar.png";
 
 //redux
 import { useSelector } from "react-redux";
 
+const settings = ["Logout"];
+
 export default function ProfileMenu() {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -19,6 +25,11 @@ export default function ProfileMenu() {
   };
 
   const username = useSelector((state) => state.user.username);
+
+  const handleLogout = () => {
+    Cookies.set("token", "", { expires: new Date(0) });
+    window.location.reload();
+  };
 
   return (
     <div>
@@ -57,9 +68,11 @@ export default function ProfileMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem> */}
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        {settings.map((setting) => (
+          <MenuItem key={setting} onClick={handleClose}>
+            <div onClick={() => handleLogout()}>{setting}</div>
+          </MenuItem>
+        ))}
       </Menu>
     </div>
   );
