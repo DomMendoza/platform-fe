@@ -2,7 +2,6 @@ import React from "react";
 import PushableButtonAuth from "./Inputs/PushableButton.auth";
 import AuthModal from "./AuthModal";
 import ProfileMenu from "./Display/ProfileMenu";
-import PushableButton from "./Inputs/PushableButton";
 import UserCredits from "./Display/UserCredits";
 
 function TopNavigation() {

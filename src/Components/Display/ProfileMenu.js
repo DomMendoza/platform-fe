@@ -5,6 +5,9 @@ import MenuItem from "@mui/material/MenuItem";
 import userAvatar from "../../Assets/userAvatar.png";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
+//redux
+import { useSelector } from "react-redux";
+
 export default function ProfileMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -14,6 +17,8 @@ export default function ProfileMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const username = useSelector((state) => state.user.username);
 
   return (
     <div>
@@ -29,7 +34,7 @@ export default function ProfileMenu() {
         <div className="bg-white rounded-full pr-2 py-1 flex justify-center items-center gap-2">
           <div>
             <p className="pl-[3.5rem] text-xs font-[Poppins]">Logged in as:</p>
-            <p className="pl-[3.5rem] font-bold font-[Poppins]">Useefr123</p>
+            <p className="pl-[3.5rem] font-bold font-[Poppins]">{username}</p>
           </div>
           <KeyboardArrowDownIcon />
         </div>
