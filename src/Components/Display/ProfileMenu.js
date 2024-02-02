@@ -2,8 +2,8 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { IconButton } from "@mui/material";
+import userAvatar from "../../Assets/userAvatar.png";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 export default function ProfileMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -17,24 +17,43 @@ export default function ProfileMenu() {
 
   return (
     <div>
-      <div className=" w-full h-full flex justify-center items-center">
-        <AccountCircleIcon
-          className=" text-black"
-          sx={{ fontSize: "3rem" }}
-          onClick={handleClick}
-        />
+      <div
+        className="flex justify-center items-center gap-2 relative cursor-pointer"
+        onClick={handleClick}
+      >
+        <div className="h-full absolute -left-1">
+          <div className="h-full">
+            <img src={userAvatar} className="h-full" />
+          </div>
+        </div>
+        <div className="bg-white rounded-full pr-2 py-1 flex justify-center items-center gap-2">
+          <div>
+            <p className="pl-[3.5rem] text-xs font-[Poppins]">Logged in as:</p>
+            <p className="pl-[3.5rem] font-bold font-[Poppins]">Useefr123</p>
+          </div>
+          <KeyboardArrowDownIcon />
+        </div>
       </div>
       <Menu
+        sx={{ mt: "10px" }}
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+        anchorOrigin={{
+          vertical: "bottom", // Set to 'center'
+          horizontal: "center", // Set to 'center'
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
+        {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>My account</MenuItem> */}
         <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>
     </div>

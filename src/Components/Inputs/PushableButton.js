@@ -9,12 +9,14 @@ function PushableButton({ text, eventHandler }) {
         borderRadius: "10px",
         cursor: "pointer",
         outlineOffset: "4px",
+        height: "100%",
       }}
     >
       <Button
         className="-translate-y-1 active:-translate-y-0 "
         disableRipple
         style={{
+          height: "100%",
           width: "100%",
           padding: "7px 30px",
           borderRadius: "10px",
