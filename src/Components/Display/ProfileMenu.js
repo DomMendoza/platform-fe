@@ -1,10 +1,9 @@
 import * as React from "react";
 import Cookies from "js-cookie";
 
-import { useNavigate } from "react-router-dom";
-import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import LogoutIcon from "@mui/icons-material/Logout";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import userAvatar from "../../Assets/userAvatar.png";
 
@@ -14,7 +13,6 @@ import { useSelector } from "react-redux";
 const settings = ["Logout"];
 
 export default function ProfileMenu() {
-  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -24,12 +22,17 @@ export default function ProfileMenu() {
     setAnchorEl(null);
   };
 
-  const username = useSelector((state) => state.user.username);
+  const { username, status } = useSelector((state) => state.user);
 
   const handleLogout = () => {
     Cookies.set("token", "", { expires: new Date(0) });
     window.location.reload();
   };
+
+  // React.useEffect(() => {
+  //   console.log("username: ", username);
+  //   console.log("status: ", status);
+  // }, [username, status]);
 
   return (
     <div>
@@ -69,8 +72,14 @@ export default function ProfileMenu() {
         }}
       >
         {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleClose}>
-            <div onClick={() => handleLogout()}>{setting}</div>
+          <MenuItem key={setting} onClick={handleClose} sx={{ width: "10rem" }}>
+            <div
+              onClick={() => handleLogout()}
+              className=" w-full flex gap-2 p-2 rounded-[5px]"
+            >
+              <LogoutIcon />
+              <p>{setting}</p>
+            </div>
           </MenuItem>
         ))}
       </Menu>

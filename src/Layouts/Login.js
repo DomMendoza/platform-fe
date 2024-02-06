@@ -21,6 +21,9 @@ import IconButton from "@mui/material/IconButton";
 
 //API
 import authService from "../Services/auth.service";
+import { useDispatch } from "react-redux";
+import { setUserDataFromToken } from "../Slice/UserSlice";
+import { loginUser } from "../Services/auth.service";
 
 function Copyright(props) {
   return (
@@ -43,7 +46,7 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function Login() {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -61,12 +64,35 @@ export default function Login() {
     const result = await authService.loginUser(username, password);
     if (result.success) {
       Cookies.set("token", result.loginAuthenticate, { expires: 1 });
-      // toast.success("Successfully logged in.");
       window.location.reload();
     } else {
       toast.error("Invalid Credentials.");
     }
   };
+
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   const username = data.get("username");
+  //   const password = data.get("password");
+
+  //   try {
+  //     const resultAction = await dispatch(loginUser({ username, password }));
+  //     const { payload } = resultAction;
+  //     console.log(payload);
+
+  //     if (payload.success) {
+  //       const token = payload.loginAuthenticate;
+  //       Cookies.set("token", token, { expires: 1 });
+  //       window.location.reload();
+  //     } else {
+  //       toast.error("Invalid Credentials.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Login error:", error);
+  //     toast.error("An error occurred while logging in.");
+  //   }
+  // };
 
   return (
     <div className=" bg-white px-5 py-8 rounded-lg flex flex-col justify-center items-center gap-5">
