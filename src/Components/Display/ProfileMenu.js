@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import Cookies from "js-cookie";
 
 import Menu from "@mui/material/Menu";
@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 const settings = ["Logout"];
 
 export default function ProfileMenu() {
+  const { username } = useSelector((state) => state.user);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -22,17 +23,10 @@ export default function ProfileMenu() {
     setAnchorEl(null);
   };
 
-  const { username, status } = useSelector((state) => state.user);
-
   const handleLogout = () => {
     Cookies.set("token", "", { expires: new Date(0) });
     window.location.reload();
   };
-
-  // React.useEffect(() => {
-  //   console.log("username: ", username);
-  //   console.log("status: ", status);
-  // }, [username, status]);
 
   return (
     <div>

@@ -1,39 +1,40 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { jwtDecode } from "jwt-decode";
-
-//API
-// import { loginUser } from "../Services/auth.service";
 
 const initialState = {
+  uid: "",
   username: "",
-
-  status: "idle",
-  error: null,
-  credits: "100,000",
+  email: "",
+  phone: "",
+  user_type: "",
+  birthdate: "",
+  referral_token: null,
 };
 
 const UserSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
-  // extraReducers(builder) {
-  //   builder
-  //     .addCase(loginUser.pending, (state, action) => {
-  //       state.status = "loading";
-  //     })
-  //     .addCase(loginUser.fulfilled, (state, action) => {
-  //       const decodedToken = jwtDecode(action.payload.loginAuthenticate);
-
-  //       state.status = "succeeded";
-  //       state.username = decodedToken.username;
-  //     })
-  //     .addCase(loginUser.rejected, (state, action) => {
-  //       state.status = "failed";
-  //       state.error = action.payload; // Assuming the payload contains error message
-  //     });
-  // },
+  reducers: {
+    setUser: (state, action) => {
+      const {
+        uid,
+        username,
+        email,
+        phone,
+        user_type,
+        birthdate,
+        referral_token,
+      } = action.payload;
+      state.uid = uid;
+      state.email = email;
+      state.phone = phone;
+      state.user_type = user_type;
+      state.birthdate = birthdate;
+      state.username = username;
+      state.referral_token = referral_token;
+    },
+  },
 });
 
-export const {} = UserSlice.actions;
+export const { setUser } = UserSlice.actions;
 
 export default UserSlice.reducer;
