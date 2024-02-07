@@ -19,6 +19,8 @@ import IconButton from "@mui/material/IconButton";
 
 //API
 import authService from "../Services/auth.service";
+import { useDispatch, useSelector } from "react-redux";
+import { handleRegisterOpen, handleLoginClose } from "../Slice/ModalSlice";
 
 function Copyright(props) {
   return (
@@ -39,6 +41,7 @@ function Copyright(props) {
 }
 
 export default function Login() {
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -163,6 +166,10 @@ export default function Login() {
             href="/#"
             variant="body2"
             className="font-[Poppins] no-underline text-xs"
+            onClick={() => {
+              dispatch(handleRegisterOpen());
+              dispatch(handleLoginClose());
+            }}
           >
             Don't have an account yet? <span>Join Now!</span>
           </Link>

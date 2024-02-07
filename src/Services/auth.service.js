@@ -2,14 +2,14 @@ import axios from "axios";
 
 const baseURL = "http://54.169.218.142/api";
 
-const registerUser = async ({
+const registerUser = async (
   username,
   password,
   name,
   email,
   phone,
-  birthdate,
-}) => {
+  birthdate
+) => {
   const body = { username, password, name, email, phone, birthdate };
 
   try {

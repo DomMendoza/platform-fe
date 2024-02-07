@@ -1,12 +1,13 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
 import PushableButtonAuth from "./Inputs/PushableButton.auth";
-import Login from "../Layouts/Login";
 import Register from "../Layouts/Register";
+
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { handleRegisterOpen, handleRegisterClose } from "../Slice/ModalSlice";
 
 const style = {
   position: "absolute",
@@ -17,30 +18,31 @@ const style = {
   boxShadow: 24,
 };
 
-export default function AuthModal({ type }) {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+export default function RegisterModal() {
+  const dispatch = useDispatch();
+  const registerOpen = useSelector((state) => state.modal.registerOpen);
+
+  const handleOpen = () => {
+    dispatch(handleRegisterOpen());
+  };
+
+  const handleClose = () => {
+    dispatch(handleRegisterClose());
+  };
 
   return (
     <div>
-      <PushableButtonAuth text={type} handleOpen={handleOpen} />
+      <PushableButtonAuth text={"register"} handleOpen={handleOpen} />
       <Modal
-        open={open}
+        open={registerOpen}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         className="backdrop-blur-sm"
       >
-        {type === "login" ? (
-          <Box sx={style}>
-            <Login />
-          </Box>
-        ) : (
-          <Box sx={style}>
-            <Register />
-          </Box>
-        )}
+        <Box sx={style}>
+          <Register />
+        </Box>
       </Modal>
     </div>
   );
