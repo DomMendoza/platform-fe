@@ -81,8 +81,7 @@ function SideNavigation() {
               </div>
             ))}
           </div>
-          <div className="nav-container flex flex-col gap-3">
-            <FontAwesomeIcon icon="fa-solid fa-house" />
+          <div className="nav-container flex flex-col gap-3 ">
             {navLinks.map((item, index) => (
               <PushableButtonNav
                 key={index}

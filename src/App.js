@@ -4,8 +4,8 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Navigation from "./Layouts/Navigation";
 import Home from "./Pages/Home";

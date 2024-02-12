@@ -16,7 +16,12 @@ import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
+import { useForm, Controller } from "react-hook-form";
 import { handleRegisterClose, handleLoginOpen } from "../Slice/ModalSlice";
 import { useDispatch } from "react-redux";
 
@@ -40,14 +45,23 @@ function Copyright(props) {
 
 export default function Register() {
   const dispatch = useDispatch();
+
+  const { control, handleSubmit, formState } = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      birthdate: null,
+      username: "",
+      password: "",
+      confirmPassword: "",
+    },
+    mode: "onChange",
+  });
+  const onSubmit = (data) => console.log(data);
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmedPassword] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
-
-  const handleDateChange = (date) => {
-    // This function will be called whenever the user selects a new date
-    setSelectedDate(date);
-  };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleClickShowConfirmedPassword = () =>
@@ -57,52 +71,52 @@ export default function Register() {
     event.preventDefault();
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const name = data.get("name");
-    const email = data.get("email");
-    const phone = data.get("phone");
-    const birthdate = dayjs(selectedDate).format("YYYY-MM-DD");
-    const username = data.get("username");
-    const password = data.get("password");
-    const confirm = data.get("confirmPassword");
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   const name = data.get("name");
+  //   const email = data.get("email");
+  //   const phone = data.get("phone");
+  //   const birthdate = dayjs(selectedDate).format("YYYY-MM-DD");
+  //   const username = data.get("username");
+  //   const password = data.get("password");
+  //   const confirm = data.get("confirmPassword");
 
-    // Check if any of the values are not filled
-    if (
-      !name ||
-      !email ||
-      !phone ||
-      !birthdate ||
-      !username ||
-      !password ||
-      !confirm
-    ) {
-      toast.error("Please fill in all the required fields.");
-      return;
-    } else {
-      if (password === confirm) {
-        const result = await authService.registerUser(
-          username,
-          password,
-          name,
-          email,
-          phone,
-          birthdate
-        );
-        if (result.success) {
-          console.log("user: ", result.user);
-          toast.success("Successfully Registered!");
-          dispatch(handleRegisterClose());
-          dispatch(handleLoginOpen());
-        } else {
-          toast.error("An error occured while registering user.");
-        }
-      } else {
-        toast.error("Password does not match.");
-      }
-    }
-  };
+  //   // Check if any of the values are not filled
+  //   if (
+  //     !name ||
+  //     !email ||
+  //     !phone ||
+  //     !birthdate ||
+  //     !username ||
+  //     !password ||
+  //     !confirm
+  //   ) {
+  //     toast.error("Please fill in all the required fields.");
+  //     return;
+  //   } else {
+  //     if (password === confirm) {
+  //       const result = await authService.registerUser(
+  //         username,
+  //         password,
+  //         name,
+  //         email,
+  //         phone,
+  //         birthdate
+  //       );
+  //       if (result.success) {
+  //         console.log("user: ", result.user);
+  //         toast.success("Successfully Registered!");
+  //         dispatch(handleRegisterClose());
+  //         dispatch(handleLoginOpen());
+  //       } else {
+  //         toast.error("An error occured while registering user.");
+  //       }
+  //     } else {
+  //       toast.error("Password does not match.");
+  //     }
+  //   }
+  // };
 
   return (
     <div className=" bg-white px-5 py-8 rounded-lg flex flex-col justify-center items-center gap-5">
@@ -136,138 +150,240 @@ export default function Register() {
       <Box
         className="input-container flex flex-col justify-center items-center  w-full "
         component="form"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
         <div className="auth-container flex flex-col gap-2 w-full ">
           <div className="flex flex-col gap-3 justify-between items-center">
-            <TextField
-              required
-              fullWidth
-              inputProps={{
-                style: {
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "0.8rem",
-                },
-              }}
-              InputLabelProps={{
-                style: {
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "0.9rem",
-                },
-              }}
-              id="name"
-              label="Name"
+            <Controller
               name="name"
-              autoComplete="name"
-              autoFocus
-            />
-            <TextField
-              required
-              fullWidth
-              inputProps={{
-                style: {
-                  fontFamily: "Poppins, sans serif",
-                  fontSize: ".8rem",
+              control={control}
+              defaultValue=""
+              rules={{
+                required: {
+                  value: true,
+                  message: "Name is required",
                 },
               }}
-              InputLabelProps={{
-                style: { fontFamily: "Poppins, sans serif", fontSize: ".9rem" },
-              }}
-              id="email"
-              label="Email"
+              render={({ field, fieldState: { error } }) => (
+                <TextField
+                  {...field}
+                  label="Name"
+                  variant="outlined"
+                  fullWidth
+                  inputProps={{
+                    style: {
+                      fontFamily: "Poppins, sans-serif",
+                      fontSize: "0.8rem",
+                    },
+                  }}
+                  InputLabelProps={{
+                    style: {
+                      fontFamily: "Poppins, sans-serif",
+                      fontSize: "0.9rem",
+                    },
+                  }}
+                  error={error !== undefined}
+                />
+              )}
+            />
+            <Controller
               name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              required
-              fullWidth
-              inputProps={{
-                style: {
-                  fontFamily: "Poppins, sans serif",
-                  fontSize: ".8rem",
+              control={control}
+              defaultValue=""
+              rules={{
+                required: {
+                  value: true,
+                  message: "email is required",
                 },
               }}
-              InputLabelProps={{
-                style: { fontFamily: "Poppins, sans serif", fontSize: ".9rem" },
-              }}
-              id="phone"
-              label="Phone Number"
+              render={({ field, fieldState: { error } }) => (
+                <TextField
+                  {...field}
+                  label="Email"
+                  variant="outlined"
+                  fullWidth
+                  inputProps={{
+                    style: {
+                      fontFamily: "Poppins, sans-serif",
+                      fontSize: "0.8rem",
+                    },
+                  }}
+                  InputLabelProps={{
+                    style: {
+                      fontFamily: "Poppins, sans-serif",
+                      fontSize: "0.9rem",
+                    },
+                  }}
+                  error={error !== undefined}
+                />
+              )}
+            />
+            <Controller
               name="phone"
-              autoComplete="phone"
-              autoFocus
-            />
-            <div className="w-full">
-              <DatePickerInput
-                label={"Birthdate"}
-                selectedDate={selectedDate}
-                handleDateChange={handleDateChange}
-              />
-            </div>
-            <TextField
-              required
-              fullWidth
-              inputProps={{
-                style: {
-                  fontFamily: "Poppins, sans serif",
-                  fontSize: ".8rem",
+              control={control}
+              defaultValue=""
+              rules={{
+                required: {
+                  value: true,
+                  message: "phone is required",
                 },
               }}
-              InputLabelProps={{
-                style: { fontFamily: "Poppins, sans serif", fontSize: ".9rem" },
-              }}
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
-              autoFocus
+              render={({ field, fieldState: { error } }) => (
+                <TextField
+                  {...field}
+                  label="Phone"
+                  variant="outlined"
+                  fullWidth
+                  inputProps={{
+                    style: {
+                      fontFamily: "Poppins, sans-serif",
+                      fontSize: "0.8rem",
+                    },
+                  }}
+                  InputLabelProps={{
+                    style: {
+                      fontFamily: "Poppins, sans-serif",
+                      fontSize: "0.9rem",
+                    },
+                  }}
+                  error={error !== undefined}
+                />
+              )}
             />
-            <FormControl variant="outlined" fullWidth>
-              <InputLabel htmlFor="password">Password</InputLabel>
-              <OutlinedInput
-                id="password"
-                type={showPassword ? "text" : "password"}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                name="password"
-                label="password"
-              />
-            </FormControl>
-            <FormControl variant="outlined" fullWidth>
-              <InputLabel htmlFor="password">Confirm Password</InputLabel>
-              <OutlinedInput
-                id="confirmPassword"
-                type={showConfirmPassword ? "text" : "password"}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle confirmPassword visibility"
-                      onClick={handleClickShowConfirmedPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                name="confirmPassword"
-                label="confirmPassword"
-              />
-            </FormControl>
+            {/* TODO: INSERT INPUT VALIDATION HERE AND THEN SUBMIT */}
+            <Controller
+              name="birthdate"
+              control={control}
+              render={({ field }) => (
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer
+                    components={["DatePicker"]}
+                    sx={{ width: "100%" }}
+                  >
+                    <DatePicker
+                      {...field}
+                      label="Birthdate"
+                      slotProps={{ textField: { fullWidth: true } }}
+                      value={field.value}
+                      inputRef={field.ref}
+                      onChange={(date) => {
+                        field.onChange(dayjs(date).format("YYYY-MM-DD"));
+                      }}
+                    />
+                  </DemoContainer>
+                </LocalizationProvider>
+              )}
+            />
+            <Controller
+              name="username"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: {
+                  value: true,
+                  message: "phone is required",
+                },
+              }}
+              render={({ field, fieldState: { error } }) => (
+                <TextField
+                  {...field}
+                  label="Username"
+                  variant="outlined"
+                  fullWidth
+                  inputProps={{
+                    style: {
+                      fontFamily: "Poppins, sans-serif",
+                      fontSize: "0.8rem",
+                    },
+                  }}
+                  InputLabelProps={{
+                    style: {
+                      fontFamily: "Poppins, sans-serif",
+                      fontSize: "0.9rem",
+                    },
+                  }}
+                  error={error !== undefined}
+                />
+              )}
+            />
+            <Controller
+              name="password"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: {
+                  value: true,
+                  message: "phone is required",
+                },
+              }}
+              render={({ field, fieldState: { error } }) => (
+                <FormControl variant="outlined" fullWidth>
+                  <InputLabel htmlFor="password">Password</InputLabel>
+                  <OutlinedInput
+                    id="password"
+                    {...field}
+                    type={showPassword ? "text" : "password"}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="Password"
+                    error={error !== undefined}
+                  />
+                </FormControl>
+              )}
+            />
+            <Controller
+              name="confirmPassword"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: {
+                  value: true,
+                  message: "phone is required",
+                },
+              }}
+              render={({ field, fieldState: { error } }) => (
+                <FormControl variant="outlined" fullWidth>
+                  <InputLabel htmlFor="password">Confirm Password</InputLabel>
+                  <OutlinedInput
+                    id="confirmPassword"
+                    {...field}
+                    type={showConfirmPassword ? "text" : "password"}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle confirmPassword visibility"
+                          onClick={handleClickShowConfirmedPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showConfirmPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    name="confirmPassword"
+                    label="confirmPassword"
+                    error={error !== undefined}
+                  />
+                </FormControl>
+              )}
+            />
           </div>
         </div>
-
         <div className="button-container flex flex-col justify-center items-center w-full ">
           <Button
             type="submit"
