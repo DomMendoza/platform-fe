@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-
+import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+
 import { Button } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -14,6 +15,7 @@ import "swiper/css/navigation";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveProvider } from "../../Slice/CasinoSlice";
+import { handleLoginOpen } from "../../Slice/ModalSlice";
 
 function CasinoGames() {
   const navigate = useNavigate();
@@ -22,6 +24,17 @@ function CasinoGames() {
   const casino = useSelector((state) => state.casino.casinoGameData);
   const providerData = useSelector((state) => state.casino.providerData);
   const activeProvider = useSelector((state) => state.casino.activeProvider);
+
+  const handlePlayNow = () => {
+    const token = Cookies.get("token");
+
+    if (token) {
+      console.log("token: ", token);
+    } else {
+      dispatch(handleLoginOpen());
+      console.log("No token.");
+    }
+  };
 
   return (
     <div className=" flex flex-col gap-5">
@@ -85,6 +98,7 @@ function CasinoGames() {
               variant="contained"
               className="bg-black hover:bg-black absolute group-hover:block hidden "
               style={{ animation: "fadeMe 500ms" }}
+              onClick={handlePlayNow}
             >
               PLAY NOW
             </Button>

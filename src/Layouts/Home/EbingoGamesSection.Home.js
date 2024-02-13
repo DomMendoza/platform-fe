@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-
+import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+
 import { Button } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -14,6 +15,7 @@ import "swiper/css/navigation";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveProvider } from "../../Slice/EbingoSlice";
+import { handleLoginOpen } from "../../Slice/ModalSlice";
 
 function EbingoGames() {
   const navigate = useNavigate();
@@ -22,6 +24,17 @@ function EbingoGames() {
   const ebingo = useSelector((state) => state.ebingo.ebingoGameData);
   const providerData = useSelector((state) => state.ebingo.providerData);
   const activeProvider = useSelector((state) => state.ebingo.activeProvider);
+
+  const handlePlayNow = () => {
+    const token = Cookies.get("token");
+
+    if (token) {
+      console.log("token: ", token);
+    } else {
+      dispatch(handleLoginOpen());
+      console.log("No token.");
+    }
+  };
 
   return (
     <div className=" flex flex-col gap-5">
@@ -85,6 +98,7 @@ function EbingoGames() {
               variant="contained"
               className="bg-black hover:bg-black absolute group-hover:block hidden "
               style={{ animation: "fadeMe 500ms" }}
+              onClick={handlePlayNow}
             >
               PLAY NOW
             </Button>

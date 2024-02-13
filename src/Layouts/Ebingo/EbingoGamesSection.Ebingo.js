@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Button, IconButton } from "@mui/material";
+import Cookies from "js-cookie";
 
 //Redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { handleLoginOpen } from "../../Slice/ModalSlice";
 
 function EbingoGamesSection() {
+  const dispatch = useDispatch();
   const providerData = useSelector((state) => state.ebingo.providerData);
 
   const [limit, setLimit] = useState(13);
 
-  const handleButtonClick = (index) => {
-    console.log("Button clicked for index:", index);
+  const handlePlayNow = () => {
+    const token = Cookies.get("token");
+
+    if (token) {
+      console.log("token: ", token);
+    } else {
+      dispatch(handleLoginOpen());
+      console.log("No token.");
+    }
   };
 
   return (
@@ -29,8 +39,8 @@ function EbingoGamesSection() {
             <Button
               variant="contained"
               className="bg-black hover:bg-black absolute group-hover:block hidden "
-              onClick={() => handleButtonClick(index)}
               style={{ animation: "fadeMe 500ms" }}
+              onClick={handlePlayNow}
             >
               PLAY NOW
             </Button>
