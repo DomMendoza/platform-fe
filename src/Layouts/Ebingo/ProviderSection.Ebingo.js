@@ -11,16 +11,16 @@ import "swiper/css/navigation";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
-import { setActiveProvider } from "../Slice/SlotSlice";
+import { setActiveProvider } from "../../Slice/EbingoSlice";
 
 function ProviderSection() {
   const dispatch = useDispatch();
-  const slots = useSelector((state) => state.slots.slotsGameData);
-  const activeProvider = useSelector((state) => state.slots.activeProvider);
+  const ebingo = useSelector((state) => state.ebingo.ebingoGameData);
+  const activeProvider = useSelector((state) => state.ebingo.activeProvider);
 
   return (
     <div className="h-full flex justify-center items-center gap-2 px-4">
-      <IconButton className="bg-red-600 rounded-full slotsNavPrev">
+      <IconButton className="bg-red-600 rounded-full ebingoNavPrev">
         <ArrowBackIosIcon fontSize=".9rem" className="text-white" />
       </IconButton>
       <Swiper
@@ -28,12 +28,12 @@ function ProviderSection() {
         modules={[Navigation]}
         spaceBetween={30}
         navigation={{
-          nextEl: ".slotsNavNext",
-          prevEl: ".slotsNavPrev",
+          nextEl: ".ebingoNavNext",
+          prevEl: ".ebingoNavPrev",
         }}
         className="mySwiper h-[100%] "
       >
-        {slots.map((item, index) => (
+        {ebingo.map((item, index) => (
           <SwiperSlide
             className="p-5 rounded-lg" //adjust this padding to change the dimension of logo providers
             key={index}
@@ -49,7 +49,7 @@ function ProviderSection() {
           </SwiperSlide>
         ))}
       </Swiper>
-      <IconButton className="bg-red-600 rounded-full slotsNavNext">
+      <IconButton className="bg-red-600 rounded-full ebingoNavNext">
         <ArrowForwardIosIcon fontSize=".9rem" className="text-white" />
       </IconButton>
     </div>

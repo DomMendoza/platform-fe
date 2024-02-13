@@ -13,7 +13,7 @@ import "swiper/css/navigation";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
-import { setActiveProvider } from "../Slice/EbingoSlice";
+import { setActiveProvider } from "../../Slice/EbingoSlice";
 
 function EbingoGames() {
   const navigate = useNavigate();

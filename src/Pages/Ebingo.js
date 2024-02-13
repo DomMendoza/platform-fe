@@ -2,8 +2,8 @@ import React from "react";
 
 import casinoBgHero from "../Assets/casinoBgHero.webp";
 import Footer from "../Layouts/Footer";
-import EbingoGamesSection from "../Layouts/EbingoGamesSection.Ebingo";
-import ProviderSection from "../Layouts/ProviderSection.Ebingo";
+import EbingoGamesSection from "../Layouts/Ebingo/EbingoGamesSection.Ebingo";
+import ProviderSection from "../Layouts/Ebingo/ProviderSection.Ebingo";
 import JackpotPrize from "../Components/Display/JackpotPrice.Ebingo";
 import GamesHeroBackground from "../Components/Display/GamesHeroBackground";
 

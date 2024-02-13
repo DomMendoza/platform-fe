@@ -3,9 +3,9 @@ import PromotionCarousel from "../Components/Display/PromotionCarousel";
 import PopularGamesSwiper from "../Components/Display/PopularGamesSwiper";
 import MarqueeTextSlider from "../Components/Display/MarqueeTextSlider";
 
-import SlotsGames from "../Layouts/SlotsGamesSection.Home";
-import EbingoGames from "../Layouts/EbingoGamesSection.Home";
-import CasinoGames from "../Layouts/CasinoGamesSection.Home";
+import SlotsGames from "../Layouts/Home/SlotsGamesSection.Home";
+import EbingoGames from "../Layouts/Home/EbingoGamesSection.Home";
+import CasinoGames from "../Layouts/Home/CasinoGamesSection.Home";
 import Footer from "../Layouts/Footer";
 
 function Home() {

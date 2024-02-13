@@ -2,8 +2,8 @@ import React from "react";
 
 import slotsBgHero from "../Assets/slotsBgHero.webp";
 import Footer from "../Layouts/Footer";
-import SlotsGamesSection from "../Layouts/SlotsGamesSection.Slots";
-import ProviderSection from "../Layouts/ProviderSection.Slots";
+import SlotsGamesSection from "../Layouts/Slots/SlotsGamesSection.Slots";
+import ProviderSection from "../Layouts/Slots/ProviderSection.Slots";
 import JackpotPrize from "../Components/Display/JackpotPrize.Slots";
 import GamesHeroBackground from "../Components/Display/GamesHeroBackground";
 

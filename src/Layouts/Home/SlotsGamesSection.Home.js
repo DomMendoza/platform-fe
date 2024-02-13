@@ -13,20 +13,20 @@ import "swiper/css/navigation";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
-import { setActiveProvider } from "../Slice/CasinoSlice";
+import { setActiveProvider } from "../../Slice/SlotSlice";
 
-function CasinoGames() {
+function SlotsGames() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const casino = useSelector((state) => state.casino.casinoGameData);
-  const providerData = useSelector((state) => state.casino.providerData);
-  const activeProvider = useSelector((state) => state.casino.activeProvider);
+  const slots = useSelector((state) => state.slots.slotsGameData);
+  const providerData = useSelector((state) => state.slots.providerData);
+  const activeProvider = useSelector((state) => state.slots.activeProvider);
 
   return (
     <div className=" flex flex-col gap-5">
       <div className="text-container flex justify-between items-center gap-5">
-        <p className="text-2xl font-bold uppercase ">Casino Games</p>
+        <p className="text-2xl font-bold uppercase ">Slot Games</p>
         <div className="swiper-container w-[55%] px-10 relative">
           <Swiper
             slidesPerView={5}
@@ -36,7 +36,7 @@ function CasinoGames() {
             }}
             modules={[Navigation]}
           >
-            {casino.map((item, index) => (
+            {slots.map((item, index) => (
               <SwiperSlide
                 onClick={() => dispatch(setActiveProvider(item.provider))}
                 key={index}
@@ -92,7 +92,7 @@ function CasinoGames() {
         ))}
         <div
           className="bg-red-400 w-full h-full rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] cursor-pointer"
-          onClick={() => navigate("/casino")}
+          onClick={() => navigate("/slots")}
         >
           <div className="w-full h-full flex flex-col justify-center items-center gap-2 rounded-lg">
             <div className="flex justify-center items-center gap-2">
@@ -108,4 +108,4 @@ function CasinoGames() {
   );
 }
 
-export default CasinoGames;
+export default SlotsGames;
