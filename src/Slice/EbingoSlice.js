@@ -14,7 +14,7 @@ const initialState = {
       provider: "jili",
       logo: jili,
       games: [
-        { name: "superAce", image: superAce },
+        { name: "bingo-dragon_vs_tiger", image: superAce },
         { name: "superAce", image: superAce },
         { name: "superAce", image: superAce },
       ],

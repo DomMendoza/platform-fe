@@ -17,6 +17,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { setActiveProvider } from "../../Slice/EbingoSlice";
 import { handleLoginOpen } from "../../Slice/ModalSlice";
 
+//API
+import gameService from "../../Services/games.service";
+
 function EbingoGames() {
   const navigate = useNavigate();
 
@@ -24,12 +27,14 @@ function EbingoGames() {
   const ebingo = useSelector((state) => state.ebingo.ebingoGameData);
   const providerData = useSelector((state) => state.ebingo.providerData);
   const activeProvider = useSelector((state) => state.ebingo.activeProvider);
+  const user_id = useSelector((state) => state.user.uid);
 
-  const handlePlayNow = () => {
+  const handlePlayNow = async (game) => {
     const token = Cookies.get("token");
 
     if (token) {
-      console.log("token: ", token);
+      const result = await gameService.bingoRedirect(game.name, user_id, token);
+      console.log("result: ", result);
     } else {
       dispatch(handleLoginOpen());
       console.log("No token.");
@@ -98,7 +103,7 @@ function EbingoGames() {
               variant="contained"
               className="bg-black hover:bg-black absolute group-hover:block hidden "
               style={{ animation: "fadeMe 500ms" }}
-              onClick={handlePlayNow}
+              onClick={() => handlePlayNow(item)}
             >
               PLAY NOW
             </Button>
