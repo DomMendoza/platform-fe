@@ -3,13 +3,14 @@ import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 
 import LoginModal from "./LoginModal";
+import RegisterModal from "./RegisterModal";
+import OtpModal from "./OtpModal";
 import ProfileMenu from "./Display/ProfileMenu";
 import UserCredits from "./Display/UserCredits";
 
 //redux
 import { useDispatch } from "react-redux";
 import { setUser } from "../Slice/UserSlice";
-import RegisterModal from "./RegisterModal";
 
 function TopNavigation() {
   const token = Cookies.get("token");
@@ -63,6 +64,7 @@ function TopNavigation() {
         </>
       ) : (
         <div className="flex justify-center items-center gap-2 px-5 border-2 border-red-600">
+          <OtpModal />
           <LoginModal />
           <RegisterModal />
         </div>

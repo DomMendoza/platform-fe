@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import authService from "../Services/auth.service";
-import DatePickerInput from "../Components/Inputs/DatePicker";
 import dayjs from "dayjs";
+import Cookies from "js-cookie";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -22,7 +22,11 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import { useForm, Controller } from "react-hook-form";
-import { handleRegisterClose, handleLoginOpen } from "../Slice/ModalSlice";
+import {
+  handleRegisterClose,
+  handleLoginOpen,
+  handleOtpOpen,
+} from "../Slice/ModalSlice";
 import { useDispatch } from "react-redux";
 
 function Copyright(props) {
@@ -48,17 +52,47 @@ export default function Register() {
 
   const { control, handleSubmit, formState } = useForm({
     defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
+      name: null,
+      email: null,
+      phone: null,
       birthdate: null,
-      username: "",
-      password: "",
-      confirmPassword: "",
+      username: null,
+      password: null,
+      confirmPassword: null,
     },
     mode: "onChange",
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    const name = data.name;
+    const email = data.email;
+    const phone = data.phone;
+    const birthdate = data.birthdate;
+    const username = data.username;
+    const password = data.password;
+    const confirmPassword = data.confirmPassword;
+
+    if (password === confirmPassword) {
+      const result = await authService.registerUser(
+        username,
+        password,
+        name,
+        email,
+        phone,
+        birthdate
+      );
+      if (result && result.success) {
+        const { player_id } = result.user;
+        Cookies.set("player_id", player_id, { expires: 1 });
+        // toast.success("Successfully Registered!");
+        dispatch(handleRegisterClose());
+        dispatch(handleOtpOpen());
+      } else {
+        toast.error("An error occured while registering user.");
+      }
+    } else {
+      toast.error("Password does not match.");
+    }
+  };
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmedPassword] = useState(false);
@@ -71,55 +105,8 @@ export default function Register() {
     event.preventDefault();
   };
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   const name = data.get("name");
-  //   const email = data.get("email");
-  //   const phone = data.get("phone");
-  //   const birthdate = dayjs(selectedDate).format("YYYY-MM-DD");
-  //   const username = data.get("username");
-  //   const password = data.get("password");
-  //   const confirm = data.get("confirmPassword");
-
-  //   // Check if any of the values are not filled
-  //   if (
-  //     !name ||
-  //     !email ||
-  //     !phone ||
-  //     !birthdate ||
-  //     !username ||
-  //     !password ||
-  //     !confirm
-  //   ) {
-  //     toast.error("Please fill in all the required fields.");
-  //     return;
-  //   } else {
-  //     if (password === confirm) {
-  //       const result = await authService.registerUser(
-  //         username,
-  //         password,
-  //         name,
-  //         email,
-  //         phone,
-  //         birthdate
-  //       );
-  //       if (result.success) {
-  //         console.log("user: ", result.user);
-  //         toast.success("Successfully Registered!");
-  //         dispatch(handleRegisterClose());
-  //         dispatch(handleLoginOpen());
-  //       } else {
-  //         toast.error("An error occured while registering user.");
-  //       }
-  //     } else {
-  //       toast.error("Password does not match.");
-  //     }
-  //   }
-  // };
-
   return (
-    <div className=" bg-white px-5 py-8 rounded-lg flex flex-col justify-center items-center gap-5">
+    <div className=" bg-white p-8 rounded-lg flex flex-col justify-center items-center gap-5">
       <div
         className="header-container flex flex-col mb-2
        justify-center items-center"
@@ -153,236 +140,252 @@ export default function Register() {
         onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
-        <div className="auth-container flex flex-col gap-2 w-full ">
-          <div className="flex flex-col gap-3 justify-between items-center">
-            <Controller
-              name="name"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: {
-                  value: true,
-                  message: "Name is required",
-                },
-              }}
-              render={({ field, fieldState: { error } }) => (
-                <TextField
-                  {...field}
-                  label="Name"
-                  variant="outlined"
-                  fullWidth
-                  inputProps={{
-                    style: {
-                      fontFamily: "Poppins, sans-serif",
-                      fontSize: "0.8rem",
-                    },
-                  }}
-                  InputLabelProps={{
-                    style: {
-                      fontFamily: "Poppins, sans-serif",
-                      fontSize: "0.9rem",
-                    },
-                  }}
-                  error={error !== undefined}
-                />
-              )}
-            />
-            <Controller
-              name="email"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: {
-                  value: true,
-                  message: "email is required",
-                },
-              }}
-              render={({ field, fieldState: { error } }) => (
-                <TextField
-                  {...field}
-                  label="Email"
-                  variant="outlined"
-                  fullWidth
-                  inputProps={{
-                    style: {
-                      fontFamily: "Poppins, sans-serif",
-                      fontSize: "0.8rem",
-                    },
-                  }}
-                  InputLabelProps={{
-                    style: {
-                      fontFamily: "Poppins, sans-serif",
-                      fontSize: "0.9rem",
-                    },
-                  }}
-                  error={error !== undefined}
-                />
-              )}
-            />
-            <Controller
-              name="phone"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: {
-                  value: true,
-                  message: "phone is required",
-                },
-              }}
-              render={({ field, fieldState: { error } }) => (
-                <TextField
-                  {...field}
-                  label="Phone"
-                  variant="outlined"
-                  fullWidth
-                  inputProps={{
-                    style: {
-                      fontFamily: "Poppins, sans-serif",
-                      fontSize: "0.8rem",
-                    },
-                  }}
-                  InputLabelProps={{
-                    style: {
-                      fontFamily: "Poppins, sans-serif",
-                      fontSize: "0.9rem",
-                    },
-                  }}
-                  error={error !== undefined}
-                />
-              )}
-            />
-            {/* TODO: INSERT INPUT VALIDATION HERE AND THEN SUBMIT */}
-            <Controller
-              name="birthdate"
-              control={control}
-              render={({ field }) => (
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DemoContainer
-                    components={["DatePicker"]}
-                    sx={{ width: "100%" }}
-                  >
-                    <DatePicker
-                      {...field}
-                      label="Birthdate"
-                      slotProps={{ textField: { fullWidth: true } }}
-                      value={field.value}
-                      inputRef={field.ref}
-                      onChange={(date) => {
-                        field.onChange(dayjs(date).format("YYYY-MM-DD"));
-                      }}
-                    />
-                  </DemoContainer>
-                </LocalizationProvider>
-              )}
-            />
-            <Controller
-              name="username"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: {
-                  value: true,
-                  message: "phone is required",
-                },
-              }}
-              render={({ field, fieldState: { error } }) => (
-                <TextField
-                  {...field}
-                  label="Username"
-                  variant="outlined"
-                  fullWidth
-                  inputProps={{
-                    style: {
-                      fontFamily: "Poppins, sans-serif",
-                      fontSize: "0.8rem",
-                    },
-                  }}
-                  InputLabelProps={{
-                    style: {
-                      fontFamily: "Poppins, sans-serif",
-                      fontSize: "0.9rem",
-                    },
-                  }}
-                  error={error !== undefined}
-                />
-              )}
-            />
-            <Controller
-              name="password"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: {
-                  value: true,
-                  message: "phone is required",
-                },
-              }}
-              render={({ field, fieldState: { error } }) => (
-                <FormControl variant="outlined" fullWidth>
-                  <InputLabel htmlFor="password">Password</InputLabel>
-                  <OutlinedInput
-                    id="password"
+        <div className="grid grid-cols-2 gap-4 place-items-center w-full ">
+          <Controller
+            name="name"
+            control={control}
+            defaultValue=""
+            rules={{
+              required: {
+                value: true,
+                message: "Name is required",
+              },
+            }}
+            render={({ field, fieldState: { error } }) => (
+              <TextField
+                {...field}
+                label="Name"
+                variant="outlined"
+                fullWidth
+                inputProps={{
+                  style: {
+                    fontFamily: "Poppins, sans-serif",
+                    fontSize: "0.8rem",
+                  },
+                }}
+                InputLabelProps={{
+                  style: {
+                    fontFamily: "Poppins, sans-serif",
+                    fontSize: "0.9rem",
+                  },
+                }}
+                error={error !== undefined}
+                helperText={error ? error.message : ""}
+              />
+            )}
+          />
+          <Controller
+            name="email"
+            control={control}
+            defaultValue=""
+            rules={{
+              required: {
+                value: true,
+                message: "email is required",
+              },
+              pattern: {
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                message: "Invalid email address",
+              },
+            }}
+            render={({ field, fieldState: { error } }) => (
+              <TextField
+                {...field}
+                label="Email"
+                variant="outlined"
+                fullWidth
+                inputProps={{
+                  style: {
+                    fontFamily: "Poppins, sans-serif",
+                    fontSize: "0.8rem",
+                  },
+                }}
+                InputLabelProps={{
+                  style: {
+                    fontFamily: "Poppins, sans-serif",
+                    fontSize: "0.9rem",
+                  },
+                }}
+                error={error !== undefined}
+                helperText={error ? error.message : ""}
+              />
+            )}
+          />
+          <Controller
+            name="phone"
+            control={control}
+            defaultValue=""
+            rules={{
+              required: {
+                value: true,
+                message: "phone is required",
+              },
+              pattern: {
+                value: /^09[0-9]{9}$/,
+                message: "Invalid phone number",
+              },
+            }}
+            render={({ field, fieldState: { error } }) => (
+              <TextField
+                {...field}
+                label="09**********"
+                variant="outlined"
+                fullWidth
+                inputProps={{
+                  style: {
+                    fontFamily: "Poppins, sans-serif",
+                    fontSize: "0.8rem",
+                  },
+                }}
+                InputLabelProps={{
+                  style: {
+                    fontFamily: "Poppins, sans-serif",
+                    fontSize: "0.9rem",
+                  },
+                }}
+                error={error !== undefined}
+                helperText={error ? error.message : ""}
+              />
+            )}
+          />
+          <Controller
+            name="birthdate"
+            control={control}
+            render={({ field }) => (
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer
+                  components={["DatePicker"]}
+                  sx={{ width: "100%" }}
+                >
+                  <DatePicker
                     {...field}
-                    type={showPassword ? "text" : "password"}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                    label="Password"
-                    error={error !== undefined}
+                    label="Birthdate"
+                    slotProps={{ textField: { fullWidth: true } }}
+                    value={field.value}
+                    inputRef={field.ref}
+                    onChange={(date) => {
+                      field.onChange(dayjs(date).format("YYYY-MM-DD"));
+                    }}
                   />
-                </FormControl>
-              )}
-            />
-            <Controller
-              name="confirmPassword"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: {
-                  value: true,
-                  message: "phone is required",
-                },
-              }}
-              render={({ field, fieldState: { error } }) => (
-                <FormControl variant="outlined" fullWidth>
-                  <InputLabel htmlFor="password">Confirm Password</InputLabel>
-                  <OutlinedInput
-                    id="confirmPassword"
-                    {...field}
-                    type={showConfirmPassword ? "text" : "password"}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle confirmPassword visibility"
-                          onClick={handleClickShowConfirmedPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {showConfirmPassword ? (
-                            <VisibilityOff />
-                          ) : (
-                            <Visibility />
-                          )}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                    name="confirmPassword"
-                    label="confirmPassword"
-                    error={error !== undefined}
-                  />
-                </FormControl>
-              )}
-            />
-          </div>
+                </DemoContainer>
+              </LocalizationProvider>
+            )}
+          />
+          <Controller
+            name="username"
+            control={control}
+            defaultValue=""
+            rules={{
+              required: {
+                value: true,
+                message: "username is required",
+              },
+            }}
+            render={({ field, fieldState: { error } }) => (
+              <TextField
+                {...field}
+                label="Username"
+                variant="outlined"
+                fullWidth
+                inputProps={{
+                  style: {
+                    fontFamily: "Poppins, sans-serif",
+                    fontSize: "0.8rem",
+                  },
+                }}
+                InputLabelProps={{
+                  style: {
+                    fontFamily: "Poppins, sans-serif",
+                    fontSize: "0.9rem",
+                  },
+                }}
+                error={error !== undefined}
+                helperText={error ? error.message : ""}
+              />
+            )}
+          />
+          <Controller
+            name="password"
+            control={control}
+            defaultValue=""
+            rules={{
+              required: "Password is required",
+              minLength: {
+                value: 8,
+                message: "Password must be at least 8 characters long",
+              },
+            }}
+            render={({ field, fieldState: { error } }) => (
+              <FormControl variant="outlined" fullWidth>
+                <InputLabel htmlFor="password">Password</InputLabel>
+                <OutlinedInput
+                  id="password"
+                  {...field}
+                  type={showPassword ? "text" : "password"}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Password"
+                  error={error !== undefined}
+                  helpertext={error ? error.message : ""}
+                />
+              </FormControl>
+            )}
+          />
+          <Controller
+            name="confirmPassword"
+            control={control}
+            defaultValue=""
+            rules={{
+              required: {
+                value: true,
+                message: "confirm your password",
+              },
+              minLength: {
+                value: 8,
+                message: "Password must be at least 8 characters long",
+              },
+            }}
+            render={({ field, fieldState: { error } }) => (
+              <FormControl variant="outlined" fullWidth>
+                <InputLabel htmlFor="password">Confirm Password</InputLabel>
+                <OutlinedInput
+                  id="confirmPassword"
+                  {...field}
+                  type={showConfirmPassword ? "text" : "password"}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle confirmPassword visibility"
+                        onClick={handleClickShowConfirmedPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showConfirmPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  name="confirmPassword"
+                  label="confirmPassword"
+                  error={error !== undefined}
+                  helperText={error ? error.message : ""}
+                />
+              </FormControl>
+            )}
+          />
         </div>
         <div className="button-container flex flex-col justify-center items-center w-full ">
           <Button

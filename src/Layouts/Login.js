@@ -1,6 +1,7 @@
 import * as React from "react";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
+import { useForm, Controller } from "react-hook-form";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -42,27 +43,35 @@ function Copyright(props) {
 
 export default function Login() {
   const dispatch = useDispatch();
+
+  const { control, handleSubmit, formState } = useForm({
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+    mode: "onChange",
+  });
+  const onSubmit = async (data) => {
+    const username = data.username;
+    const password = data.password;
+
+    // console.log(username, password);
+
+    const result = await authService.loginUser(username, password);
+    if (result && result.success) {
+      Cookies.set("token", result.loginAuthenticate, { expires: 1 });
+      window.location.reload();
+    } else {
+      toast.error("Invalid Credentials.");
+    }
+  };
+
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const username = data.get("username");
-    const password = data.get("password");
-
-    const result = await authService.loginUser(username, password);
-    if (result.success) {
-      Cookies.set("token", result.loginAuthenticate, { expires: 1 });
-      window.location.reload();
-    } else {
-      toast.error("Invalid Credentials.");
-    }
   };
 
   return (
@@ -94,43 +103,81 @@ export default function Login() {
       <Box
         className="input-container flex flex-col justify-center items-center  w-full "
         component="form"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
         <div className="auth-container flex flex-col w-full ">
           <div className="flex flex-col gap-5 justify-between items-center">
-            <TextField
-              required
-              fullWidth
-              inputProps={{ style: { fontFamily: "Poppins, sans serif" } }}
-              InputLabelProps={{ style: { fontFamily: "Poppins, sans serif" } }}
-              id="username"
-              label="Username"
+            <Controller
               name="username"
-              autoComplete="username"
-              autoFocus
+              control={control}
+              defaultValue=""
+              rules={{
+                required: {
+                  value: true,
+                  message: "username is required",
+                },
+              }}
+              render={({ field, fieldState: { error } }) => (
+                <TextField
+                  {...field}
+                  label="Username"
+                  variant="outlined"
+                  fullWidth
+                  inputProps={{
+                    style: {
+                      fontFamily: "Poppins, sans-serif",
+                      fontSize: "0.8rem",
+                    },
+                  }}
+                  InputLabelProps={{
+                    style: {
+                      fontFamily: "Poppins, sans-serif",
+                      fontSize: "0.9rem",
+                    },
+                  }}
+                  error={error !== undefined}
+                  helperText={error ? error.message : ""}
+                />
+              )}
             />
-            <FormControl variant="outlined" fullWidth>
-              <InputLabel htmlFor="password">Password</InputLabel>
-              <OutlinedInput
-                id="password"
-                type={showPassword ? "text" : "password"}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                name="password"
-                label="password"
-              />
-            </FormControl>
+            <Controller
+              name="password"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: "Password is required",
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters long",
+                },
+              }}
+              render={({ field, fieldState: { error } }) => (
+                <FormControl variant="outlined" fullWidth>
+                  <InputLabel htmlFor="password">Password</InputLabel>
+                  <OutlinedInput
+                    id="password"
+                    {...field}
+                    type={showPassword ? "text" : "password"}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="Password"
+                    error={error !== undefined}
+                    helperText={error ? error.message : ""}
+                  />
+                </FormControl>
+              )}
+            />
           </div>
           <div className="flex justify-between items-center">
             <FormControlLabel

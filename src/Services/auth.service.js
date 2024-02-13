@@ -32,18 +32,14 @@ const loginUser = async (username, password) => {
     return response.data;
   } catch (error) {
     console.error(error);
-    throw new Error("An error occurred while logging in.");
   }
 };
 
 const verifyUser = async (player_id, otpsent) => {
-  const params = {
-    player_id,
-    otpsent,
-  };
-
   try {
-    const response = await axios.post(`${baseURL}/verify/player`, params);
+    const response = await axios.post(
+      `${baseURL}/verify/player?player_id=${player_id}&otpsent=${otpsent}`
+    );
     return response.data;
   } catch (error) {
     console.error(error);

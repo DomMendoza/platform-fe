@@ -25,6 +25,7 @@ export default function ProfileMenu() {
 
   const handleLogout = () => {
     Cookies.set("token", "", { expires: new Date(0) });
+    Cookies.set("player_id", "", { expires: new Date(0) });
     window.location.reload();
   };
 
