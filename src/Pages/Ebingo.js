@@ -1,17 +1,17 @@
 import React from "react";
 
-import slotsBgHero from "../Assets/slotsBgHero.webp";
+import casinoBgHero from "../Assets/casinoBgHero.webp";
 import Footer from "../Layouts/Footer";
-import SlotsGamesSection from "../Layouts/SlotsGamesSection.Slots";
-import ProviderSection from "../Layouts/ProviderSection.Slots";
-import JackpotPrize from "../Components/Display/JackpotPrize.Slots";
+import EbingoGamesSection from "../Layouts/EbingoGamesSection.Ebingo";
+import ProviderSection from "../Layouts/ProviderSection.Ebingo";
+import JackpotPrize from "../Components/Display/JackpotPrice.Ebingo";
 import GamesHeroBackground from "../Components/Display/GamesHeroBackground";
 
-function Slots() {
+function Ebingo() {
   return (
     <div className="w-full flex flex-col gap-16 justify-center items-center bg-gray-400">
       <div className="w-[65rem] 2xl:w-[85rem] h-full flex flex-col gap-5 border-2 border-red-600">
-        <GamesHeroBackground img={slotsBgHero} />
+        <GamesHeroBackground img={casinoBgHero} />
         <div className="home-two jackpot-container border-2 border-green-600">
           <div className="bg-gray-300 rounded-lg h-[10rem] 2xl:h-[12rem]">
             <div className="border-2 border-red-600 w-full h-full flex justify-center items-center">
@@ -27,7 +27,7 @@ function Slots() {
           </div>
         </div>
         <div className="home-three swiper-container border-2 border-green-600">
-          <SlotsGamesSection />
+          <EbingoGamesSection />
         </div>
       </div>
       <Footer />
@@ -35,4 +35,4 @@ function Slots() {
   );
 }
 
-export default Slots;
+export default Ebingo;

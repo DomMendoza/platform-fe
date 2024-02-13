@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import { faBasketball } from "@fortawesome/free-solid-svg-icons";
 import { faDice } from "@fortawesome/free-solid-svg-icons";
+import { faClover } from "@fortawesome/free-solid-svg-icons";
 import { faGift } from "@fortawesome/free-solid-svg-icons";
 import { faCheckToSlot } from "@fortawesome/free-solid-svg-icons";
 
@@ -23,6 +24,11 @@ function SideNavigation() {
     {
       name: "Casino",
       link: "/casino",
+      icon: <FontAwesomeIcon icon={faClover} />,
+    },
+    {
+      name: "E-Bingo",
+      link: "/ebingo",
       icon: <FontAwesomeIcon icon={faDice} />,
     },
     {

@@ -12,6 +12,7 @@ import Home from "./Pages/Home";
 import Sports from "./Pages/Sports";
 import Slots from "./Pages/Slots";
 import Casino from "./Pages/Casino";
+import Ebingo from "./Pages/Ebingo";
 import Promotions from "./Pages/Promotions";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<Navigation />}>
           <Route index element={<Home />} />
           <Route path="sports" element={<Sports />} />
+          <Route path="ebingo" element={<Ebingo />} />
           <Route path="slots" element={<Slots />} />
           <Route path="casino" element={<Casino />} />
           <Route path="promotions" element={<Promotions />} />
