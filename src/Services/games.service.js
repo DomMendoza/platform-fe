@@ -16,6 +16,19 @@ const bingoRedirect = async (game, user_id, token) => {
   }
 };
 
+const getDynastyGaming = async () => {
+  try {
+    const response = await axios.get(
+      "https://uat.888bingo.ph/api/games/1671070084897"
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    // throw new Error("An error occurred while redirecting.");
+  }
+};
+
 export default {
   bingoRedirect,
+  getDynastyGaming,
 };

@@ -8,6 +8,7 @@ const initialState = {
   user_type: "",
   birthdate: "",
   referral_token: null,
+  wallet: null,
 };
 
 const UserSlice = createSlice({
@@ -32,9 +33,12 @@ const UserSlice = createSlice({
       state.username = username;
       state.referral_token = referral_token;
     },
+    setWallet: (state, action) => {
+      state.wallet = action.payload;
+    },
   },
 });
 
-export const { setUser } = UserSlice.actions;
+export const { setUser, setWallet } = UserSlice.actions;
 
 export default UserSlice.reducer;

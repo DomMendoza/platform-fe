@@ -16,6 +16,8 @@ import "swiper/css/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveProvider } from "../../Slice/EbingoSlice";
 import { handleLoginOpen } from "../../Slice/ModalSlice";
+import { setDynastyGaming } from "../../Slice/EbingoSlice";
+import { setJili } from "../../Slice/EbingoSlice";
 
 //API
 import gameService from "../../Services/games.service";
@@ -29,17 +31,45 @@ function EbingoGames() {
   const activeProvider = useSelector((state) => state.ebingo.activeProvider);
   const user_id = useSelector((state) => state.user.uid);
 
-  const handlePlayNow = async (game) => {
+  const handlePlayNow = async (gameName) => {
     const token = Cookies.get("token");
 
     if (token) {
-      const result = await gameService.bingoRedirect(game.name, user_id, token);
-      console.log("result: ", result);
+      const result = await gameService.bingoRedirect(gameName, user_id, token);
+      console.log("result: ", result.url);
+      navigate("/redirect", { state: { url: result.url } });
     } else {
       dispatch(handleLoginOpen());
       console.log("No token.");
     }
   };
+
+  useEffect(() => {
+    const fetchEbingoGames = async () => {
+      //FETCH DG GAMES
+      const dgResult = await gameService.getDynastyGaming();
+      if (dgResult) {
+        const classic = dgResult.data.classic;
+        const variant = dgResult.data.variant;
+        const dgData = [...classic, ...variant];
+        dispatch(setDynastyGaming(dgData));
+      } else {
+        console.error("An error has occured fetching the data.");
+      }
+      //FETCH JILI GAMES
+      const jiliResult = await gameService.getDynastyGaming();
+      if (jiliResult) {
+        const classic = jiliResult.data.classic;
+        const variant = jiliResult.data.variant;
+        const jiliData = [...classic, ...variant];
+        dispatch(setJili(jiliData));
+      } else {
+        console.error("An error has occured fetching the data.");
+      }
+    };
+    fetchEbingoGames();
+    // dispatch(setInitialState());
+  }, []);
 
   return (
     <div className=" flex flex-col gap-5">
@@ -90,38 +120,37 @@ function EbingoGames() {
         </div>
       </div>
       <div className="game-grid grid grid-cols-7 grid-rows-2 place-items-center gap-5 ">
-        {providerData.games.slice(0, 13).map((item, index) => (
-          <div
-            key={index}
-            className="group rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] flex justify-center items-center relative"
-          >
-            <img
-              src={item.image}
-              className="w-full h-full object-contain rounded-lg group-hover:brightness-50 duration-300 ease-in-out"
-            />
-            <Button
-              variant="contained"
-              className="bg-black hover:bg-black absolute group-hover:block hidden "
-              style={{ animation: "fadeMe 500ms" }}
-              onClick={() => handlePlayNow(item)}
+        {providerData &&
+        Object.keys(providerData).length !== 0 &&
+        providerData.games.length !== 0 ? (
+          providerData.games.slice(0, 14).map((item, index) => (
+            <div
+              key={index}
+              className="group flex justify-center items-center relative"
             >
-              PLAY NOW
-            </Button>
-          </div>
-        ))}
-        <div
-          className="bg-red-400 w-full h-full rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] cursor-pointer"
-          onClick={() => navigate("/ebingo")}
-        >
-          <div className="w-full h-full flex flex-col justify-center items-center gap-2 rounded-lg">
-            <div className="flex justify-center items-center gap-2">
-              <div className="bg-white rounded-full w-3 h-3"></div>
-              <div className="bg-white rounded-full w-3 h-3"></div>
-              <div className="bg-white rounded-full w-3 h-3"></div>
+              <img
+                src={`https://uat.888bingo.ph/${item.icon.bg}`}
+                className="group-hover:brightness-75 duration-300 ease-in-out"
+              />
+              <img
+                src={`https://uat.888bingo.ph/${item.icon.logo}`}
+                className="group-hover:brightness-75 duration-300 ease-in-out absolute w-[75%]"
+              />
+              <Button
+                variant="contained"
+                className="bg-black hover:bg-black absolute group-hover:block hidden"
+                style={{ animation: "fadeMe 500ms" }}
+                onClick={() => handlePlayNow(item.name)}
+              >
+                PLAY NOW
+              </Button>
             </div>
-            <p className="font-bold text-lg font-[Poppins] text-white">More</p>
+          ))
+        ) : (
+          <div className="h-[10rem] w-[10rem] border-2 border-black rounded-lg flex justify-center items-center">
+            <p className="font-[Poppins]">No listed game.</p>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

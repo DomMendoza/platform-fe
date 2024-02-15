@@ -14,6 +14,7 @@ import Slots from "./Pages/Slots";
 import Casino from "./Pages/Casino";
 import Ebingo from "./Pages/Ebingo";
 import Promotions from "./Pages/Promotions";
+import GameWindow from "./Pages/GameWindow";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="slots" element={<Slots />} />
           <Route path="casino" element={<Casino />} />
           <Route path="promotions" element={<Promotions />} />
+          <Route path="redirect" element={<GameWindow />} />
         </Route>
       </Routes>
     </BrowserRouter>
