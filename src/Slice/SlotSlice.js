@@ -66,24 +66,13 @@ const SlotSlice = createSlice({
         activeProvider: action.payload,
       };
     },
-    setDynastyGaming: (state, action) => {
-      const dgIndex = state.slotsGameData.findIndex(
-        (provider) => provider.provider === "dg"
+    setProviderGames: (state, action) => {
+      const { provider, games } = action.payload;
+      const providerIndex = state.slotsGameData.findIndex(
+        (item) => item.provider === provider
       );
-      if (dgIndex !== -1) {
-        state.slotsGameData[dgIndex].games = action.payload;
-        //Initialize
-        state.providerData = state.slotsGameData[0];
-        state.activeProvider = state.slotsGameData[0].provider;
-      }
-    },
-    setJili: (state, action) => {
-      const jiliIndex = state.slotsGameData.findIndex(
-        (provider) => provider.provider === "jili"
-      );
-      if (jiliIndex !== -1) {
-        state.slotsGameData[jiliIndex].games = action.payload;
-        //Initialize
+      if (providerIndex !== -1) {
+        state.slotsGameData[providerIndex].games = games;
         state.providerData = state.slotsGameData[0];
         state.activeProvider = state.slotsGameData[0].provider;
       }
@@ -91,7 +80,6 @@ const SlotSlice = createSlice({
   },
 });
 
-export const { setActiveProvider, setDynastyGaming, setJili } =
-  SlotSlice.actions;
+export const { setActiveProvider, setProviderGames } = SlotSlice.actions;
 
 export default SlotSlice.reducer;

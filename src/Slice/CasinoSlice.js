@@ -73,24 +73,13 @@ const CasinoSlice = createSlice({
         activeProvider: action.payload,
       };
     },
-    setDynastyGaming: (state, action) => {
-      const dgIndex = state.casinoGameData.findIndex(
-        (provider) => provider.provider === "dg"
+    setProviderGames: (state, action) => {
+      const { provider, games } = action.payload;
+      const providerIndex = state.casinoGameData.findIndex(
+        (item) => item.provider === provider
       );
-      if (dgIndex !== -1) {
-        state.casinoGameData[dgIndex].games = action.payload;
-        //Initialize
-        state.providerData = state.casinoGameData[0];
-        state.activeProvider = state.casinoGameData[0].provider;
-      }
-    },
-    setJili: (state, action) => {
-      const jiliIndex = state.casinoGameData.findIndex(
-        (provider) => provider.provider === "jili"
-      );
-      if (jiliIndex !== -1) {
-        state.casinoGameData[jiliIndex].games = action.payload;
-        //Initialize
+      if (providerIndex !== -1) {
+        state.casinoGameData[providerIndex].games = games;
         state.providerData = state.casinoGameData[0];
         state.activeProvider = state.casinoGameData[0].provider;
       }
@@ -98,7 +87,6 @@ const CasinoSlice = createSlice({
   },
 });
 
-export const { setActiveProvider, setDynastyGaming, setJili } =
-  CasinoSlice.actions;
+export const { setActiveProvider, setProviderGames } = CasinoSlice.actions;
 
 export default CasinoSlice.reducer;

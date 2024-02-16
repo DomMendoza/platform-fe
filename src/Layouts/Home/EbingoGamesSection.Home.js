@@ -16,11 +16,12 @@ import "swiper/css/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveProvider } from "../../Slice/EbingoSlice";
 import { handleLoginOpen } from "../../Slice/ModalSlice";
-import { setDynastyGaming } from "../../Slice/EbingoSlice";
-import { setJili } from "../../Slice/EbingoSlice";
 
 //API
-import gameService from "../../Services/games.service";
+import gamesService from "../../Services/games.service";
+
+//Helper
+import fetchEbingoGames from "../../Helpers/fetchEbingoGames";
 
 function EbingoGames() {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ function EbingoGames() {
     const token = Cookies.get("token");
 
     if (token) {
-      const result = await gameService.bingoRedirect(gameName, user_id, token);
+      const result = await gamesService.bingoRedirect(gameName, user_id, token);
       console.log("result: ", result.url);
       navigate("/redirect", { state: { url: result.url } });
     } else {
@@ -44,32 +45,10 @@ function EbingoGames() {
     }
   };
 
+  //Fetch E-bingo Games
   useEffect(() => {
-    const fetchEbingoGames = async () => {
-      //FETCH DG GAMES
-      const dgResult = await gameService.getDynastyGaming();
-      if (dgResult) {
-        const classic = dgResult.data.classic;
-        const variant = dgResult.data.variant;
-        const dgData = [...classic, ...variant];
-        dispatch(setDynastyGaming(dgData));
-      } else {
-        console.error("An error has occured fetching the data.");
-      }
-      //FETCH JILI GAMES
-      const jiliResult = await gameService.getDynastyGaming();
-      if (jiliResult) {
-        const classic = jiliResult.data.classic;
-        const variant = jiliResult.data.variant;
-        const jiliData = [...classic, ...variant];
-        dispatch(setJili(jiliData));
-      } else {
-        console.error("An error has occured fetching the data.");
-      }
-    };
-    fetchEbingoGames();
-    // dispatch(setInitialState());
-  }, []);
+    fetchEbingoGames(dispatch);
+  }, [dispatch]);
 
   return (
     <div className=" flex flex-col gap-5">

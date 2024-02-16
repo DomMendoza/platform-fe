@@ -16,11 +16,12 @@ import "swiper/css/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveProvider } from "../../Slice/CasinoSlice";
 import { handleLoginOpen } from "../../Slice/ModalSlice";
-import { setDynastyGaming } from "../../Slice/CasinoSlice";
-import { setJili } from "../../Slice/CasinoSlice";
 
 //API
-import gameService from "../../Services/games.service";
+import gamesService from "../../Services/games.service";
+
+//Helper
+import fetchCasinoGames from "../../Helpers/fetchCasinoGames";
 
 function CasinoGames() {
   const navigate = useNavigate();
@@ -29,12 +30,15 @@ function CasinoGames() {
   const casino = useSelector((state) => state.casino.casinoGameData);
   const providerData = useSelector((state) => state.casino.providerData);
   const activeProvider = useSelector((state) => state.casino.activeProvider);
+  const user_id = useSelector((state) => state.user.uid);
 
-  const handlePlayNow = () => {
+  const handlePlayNow = async (gameName) => {
     const token = Cookies.get("token");
 
     if (token) {
-      console.log("token: ", token);
+      const result = await gamesService.bingoRedirect(gameName, user_id, token);
+      console.log("result: ", result.url);
+      navigate("/redirect", { state: { url: result.url } });
     } else {
       dispatch(handleLoginOpen());
       console.log("No token.");
@@ -42,31 +46,8 @@ function CasinoGames() {
   };
 
   useEffect(() => {
-    const fetchCasinoGames = async () => {
-      //FETCH DG GAMES
-      const dgResult = await gameService.getDynastyGaming();
-      if (dgResult) {
-        const classic = dgResult.data.classic;
-        const variant = dgResult.data.variant;
-        const dgData = [...classic, ...variant];
-        dispatch(setDynastyGaming(dgData));
-      } else {
-        console.error("An error has occured fetching the data.");
-      }
-      //FETCH JILI GAMES
-      const jiliResult = await gameService.getDynastyGaming();
-      if (jiliResult) {
-        const classic = jiliResult.data.classic;
-        const variant = jiliResult.data.variant;
-        const jiliData = [...classic, ...variant];
-        dispatch(setJili(jiliData));
-      } else {
-        console.error("An error has occured fetching the data.");
-      }
-    };
-    fetchCasinoGames();
-    // dispatch(setInitialState());
-  }, []);
+    fetchCasinoGames(dispatch);
+  }, [dispatch]);
 
   return (
     <div className=" flex flex-col gap-5">

@@ -66,24 +66,13 @@ const EbingoSlice = createSlice({
         activeProvider: action.payload,
       };
     },
-    setDynastyGaming: (state, action) => {
-      const dgIndex = state.ebingoGameData.findIndex(
-        (provider) => provider.provider === "dg"
+    setProviderGames: (state, action) => {
+      const { provider, games } = action.payload;
+      const providerIndex = state.ebingoGameData.findIndex(
+        (item) => item.provider === provider
       );
-      if (dgIndex !== -1) {
-        state.ebingoGameData[dgIndex].games = action.payload;
-        //Initialize
-        state.providerData = state.ebingoGameData[0];
-        state.activeProvider = state.ebingoGameData[0].provider;
-      }
-    },
-    setJili: (state, action) => {
-      const jiliIndex = state.ebingoGameData.findIndex(
-        (provider) => provider.provider === "jili"
-      );
-      if (jiliIndex !== -1) {
-        state.ebingoGameData[jiliIndex].games = action.payload;
-        //Initialize
+      if (providerIndex !== -1) {
+        state.ebingoGameData[providerIndex].games = games;
         state.providerData = state.ebingoGameData[0];
         state.activeProvider = state.ebingoGameData[0].provider;
       }
@@ -91,7 +80,6 @@ const EbingoSlice = createSlice({
   },
 });
 
-export const { setActiveProvider, setDynastyGaming, setJili } =
-  EbingoSlice.actions;
+export const { setActiveProvider, setProviderGames } = EbingoSlice.actions;
 
 export default EbingoSlice.reducer;
