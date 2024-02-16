@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button, IconButton } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import gamesService from "../../Services/games.service";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -8,15 +10,19 @@ import { handleLoginOpen } from "../../Slice/ModalSlice";
 
 function EbingoGamesSection() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const providerData = useSelector((state) => state.ebingo.providerData);
 
   const [limit, setLimit] = useState(13);
+  const user_id = useSelector((state) => state.user.uid);
 
-  const handlePlayNow = () => {
+  const handlePlayNow = async (gameName) => {
     const token = Cookies.get("token");
 
     if (token) {
-      console.log("token: ", token);
+      const result = await gamesService.bingoRedirect(gameName, user_id, token);
+      console.log("result: ", result.url);
+      navigate("/redirect", { state: { url: result.url } });
     } else {
       dispatch(handleLoginOpen());
       console.log("No token.");
@@ -30,17 +36,21 @@ function EbingoGamesSection() {
         {providerData.games.slice(0, limit).map((item, index) => (
           <div
             key={index}
-            className="group rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] flex justify-center items-center relative"
+            className="group flex justify-center items-center relative"
           >
             <img
-              src={item.image}
-              className="w-full h-full object-contain rounded-lg group-hover:brightness-50 duration-300 ease-in-out"
+              src={`https://uat.888bingo.ph/${item.icon.bg}`}
+              className="group-hover:brightness-75 duration-300 ease-in-out"
+            />
+            <img
+              src={`https://uat.888bingo.ph/${item.icon.logo}`}
+              className="group-hover:brightness-75 duration-300 ease-in-out absolute w-[75%]"
             />
             <Button
               variant="contained"
-              className="bg-black hover:bg-black absolute group-hover:block hidden "
+              className="bg-black hover:bg-black absolute group-hover:block hidden"
               style={{ animation: "fadeMe 500ms" }}
-              onClick={handlePlayNow}
+              onClick={() => handlePlayNow(item.name)}
             >
               PLAY NOW
             </Button>

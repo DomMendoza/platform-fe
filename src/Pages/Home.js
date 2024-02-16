@@ -25,8 +25,8 @@ function Home() {
         </div>
         <div className="home-three px-5 py-2 flex flex-col gap-14 rounded-lg border-2 border-red-600">
           <SlotsGames />
-          <EbingoGames />
           <CasinoGames />
+          <EbingoGames />
         </div>
       </div>
       <Footer />

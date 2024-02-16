@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import PushableButton from "../../Components/Inputs/PushableButton";
 
 import { Button } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -52,7 +53,13 @@ function CasinoGames() {
   return (
     <div className=" flex flex-col gap-5">
       <div className="text-container flex justify-between items-center gap-5">
-        <p className="text-2xl font-bold uppercase ">Casino Games</p>
+        <div className="flex gap-10">
+          <p className="text-2xl font-bold uppercase ">Casino Games</p>
+          <PushableButton
+            text={"View All"}
+            eventHandler={() => navigate("/casino")}
+          />
+        </div>
         <div className="swiper-container w-[55%] px-10 relative">
           <Swiper
             slidesPerView={5}
