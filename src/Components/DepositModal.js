@@ -53,7 +53,11 @@ export default function DepositModal() {
               <p className="text-sm font-[Poppins]">Select amount:</p>
               <div className="grid grid-cols-5 grid-rows-2 gap-2">
                 {Array.from({ length: 10 }, (v, i) => i).map((item) => (
-                  <Button variant="contained" className="bg-gray-500 px-6 py-4">
+                  <Button
+                    variant="contained"
+                    className="bg-gray-500 px-6 py-4"
+                    key={item}
+                  >
                     {(item + 1) * 100}
                   </Button>
                 ))}
