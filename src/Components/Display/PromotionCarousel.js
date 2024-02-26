@@ -1,13 +1,15 @@
 import React, { useRef, useState } from "react";
 
 import promo1 from "../../Assets/promo1.webp";
-import promo2 from "../../Assets/promo2.webp";
+import promo2 from "../../Assets/dailyDeposit.png";
+import promo3 from "../../Assets/dailyRebate.png";
+import promo4 from "../../Assets/firstDeposit.png";
 
 import { Pagination, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 export default function PromotionCarousel() {
-  // const assetImg = [promo1, promo2];
+  const assetImg = [promo1, promo2, promo3, promo4];
 
   return (
     <Swiper
@@ -22,9 +24,9 @@ export default function PromotionCarousel() {
       }}
       modules={[Pagination, Autoplay]}
     >
-      {Array.from({ length: 7 }, (v, i) => i).map((item, index) => (
+      {assetImg.map((item, index) => (
         <SwiperSlide className="border-2 border-blue-600" key={index}>
-          <img src={promo1} className="w-full h-[20rem] 2xl:h-[25rem]" />
+          <img src={item} className="w-full h-[20rem] 2xl:h-[25rem]" />
         </SwiperSlide>
       ))}
     </Swiper>
