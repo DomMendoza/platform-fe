@@ -13,6 +13,8 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
@@ -49,6 +51,11 @@ function Copyright(props) {
 
 export default function Register() {
   const dispatch = useDispatch();
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
 
   const { control, handleSubmit, formState } = useForm({
     defaultValues: {
@@ -70,6 +77,11 @@ export default function Register() {
     const username = data.username;
     const password = data.password;
     const confirmPassword = data.confirmPassword;
+
+    if (!isChecked) {
+      toast.error("Please accept the Terms of Use and Privacy Policy.");
+      return;
+    }
 
     if (password === confirmPassword) {
       const result = await authService.registerUser(
@@ -135,7 +147,7 @@ export default function Register() {
         </Typography>
       </div>
       <Box
-        className="input-container flex flex-col justify-center items-center  w-full "
+        className="input-container flex flex-col justify-center items-center gap-2 w-full "
         component="form"
         onSubmit={handleSubmit(onSubmit)}
         noValidate
@@ -387,6 +399,25 @@ export default function Register() {
             )}
           />
         </div>
+        {/* TODO: Do this */}
+        <div className="flex justify-start items-center mt-2 w-full">
+          <Checkbox
+            style={{ padding: 0 }}
+            checked={isChecked}
+            onChange={handleCheckboxChange}
+          />
+          <p className="text-xs font-[Poppins]">
+            I am at least 21 years of age and I accept the{" "}
+            <a href="#" className="text-blue-500 underline">
+              Terms of Use
+            </a>{" "}
+            and{" "}
+            <a href="#" className="text-blue-500 underline">
+              Privacy Policy
+            </a>
+          </p>
+        </div>
+
         <div className="button-container flex flex-col justify-center items-center w-full ">
           <Button
             type="submit"
