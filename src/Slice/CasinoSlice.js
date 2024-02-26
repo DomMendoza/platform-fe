@@ -13,80 +13,58 @@ const initialState = {
     {
       provider: "dg",
       logo: dg,
-      games: [],
+      link: "https://uat.888bingo.ph/api/games/1671070084897",
       jackpot: 24654326,
     },
     {
       provider: "jili",
       logo: jili,
-      games: [],
+      link: "https://uat.888bingo.ph/api/games/1671070084897",
       jackpot: 24654326,
     },
     {
       provider: "cq9",
       logo: cq9,
-      games: [],
+      link: "https://uat.888bingo.ph/api/games/1671070084897",
       jackpot: 454324523,
     },
     {
       provider: "fachai",
       logo: fachai,
-      games: [],
+      link: "https://uat.888bingo.ph/api/games/1671070084897",
       jackpot: 35467358,
     },
     {
       provider: "jdb",
       logo: jdb,
-      games: [],
+      link: "https://uat.888bingo.ph/api/games/1671070084897",
       jackpot: 21315345,
     },
     {
       provider: "playtech",
       logo: playtech_1,
-      games: [],
+      link: "https://uat.888bingo.ph/api/games/1671070084897",
       jackpot: 13436146,
     },
-  ],
-  providerData: {},
-  activeProvider: "",
+  ], //assets of each provider
+  gameData: [], //array of games
+  active: {}, //selected provider and its link
 };
-
-// Find the initial provider based on activeProvider
-const initialProvider = initialState.casinoGameData.find(
-  (item) => item.provider === initialState.activeProvider
-);
-// Set providerData based on the initial provider
-initialState.providerData = initialProvider ? initialProvider : {};
 
 const CasinoSlice = createSlice({
   name: "casino",
   initialState,
   reducers: {
-    setActiveProvider: (state, action) => {
-      const currentProvider = state.casinoGameData.find(
-        (item) => item.provider === action.payload
-      );
-
-      return {
-        ...state,
-        providerData: currentProvider ? currentProvider : {},
-        activeProvider: action.payload,
-      };
+    setActive: (state, action) => {
+      const { provider, link } = action.payload;
+      state.active = { provider, link };
     },
-    setProviderGames: (state, action) => {
-      const { provider, games } = action.payload;
-      const providerIndex = state.casinoGameData.findIndex(
-        (item) => item.provider === provider
-      );
-      if (providerIndex !== -1) {
-        state.casinoGameData[providerIndex].games = games;
-        state.providerData = state.casinoGameData[0];
-        state.activeProvider = state.casinoGameData[0].provider;
-      }
+    setGameData: (state, action) => {
+      state.gameData = action.payload;
     },
   },
 });
 
-export const { setActiveProvider, setProviderGames } = CasinoSlice.actions;
+export const { setActive, setGameData } = CasinoSlice.actions;
 
 export default CasinoSlice.reducer;

@@ -11,12 +11,11 @@ import "swiper/css/navigation";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
-import { setActiveProvider } from "../../Slice/SlotSlice";
+import { setActive } from "../../Slice/SlotSlice";
 
 function ProviderSection() {
   const dispatch = useDispatch();
-  const slots = useSelector((state) => state.slots.slotsGameData);
-  const activeProvider = useSelector((state) => state.slots.activeProvider);
+  const { slotsGameData, active } = useSelector((state) => state.slots);
 
   return (
     <div className="h-full flex justify-center items-center gap-2 px-4">
@@ -33,16 +32,20 @@ function ProviderSection() {
         }}
         className="mySwiper h-[100%] "
       >
-        {slots.map((item, index) => (
+        {slotsGameData.map((item, index) => (
           <SwiperSlide
             className="p-5 rounded-lg" //adjust this padding to change the dimension of logo providers
             key={index}
           >
             <div
               className={`h-full flex justify-center items-center p-3 border-2 border-red-600 rounded-lg cursor-pointer ease-in-out duration-300 ${
-                activeProvider === item.provider ? "-translate-y-3" : ""
+                active.provider === item.provider ? "-translate-y-3" : ""
               }`}
-              onClick={() => dispatch(setActiveProvider(item.provider))}
+              onClick={() =>
+                dispatch(
+                  setActive({ provider: item.provider, link: item.link })
+                )
+              }
             >
               <img src={item.logo} />
             </div>

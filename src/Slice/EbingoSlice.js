@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import gamesService from "../Services/games.service";
 
 //Providers
 import dg from "../Assets/dg.webp";
@@ -8,78 +9,66 @@ import fachai from "../Assets/fachai.webp";
 import jdb from "../Assets/jdb.webp";
 import playtech_1 from "../Assets/playtech_1.webp";
 
+// https://uat.888bingo.ph/api/games/1671070084897
+// https://fakestoreapi.com/products?limit=1
+
 const initialState = {
   ebingoGameData: [
     {
       provider: "dg",
       logo: dg,
-      games: [],
+      link: "https://uat.888bingo.ph/api/games/1671070084897",
       jackpot: 24654326,
     },
     {
       provider: "jili",
       logo: jili,
-      games: [],
+      link: "https://uat.888bingo.ph/api/games/1671070084897",
       jackpot: 24654326,
     },
     {
       provider: "cq9",
       logo: cq9,
-      games: [],
+      link: "https://uat.888bingo.ph/api/games/1671070084897",
       jackpot: 454324523,
     },
     {
       provider: "fachai",
       logo: fachai,
-      games: [],
+      link: "https://uat.888bingo.ph/api/games/1671070084897",
       jackpot: 35467358,
     },
     {
       provider: "jdb",
       logo: jdb,
-      games: [],
+      link: "https://uat.888bingo.ph/api/games/1671070084897",
       jackpot: 21315345,
     },
     {
       provider: "playtech",
       logo: playtech_1,
-      games: [],
+      link: "https://uat.888bingo.ph/api/games/1671070084897",
       jackpot: 13436146,
     },
-  ],
-  providerData: {},
-  activeProvider: "",
+  ], //assets of each provider
+  gameData: [], //array of games
+  active: {}, //selected provider and its link
 };
 
 const EbingoSlice = createSlice({
   name: "ebingo",
   initialState,
   reducers: {
-    setActiveProvider: (state, action) => {
-      const currentProvider = state.ebingoGameData.find(
-        (item) => item.provider === action.payload
-      );
-
-      return {
-        ...state,
-        providerData: currentProvider ? currentProvider : {},
-        activeProvider: action.payload,
-      };
+    setActive: (state, action) => {
+      const { provider, link } = action.payload;
+      state.active = { provider, link };
     },
-    setProviderGames: (state, action) => {
-      const { provider, games } = action.payload;
-      const providerIndex = state.ebingoGameData.findIndex(
-        (item) => item.provider === provider
-      );
-      if (providerIndex !== -1) {
-        state.ebingoGameData[providerIndex].games = games;
-        state.providerData = state.ebingoGameData[0];
-        state.activeProvider = state.ebingoGameData[0].provider;
-      }
+    setGameData: (state, action) => {
+      state.gameData = action.payload;
     },
   },
 });
 
-export const { setActiveProvider, setProviderGames } = EbingoSlice.actions;
+export const { setActive, setGameData } = EbingoSlice.actions;
 
 export default EbingoSlice.reducer;

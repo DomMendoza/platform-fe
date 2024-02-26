@@ -15,22 +15,25 @@ import "swiper/css/navigation";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
-import { setActiveProvider } from "../../Slice/CasinoSlice";
 import { handleLoginOpen } from "../../Slice/ModalSlice";
+import { useGetGameProviderQuery } from "../../Slice/apiSlice";
+import { setActive } from "../../Slice/CasinoSlice";
+import { setGameData } from "../../Slice/CasinoSlice";
 
 //API
 import gamesService from "../../Services/games.service";
 
-//Helper
-import fetchCasinoGames from "../../Helpers/fetchCasinoGames";
+// //Helper
+// import fetchCasinoGames from "../../Helpers/fetchCasinoGames";
 
 function CasinoGames() {
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
-  const casino = useSelector((state) => state.casino.casinoGameData);
-  const providerData = useSelector((state) => state.casino.providerData);
-  const activeProvider = useSelector((state) => state.casino.activeProvider);
+
+  const { casinoGameData, gameData, active } = useSelector(
+    (state) => state.casino
+  );
+
   const user_id = useSelector((state) => state.user.uid);
 
   const handlePlayNow = async (gameName) => {
@@ -46,9 +49,23 @@ function CasinoGames() {
     }
   };
 
+  //INITIALIZE GAME DATA
+  const { data, isLoading, isSuccess, isError, error } =
+    useGetGameProviderQuery(active.link);
+
   useEffect(() => {
-    fetchCasinoGames(dispatch);
-  }, [dispatch]);
+    if (isLoading) {
+      console.log("loading...");
+    } else if (isSuccess) {
+      const transformedData = Object.values(data.data).reduce(
+        (acc, val) => acc.concat(val),
+        []
+      );
+      dispatch(setGameData(transformedData));
+    } else if (isError) {
+      console.log(error);
+    }
+  }, [data, isLoading, isSuccess, isError, error]);
 
   return (
     <div className=" flex flex-col gap-5">
@@ -69,20 +86,24 @@ function CasinoGames() {
             }}
             modules={[Navigation]}
           >
-            {casino.map((item, index) => (
+            {casinoGameData.map((item, index) => (
               <SwiperSlide
-                onClick={() => dispatch(setActiveProvider(item.provider))}
+                onClick={() =>
+                  dispatch(
+                    setActive({ provider: item.provider, link: item.link })
+                  )
+                }
                 key={index}
               >
                 <div
                   className={`flex justify-center items-center h-[5rem] rounded-lg transition duration-150 ease-out cursor-pointer ${
-                    activeProvider !== item.provider ? "hover:scale-125" : ""
+                    active.provider !== item.provider ? "hover:scale-125" : ""
                   }`}
                 >
                   <img
                     src={item.logo}
                     className={`h-full w-full object-contain p-3 ${
-                      activeProvider === item.provider
+                      active.provider === item.provider
                         ? "border-b-4 border-blue-600 ease-in-out duration-300"
                         : ""
                     }`}
@@ -105,10 +126,8 @@ function CasinoGames() {
         </div>
       </div>
       <div className="game-grid grid grid-cols-7 grid-rows-2 place-items-center gap-5 ">
-        {providerData &&
-        Object.keys(providerData).length !== 0 &&
-        providerData.games.length !== 0 ? (
-          providerData.games.slice(0, 14).map((item, index) => (
+        {isSuccess ? (
+          gameData.map((item, index) => (
             <div
               key={index}
               className="group flex justify-center items-center relative"

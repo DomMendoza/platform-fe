@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import slotsBgHero from "../Assets/slotsBgHero.webp";
 import Footer from "../Layouts/Footer";
@@ -7,7 +7,24 @@ import ProviderSection from "../Layouts/Slots/ProviderSection.Slots";
 import JackpotPrize from "../Components/Display/JackpotPrize.Slots";
 import GamesHeroBackground from "../Components/Display/GamesHeroBackground";
 
+//redux
+import { useSelector, useDispatch } from "react-redux";
+import { setActive } from "../Slice/SlotSlice";
+
 function Slots() {
+  const dispatch = useDispatch();
+  const { slotsGameData } = useSelector((state) => state.slots);
+
+  //INITIALIZE ACTIVE PROVIDER
+  useEffect(() => {
+    dispatch(
+      setActive({
+        provider: slotsGameData[0].provider,
+        link: slotsGameData[0].link,
+      })
+    );
+  }, [slotsGameData]);
+
   return (
     <div className="w-full flex flex-col gap-16 justify-center items-center bg-gray-400">
       <div className="w-[65rem] 2xl:w-[85rem] h-full flex flex-col gap-5 border-2 border-red-600">

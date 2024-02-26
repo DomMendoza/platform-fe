@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import casinoBgHero from "../Assets/casinoBgHero.webp";
 import Footer from "../Layouts/Footer";
@@ -7,7 +7,24 @@ import ProviderSection from "../Layouts/Casino/ProviderSection.Casino";
 import JackpotPrize from "../Components/Display/JackpotPrize.Casino";
 import GamesHeroBackground from "../Components/Display/GamesHeroBackground";
 
+//redux
+import { useSelector, useDispatch } from "react-redux";
+import { setActive } from "../Slice/CasinoSlice";
+
 function Casino() {
+  const dispatch = useDispatch();
+  const { casinoGameData } = useSelector((state) => state.casino);
+
+  //INITIALIZE ACTIVE PROVIDER
+  useEffect(() => {
+    dispatch(
+      setActive({
+        provider: casinoGameData[0].provider,
+        link: casinoGameData[0].link,
+      })
+    );
+  }, [casinoGameData]);
+
   return (
     <div className="w-full flex flex-col gap-16 justify-center items-center bg-gray-400">
       <div className="w-[65rem] 2xl:w-[85rem] h-full flex flex-col gap-5 border-2 border-red-600">
