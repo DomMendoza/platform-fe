@@ -399,7 +399,6 @@ export default function Register() {
             )}
           />
         </div>
-        {/* TODO: Do this */}
         <div className="flex justify-start items-center mt-2 w-full">
           <Checkbox
             style={{ padding: 0 }}
