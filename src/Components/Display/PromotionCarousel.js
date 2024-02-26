@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 
 import promo1 from "../../Assets/promo1.webp";
 import promo2 from "../../Assets/dailyDeposit.png";
