@@ -143,7 +143,7 @@ export default function DepositModal() {
             <div className="flex flex-col gap-1">
               <p className="text-sm font-[Poppins]">Total Payment:</p>
               <p className="text-2xl font-[Poppins] font-bold text-green-500">
-                1000.00
+                {amount ? amount : 0}
               </p>
             </div>
             <div className="flex flex-col gap-1">
