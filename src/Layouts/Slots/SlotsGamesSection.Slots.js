@@ -3,6 +3,7 @@ import { Button, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import gamesService from "../../Services/games.service";
+import LoadGames from "../../Components/LoadGames";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -65,7 +66,7 @@ function SlotsGamesSection() {
         {gameData.slice(0, limit).map((item, index) => (
           <div
             key={index}
-            className="group flex justify-center items-center relative"
+            className="group flex justify-center items-center relative "
           >
             <img
               src={`https://uat.888bingo.ph/${item.icon.bg}`}
@@ -85,23 +86,9 @@ function SlotsGamesSection() {
             </Button>
           </div>
         ))}
-        {limit < gameData.length ? (
-          <div
-            className="bg-red-400 w-full h-full rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] cursor-pointer"
-            onClick={() => setLimit(limit + 14)}
-          >
-            <div className="w-full h-full flex flex-col justify-center items-center gap-2 rounded-lg">
-              <div className="flex justify-center items-center gap-2">
-                <div className="bg-white rounded-full w-3 h-3"></div>
-                <div className="bg-white rounded-full w-3 h-3"></div>
-                <div className="bg-white rounded-full w-3 h-3"></div>
-              </div>
-              <p className="font-bold text-lg font-[Poppins] text-white">
-                More
-              </p>
-            </div>
-          </div>
-        ) : null}
+        {limit < gameData.length && (
+          <LoadGames loadGames={() => setLimit(limit + 14)} />
+        )}
       </div>
     </div>
   );

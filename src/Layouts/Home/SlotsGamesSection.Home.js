@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import PushableButton from "../../Components/Inputs/PushableButton";
-
+import LoadGames from "../../Components/LoadGames";
 import { Button } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -29,6 +29,8 @@ import gamesService from "../../Services/games.service";
 function SlotsGames() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [limit, setLimit] = useState(13);
 
   const { slotsGameData, gameData, active } = useSelector(
     (state) => state.slots
@@ -124,31 +126,36 @@ function SlotsGames() {
           </div>
         </div>
       </div>
-      <div className="game-grid grid grid-cols-7 grid-rows-2 place-items-center gap-5 ">
+      <div className="game-grid grid grid-cols-7 grid-rows-2 place-items-center gap-5">
         {isSuccess ? (
-          gameData.map((item, index) => (
-            <div
-              key={index}
-              className="group flex justify-center items-center relative"
-            >
-              <img
-                src={`https://uat.888bingo.ph/${item.icon.bg}`}
-                className="group-hover:brightness-75 duration-300 ease-in-out"
-              />
-              <img
-                src={`https://uat.888bingo.ph/${item.icon.logo}`}
-                className="group-hover:brightness-75 duration-300 ease-in-out absolute w-[75%]"
-              />
-              <Button
-                variant="contained"
-                className="bg-black hover:bg-black absolute group-hover:block hidden"
-                style={{ animation: "fadeMe 500ms" }}
-                onClick={() => handlePlayNow(item.name)}
+          <>
+            {gameData.slice(0, limit).map((item, index) => (
+              <div
+                key={index}
+                className="group flex justify-center items-center relative"
               >
-                PLAY NOW
-              </Button>
-            </div>
-          ))
+                <img
+                  src={`https://uat.888bingo.ph/${item.icon.bg}`}
+                  className="group-hover:brightness-75 duration-300 ease-in-out"
+                />
+                <img
+                  src={`https://uat.888bingo.ph/${item.icon.logo}`}
+                  className="group-hover:brightness-75 duration-300 ease-in-out absolute w-[75%]"
+                />
+                <Button
+                  variant="contained"
+                  className="bg-black hover:bg-black absolute group-hover:block hidden"
+                  style={{ animation: "fadeMe 500ms" }}
+                  onClick={() => handlePlayNow(item.name)}
+                >
+                  PLAY NOW
+                </Button>
+              </div>
+            ))}
+            {limit < gameData.length && (
+              <LoadGames loadGames={() => navigate("/slots")} />
+            )}
+          </>
         ) : (
           <div className="h-[10rem] w-[10rem] border-2 border-black rounded-lg flex justify-center items-center">
             <p className="font-[Poppins]">No listed game.</p>

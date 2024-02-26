@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { handleLoginOpen } from "../../Slice/ModalSlice";
 import { setGameData } from "../../Slice/EbingoSlice";
 import { useGetGameProviderQuery } from "../../Slice/apiSlice";
+import LoadGames from "../../Components/LoadGames";
 
 function EbingoGamesSection() {
   const dispatch = useDispatch();
@@ -65,7 +66,7 @@ function EbingoGamesSection() {
         {gameData.slice(0, limit).map((item, index) => (
           <div
             key={index}
-            className="group flex justify-center items-center relative"
+            className="group flex justify-center items-center relative "
           >
             <img
               src={`https://uat.888bingo.ph/${item.icon.bg}`}
@@ -86,21 +87,7 @@ function EbingoGamesSection() {
           </div>
         ))}
         {limit < gameData.length && (
-          <div
-            className="bg-red-400 w-full h-full rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] cursor-pointer"
-            onClick={() => setLimit(limit + 14)}
-          >
-            <div className="w-full h-full flex flex-col justify-center items-center gap-2 rounded-lg">
-              <div className="flex justify-center items-center gap-2">
-                <div className="bg-white rounded-full w-3 h-3"></div>
-                <div className="bg-white rounded-full w-3 h-3"></div>
-                <div className="bg-white rounded-full w-3 h-3"></div>
-              </div>
-              <p className="font-bold text-lg font-[Poppins] text-white">
-                More
-              </p>
-            </div>
-          </div>
+          <LoadGames loadGames={() => setLimit(limit + 14)} />
         )}
       </div>
     </div>
