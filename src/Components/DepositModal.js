@@ -1,10 +1,15 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
+import Cookies from "js-cookie";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import PushableButton from "./Inputs/PushableButton";
 import TextField from "@mui/material/TextField";
+
+//API
+import depositService from "../Services/deposit.service";
 
 const style = {
   position: "absolute",
@@ -19,10 +24,46 @@ const style = {
   borderRadius: 2,
 };
 
+const methodArray = ["GCASH"];
+const amountArray = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+
 export default function DepositModal() {
+  const token = Cookies.get("token");
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [amount, setAmount] = useState("");
+  const [method, setMethod] = useState("");
+
+  const onSubmit = async () => {
+    if (amount != "" && method != "") {
+      const amountNumber = parseFloat(amount);
+      if (isNaN(amountNumber)) {
+        alert("Please enter a valid amount.");
+        return;
+      } else {
+        const result = await depositService.cashin(amount, method, token);
+        const { checkoutUrl } = result;
+        window.open(checkoutUrl, "_blank", "noopener,noreferrer");
+        handleClose();
+      }
+    } else {
+      alert("Please complete all the required details.");
+    }
+  };
+
+  const setSelectedMethod = (method) => {
+    setMethod(method);
+  };
+
+  const setSelectedAmount = (amount) => {
+    setAmount(amount);
+  };
+
+  const handleAmountChange = (event) => {
+    setAmount(event.target.value);
+  };
 
   return (
     <div>
@@ -44,29 +85,61 @@ export default function DepositModal() {
             <div className="flex flex-col gap-1">
               <p className="text-sm font-[Poppins]">Select method:</p>
               <div className="grid grid-cols-5 grid-rows-1 gap-2">
-                <Button variant="contained" className="bg-gray-500 px-6 py-4">
-                  Gcash
-                </Button>
+                {methodArray &&
+                  methodArray.map((item, index) => (
+                    <Button
+                      variant="contained"
+                      className={`${
+                        method === item ? "bg-blue-500" : "bg-gray-500"
+                      }  px-6 py-4`}
+                      key={index}
+                      onClick={() => setSelectedMethod(item)}
+                    >
+                      {item}
+                    </Button>
+                  ))}
               </div>
             </div>
             <div className="flex flex-col gap-1">
               <p className="text-sm font-[Poppins]">Select amount:</p>
               <div className="grid grid-cols-5 grid-rows-2 gap-2">
-                {Array.from({ length: 10 }, (v, i) => i).map((item) => (
-                  <Button
-                    variant="contained"
-                    className="bg-gray-500 px-6 py-4"
-                    key={item}
-                  >
-                    {(item + 1) * 100}
-                  </Button>
-                ))}
+                {amountArray &&
+                  amountArray.map((item, index) => (
+                    <Button
+                      variant="contained"
+                      className={`${
+                        amount === item ? "bg-blue-500" : "bg-gray-500"
+                      }  px-6 py-4`}
+                      key={index}
+                      onClick={() => setSelectedAmount(item)}
+                    >
+                      {item}
+                    </Button>
+                  ))}
               </div>
             </div>
             <div className="flex flex-col gap-1">
-              {/* <p className="text-sm font-[Poppins]">Input amount:</p> */}
-              <TextField id="outlined-basic" label="₱" variant="outlined" />
+              <p className="text-sm font-[Poppins]">Enter amount:</p>
+              <TextField
+                variant="outlined"
+                value={amount}
+                onChange={handleAmountChange}
+                fullWidth
+                inputProps={{
+                  style: {
+                    fontFamily: "Poppins, sans-serif",
+                    fontSize: "0.8rem",
+                  },
+                }}
+                InputLabelProps={{
+                  style: {
+                    fontFamily: "Poppins, sans-serif",
+                    fontSize: "0.9rem",
+                  },
+                }}
+              />
             </div>
+
             <div className="flex flex-col gap-1">
               <p className="text-sm font-[Poppins]">Total Payment:</p>
               <p className="text-2xl font-[Poppins] font-bold text-green-500">
@@ -74,7 +147,12 @@ export default function DepositModal() {
               </p>
             </div>
             <div className="flex flex-col gap-1">
-              <Button variant="contained" className="bg-gray-500 px-3 py-2">
+              <Button
+                fullWidth
+                variant="contained"
+                className="bg-blue-500 px-3 py-2"
+                onClick={onSubmit}
+              >
                 Pay Now
               </Button>
             </div>
