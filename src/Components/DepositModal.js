@@ -7,6 +7,8 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import PushableButton from "./Inputs/PushableButton";
 import TextField from "@mui/material/TextField";
+import gcash_logo from "../Assets/gcash-logo.webp";
+import gcash_logo_white from "../Assets/gcash-logo-white.webp";
 
 //API
 import depositService from "../Services/deposit.service";
@@ -24,7 +26,9 @@ const style = {
   borderRadius: 2,
 };
 
-const methodArray = ["GCASH"];
+const methodArray = [
+  { name: "GCASH", logo: gcash_logo, white: gcash_logo_white },
+];
 const amountArray = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
 export default function DepositModal() {
@@ -87,16 +91,20 @@ export default function DepositModal() {
               <div className="grid grid-cols-5 grid-rows-1 gap-2">
                 {methodArray &&
                   methodArray.map((item, index) => (
-                    <Button
-                      variant="contained"
-                      className={`${
-                        method === item ? "bg-blue-500" : "bg-gray-500"
-                      }  px-6 py-4`}
+                    <div
+                      className={`rounded-md border-[1px] border-blue-300 cursor-pointer h-20 w-20 ${
+                        method === item.name ? "bg-blue-500" : ""
+                      }`}
                       key={index}
-                      onClick={() => setSelectedMethod(item)}
-                    >
-                      {item}
-                    </Button>
+                      style={{
+                        backgroundImage: `url(${
+                          method === item.name ? item.white : item.logo
+                        })`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                      onClick={() => setSelectedMethod(item.name)}
+                    ></div>
                   ))}
               </div>
             </div>
@@ -106,10 +114,10 @@ export default function DepositModal() {
                 {amountArray &&
                   amountArray.map((item, index) => (
                     <Button
-                      variant="contained"
+                      variant={`${amount === item ? "contained" : "outlined"}`}
                       className={`${
-                        amount === item ? "bg-blue-500" : "bg-gray-500"
-                      }  px-6 py-4`}
+                        amount === item ? "bg-blue-500" : "outlined"
+                      } px-6 py-4`}
                       key={index}
                       onClick={() => setSelectedAmount(item)}
                     >
@@ -153,7 +161,7 @@ export default function DepositModal() {
                 className="bg-blue-500 px-3 py-2"
                 onClick={onSubmit}
               >
-                Pay Now
+                Proceed to payment
               </Button>
             </div>
           </div>
