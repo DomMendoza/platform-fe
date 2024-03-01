@@ -6,7 +6,7 @@ import LoadGames from "../../Components/LoadGames";
 import { Button } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import slotMachine from "../../Assets/slot-machine.png"
+import slotMachine from "../../Assets/slot-machine.png";
 
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -20,6 +20,7 @@ import { handleLoginOpen } from "../../Slice/ModalSlice";
 import { useGetGameProviderQuery } from "../../Slice/apiSlice";
 import { setActive } from "../../Slice/SlotSlice";
 import { setGameData } from "../../Slice/SlotSlice";
+import { handleUnavailableOpen } from "../../Slice/ModalSlice";
 
 //API
 import gamesService from "../../Services/games.service";
@@ -43,21 +44,22 @@ function SlotsGames() {
 
     try {
       if (token) {
-        const result = await gamesService.bingoRedirect(gameName, user_id, token);
+        const result = await gamesService.bingoRedirect(
+          gameName,
+          user_id,
+          token
+        );
         console.log("result5: ", result.url);
 
-        console.log(result.data)
+        console.log(result.data);
         navigate("/redirect", { state: { url: result.url } });
       } else {
         dispatch(handleLoginOpen());
         console.log("No token.");
       }
     } catch (error) {
-      console.error(error)
-      alert("The game is currently unavailable")
-
+      dispatch(handleUnavailableOpen());
     }
-
   };
 
   //INITIALIZE GAME DATA
@@ -83,9 +85,14 @@ function SlotsGames() {
       <div className="text-container flex justify-between items-center gap-5">
         <div className="flex gap-10 items-center">
           <div className="flex justify-center items-center gap-2">
-            <img src={slotMachine} className="h-12 transform rotate-12 animate-spin-slow"
-              alt="Slot Machine" />
-            <p className="text-2xl font-bold uppercase text-[#455983] text-shadow-lg">Slot Games</p>
+            <img
+              src={slotMachine}
+              className="h-12 transform rotate-12 animate-spin-slow"
+              alt="Slot Machine"
+            />
+            <p className="text-2xl font-bold uppercase text-[#455983] text-shadow-lg">
+              Slot Games
+            </p>
           </div>
           <PushableButton
             text={"View All"}
@@ -111,15 +118,17 @@ function SlotsGames() {
                 key={index}
               >
                 <div
-                  className={`flex justify-center items-center h-[5rem] rounded-lg transition duration-150 ease-out cursor-pointer ${active.provider !== item.provider ? "hover:scale-125" : ""
-                    }`}
+                  className={`flex justify-center items-center h-[5rem] rounded-lg transition duration-150 ease-out cursor-pointer ${
+                    active.provider !== item.provider ? "hover:scale-125" : ""
+                  }`}
                 >
                   <img
                     src={item.logo}
-                    className={`h-full w-full object-contain p-3 ${active.provider === item.provider
-                      ? "border-b-4 border-blue-600 ease-in-out duration-300"
-                      : ""
-                      }`}
+                    className={`h-full w-full object-contain p-3 ${
+                      active.provider === item.provider
+                        ? "border-b-4 border-blue-600 ease-in-out duration-300"
+                        : ""
+                    }`}
                   />
                 </div>
               </SwiperSlide>

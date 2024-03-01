@@ -6,7 +6,7 @@ import LoadGames from "../../Components/LoadGames";
 import { Button } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import casino from "../../Assets/poker-cards.png"
+import casino from "../../Assets/poker-cards.png";
 
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -20,6 +20,7 @@ import { handleLoginOpen } from "../../Slice/ModalSlice";
 import { useGetGameProviderQuery } from "../../Slice/apiSlice";
 import { setActive } from "../../Slice/CasinoSlice";
 import { setGameData } from "../../Slice/CasinoSlice";
+import { handleUnavailableOpen } from "../../Slice/ModalSlice";
 
 //API
 import gamesService from "../../Services/games.service";
@@ -44,19 +45,21 @@ function CasinoGames() {
 
     try {
       if (token) {
-        const result = await gamesService.bingoRedirect(gameName, user_id, token);
+        const result = await gamesService.bingoRedirect(
+          gameName,
+          user_id,
+          token
+        );
         console.log("result3: ", result.url);
 
-        console.log(result.data)
+        console.log(result.data);
         navigate("/redirect", { state: { url: result.url } });
       } else {
         dispatch(handleLoginOpen());
         console.log("No token.");
       }
     } catch (error) {
-      console.error(error)
-      alert("The game is currently unavailable")
-
+      dispatch(handleUnavailableOpen());
     }
   };
 
@@ -82,10 +85,15 @@ function CasinoGames() {
     <div className="container-home flex flex-col gap-5 border-2 p-4 rounded-md bg-gradient-to-b from-white via-blue-500 to-indigo-400 bg-opacity-50 text-gray-800 backdrop-blur-lg shadow-lg">
       <div className="text-container flex justify-between items-center gap-5">
         <div className="flex gap-10 justify-center items-center">
-        <div className="flex justify-center items-center gap-2">
-            <img src={casino} className="h-12 transform rotate-12 animate-spin-slow"
-              alt="Slot Machine" />
-            <p className="text-2xl font-bold uppercase text-[#455983] text-shadow-lg">Casino Games</p>
+          <div className="flex justify-center items-center gap-2">
+            <img
+              src={casino}
+              className="h-12 transform rotate-12 animate-spin-slow"
+              alt="Slot Machine"
+            />
+            <p className="text-2xl font-bold uppercase text-[#455983] text-shadow-lg">
+              Casino Games
+            </p>
           </div>
           <PushableButton
             text={"View All"}

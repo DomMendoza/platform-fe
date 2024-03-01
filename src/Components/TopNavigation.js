@@ -11,6 +11,7 @@ import UserCredits from "./Display/UserCredits";
 //redux
 import { useDispatch } from "react-redux";
 import { setUser } from "../Slice/UserSlice";
+import GameUnavailableModal from "./GameUnavailableModal";
 
 function TopNavigation() {
   const token = Cookies.get("token");
@@ -52,9 +53,10 @@ function TopNavigation() {
   }, []);
 
   return (
-    <div className="bg-indigo-100/50 h-[4rem] px-10 flex flex-row-reverse sticky top-0 right-0 left-0 z-10 backdrop-blur-sm border-b border-indigo-200">
+    <div className="bg-indigo-100/50 h-[4rem] px-10 flex flex-row-reverse sticky top-0 right-0 left-0 z-10 backdrop-blur-sm border-b border-indigo-300">
       {token ? (
         <>
+          <GameUnavailableModal />
           <div className="flex justify-center items-center absolute left-0 right-0 h-full">
             <UserCredits />
           </div>
@@ -63,7 +65,7 @@ function TopNavigation() {
           </div>
         </>
       ) : (
-        <div className="flex justify-center items-center gap-2 px-5 border-2 border-red-600">
+        <div className="flex justify-center items-center gap-2 px-5">
           <OtpModal />
           <LoginModal />
           <RegisterModal />

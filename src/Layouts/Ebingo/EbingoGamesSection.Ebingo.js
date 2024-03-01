@@ -3,7 +3,7 @@ import { Button, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import gamesService from "../../Services/games.service";
-import bingo from "../../Assets/lottery.png"
+import bingo from "../../Assets/lottery.png";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -11,6 +11,7 @@ import { handleLoginOpen } from "../../Slice/ModalSlice";
 import { setGameData } from "../../Slice/EbingoSlice";
 import { useGetGameProviderQuery } from "../../Slice/apiSlice";
 import LoadGames from "../../Components/LoadGames";
+import { handleUnavailableOpen } from "../../Slice/ModalSlice";
 
 function EbingoGamesSection() {
   const dispatch = useDispatch();
@@ -26,19 +27,21 @@ function EbingoGamesSection() {
 
     try {
       if (token) {
-        const result = await gamesService.bingoRedirect(gameName, user_id, token);
+        const result = await gamesService.bingoRedirect(
+          gameName,
+          user_id,
+          token
+        );
         console.log("result2: ", result.url);
 
-        console.log(result.data)
+        console.log(result.data);
         navigate("/redirect", { state: { url: result.url } });
       } else {
         dispatch(handleLoginOpen());
         console.log("No token.");
       }
     } catch (error) {
-      console.error(error)
-      alert("The game is currently unavailable")
-
+      dispatch(handleUnavailableOpen());
     }
   };
 
@@ -71,9 +74,14 @@ function EbingoGamesSection() {
   return (
     <div className=" flex flex-col gap-5 p-4 rounded-md bg-gradient-to-b from-white via-blue-500 to-indigo-400 bg-opacity-50 text-gray-800 backdrop-blur-lg shadow-lg">
       <div className="flex justify-center items-center gap-2">
-        <img src={bingo} className="h-12 transform rotate-12 animate-spin-slow"
-          alt="Slot Machine" />
-        <p className="text-2xl font-bold uppercase text-[#455983] text-shadow-lg">E-Bingo Games</p>
+        <img
+          src={bingo}
+          className="h-12 transform rotate-12 animate-spin-slow"
+          alt="Slot Machine"
+        />
+        <p className="text-2xl font-bold uppercase text-[#455983] text-shadow-lg">
+          E-Bingo Games
+        </p>
       </div>
       <div className="game-grid grid grid-cols-7 grid-rows-2 place-items-center gap-5 ">
         {gameData.slice(0, limit).map((item, index) => (

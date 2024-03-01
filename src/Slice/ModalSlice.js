@@ -4,6 +4,7 @@ const initialState = {
   loginOpen: false,
   registerOpen: false,
   otpOpen: false,
+  unavailableOpen: false,
 };
 
 const ModalSlice = createSlice({
@@ -28,6 +29,12 @@ const ModalSlice = createSlice({
     handleOtpClose: (state) => {
       state.otpOpen = false;
     },
+    handleUnavailableOpen: (state) => {
+      state.unavailableOpen = true;
+    },
+    handleUnavailableClose: (state) => {
+      state.unavailableOpen = false;
+    },
   },
 });
 
@@ -38,6 +45,8 @@ export const {
   handleRegisterClose,
   handleOtpOpen,
   handleOtpClose,
+  handleUnavailableOpen,
+  handleUnavailableClose,
 } = ModalSlice.actions;
 
 export default ModalSlice.reducer;

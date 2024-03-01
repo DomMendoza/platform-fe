@@ -5,9 +5,9 @@ import TopNavigation from "../Components/TopNavigation";
 
 function Navigation() {
   return (
-    <div className="flex border-2 border-red-600">
+    <div className="flex">
       <SideNavigation />
-      <div className="flex-1 flex flex-col border-2 border-red-600">
+      <div className="flex-1 flex flex-col ">
         <TopNavigation />
         <Outlet />
       </div>
