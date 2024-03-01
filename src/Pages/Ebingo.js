@@ -6,6 +6,7 @@ import EbingoGamesSection from "../Layouts/Ebingo/EbingoGamesSection.Ebingo";
 import ProviderSection from "../Layouts/Ebingo/ProviderSection.Ebingo";
 import JackpotPrize from "../Components/Display/JackpotPrice.Ebingo";
 import GamesHeroBackground from "../Components/Display/GamesHeroBackground";
+import bingo from "../Assets/lottery.png"
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
@@ -26,7 +27,7 @@ function Ebingo() {
   }, [ebingoGameData]);
 
   return (
-    <div className="w-full flex flex-col gap-16 justify-center items-center bg-gray-400">
+    <div className="w-full flex flex-col gap-16 justify-center items-center bg-gradient-to-b from-white via-blue-400 to-indigo-100">
       <div className="w-[65rem] 2xl:w-[85rem] h-full flex flex-col gap-5 border-2 border-red-600">
         <GamesHeroBackground img={casinoBgHero} />
         <div className="home-two jackpot-container border-2 border-green-600">

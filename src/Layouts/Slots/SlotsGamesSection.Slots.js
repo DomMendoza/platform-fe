@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import gamesService from "../../Services/games.service";
 import LoadGames from "../../Components/LoadGames";
+import slotMachine from "../../Assets/slot-machine.png"
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -23,13 +24,21 @@ function SlotsGamesSection() {
   const handlePlayNow = async (gameName) => {
     const token = Cookies.get("token");
 
-    if (token) {
-      const result = await gamesService.bingoRedirect(gameName, user_id, token);
-      console.log("result: ", result.url);
-      navigate("/redirect", { state: { url: result.url } });
-    } else {
-      dispatch(handleLoginOpen());
-      console.log("No token.");
+    try {
+      if (token) {
+        const result = await gamesService.bingoRedirect(gameName, user_id, token);
+        console.log("result6: ", result.url);
+
+        console.log(result.data)
+        navigate("/redirect", { state: { url: result.url } });
+      } else {
+        dispatch(handleLoginOpen());
+        console.log("No token.");
+      }
+    } catch (error) {
+      console.error(error)
+      alert("The game is currently unavailable")
+
     }
   };
 
@@ -60,8 +69,12 @@ function SlotsGamesSection() {
   }, [data, isLoading, isSuccess, isError, error]);
 
   return (
-    <div className=" flex flex-col gap-5">
-      <p className="text-2xl font-bold uppercase ">Slot Games</p>
+    <div className=" flex flex-col gap-5 bg-gradient-to-b from-white via-blue-500 to-indigo-400 bg-opacity-50 text-gray-800 backdrop-blur-lg shadow-lg p-2">
+      <div className="flex justify-center items-center gap-2">
+            <img src={slotMachine} className="h-12 transform rotate-12 animate-spin-slow"
+              alt="Slot Machine" />
+            <p className="text-2xl font-bold uppercase text-[#455983] text-shadow-lg">Slot Games</p>
+          </div>
       <div className="game-grid grid grid-cols-7 grid-rows-2 place-items-center gap-5 ">
         {gameData.slice(0, limit).map((item, index) => (
           <div

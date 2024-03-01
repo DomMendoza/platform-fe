@@ -52,7 +52,7 @@ function TopNavigation() {
   }, []);
 
   return (
-    <div className="bg-red-200 h-[4rem] px-10 flex flex-row-reverse sticky top-0 right-0 left-0 z-10 ">
+    <div className="bg-indigo-100/50 h-[4rem] px-10 flex flex-row-reverse sticky top-0 right-0 left-0 z-10 backdrop-blur-sm border-b border-indigo-200">
       {token ? (
         <>
           <div className="flex justify-center items-center absolute left-0 right-0 h-full">

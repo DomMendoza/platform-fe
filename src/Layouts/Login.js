@@ -209,7 +209,7 @@ export default function Login() {
               type="submit"
               fullWidth
               variant="contained"
-              className="bg-black my-3 py-3 bg-gradient-to-r from-indigo-500 to-pink-500"
+              className="bg-black my-3 py-3 bg-gradient-to-r from-indigo-200 via-blue-500 to-indigo-500"
             >
               Sign In
             </Button>

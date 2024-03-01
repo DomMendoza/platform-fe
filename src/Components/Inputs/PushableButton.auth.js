@@ -12,7 +12,7 @@ function PushableButtonAuth({ text, handleOpen }) {
       }}
     >
       <Button
-        className="-translate-y-1 active:-translate-y-0 "
+        className="-translate-y-1 active:-translate-y-0 bg-black bg-gradient-to-r from-indigo-200 via-blue-500 to-indigo-500 "
         disableRipple
         style={{
           width: "100%",
@@ -20,7 +20,7 @@ function PushableButtonAuth({ text, handleOpen }) {
           borderRadius: "12px",
           fontSize: ".75rem",
           color: "white",
-          background: "hsl(210deg 100% 30%)",
+          // background: "hsl(210deg 100% 30%)",
         }}
         onClick={handleOpen}
       >

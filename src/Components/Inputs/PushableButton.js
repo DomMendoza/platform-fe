@@ -13,7 +13,7 @@ function PushableButton({ text, eventHandler }) {
       }}
     >
       <Button
-        className="-translate-y-1 active:-translate-y-0 "
+        className="-translate-y-1 active:-translate-y-0 bg-black bg-gradient-to-r from-indigo-400 via-blue-500 to-indigo-500"
         disableRipple
         style={{
           height: "100%",
@@ -22,7 +22,7 @@ function PushableButton({ text, eventHandler }) {
           borderRadius: "10px",
           fontSize: ".75rem",
           color: "white",
-          background: "hsl(210deg 100% 30%)",
+          // background: "hsl(210deg 100% 30%)",
         }}
         onClick={eventHandler}
       >

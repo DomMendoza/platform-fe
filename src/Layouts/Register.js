@@ -59,10 +59,10 @@ export default function Register() {
 
   const { control, handleSubmit, formState } = useForm({
     defaultValues: {
-      name: null,
+      // name: null,
       email: null,
       phone: null,
-      birthdate: null,
+      // birthdate: null,
       username: null,
       password: null,
       confirmPassword: null,
@@ -70,40 +70,49 @@ export default function Register() {
     mode: "onChange",
   });
   const onSubmit = async (data) => {
-    const name = data.name;
-    const email = data.email;
-    const phone = data.phone;
-    const birthdate = data.birthdate;
-    const username = data.username;
-    const password = data.password;
-    const confirmPassword = data.confirmPassword;
 
-    if (!isChecked) {
-      toast.error("Please accept the Terms of Use and Privacy Policy.");
-      return;
-    }
+    try {
+      // const name = data.name;
+      const email = data.email;
+      const phone = data.phone;
 
-    if (password === confirmPassword) {
-      const result = await authService.registerUser(
-        username,
-        password,
-        name,
-        email,
-        phone,
-        birthdate
-      );
-      if (result && result.success) {
-        const { player_id } = result.user;
-        Cookies.set("player_id", player_id, { expires: 1 });
-        // toast.success("Successfully Registered!");
-        dispatch(handleRegisterClose());
-        dispatch(handleOtpOpen());
-      } else {
-        toast.error("An error occured while registering user.");
+      console.log("phone", phone)
+      // const birthdate = data.birthdate;
+      const username = data.username;
+      const password = data.password;
+      const confirmPassword = data.confirmPassword;
+
+      if (!isChecked) {
+        toast.error("Please accept the Terms of Use and Privacy Policy.");
+        return;
       }
-    } else {
-      toast.error("Password does not match.");
+
+      if (password === confirmPassword) {
+        const result = await authService.registerUser(
+          username,
+          password,
+          // name,
+          email,
+          phone,
+          // birthdate
+        );
+        if (result && result.success) {
+          const { player_id } = result.user;
+          Cookies.set("player_id", player_id, { expires: 1 });
+          // toast.success("Successfully Registered!");
+          dispatch(handleRegisterClose());
+          dispatch(handleOtpOpen());
+        } else {
+          toast.error("An error occured while registering user.");
+        }
+      } else {
+        toast.error("Password does not match.");
+      }
+    } catch (error) {
+      console.error(error)
+      toast.error("Invalid phone number")
     }
+
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -153,7 +162,7 @@ export default function Register() {
         noValidate
       >
         <div className="grid grid-cols-2 gap-4 place-items-center w-full ">
-          <Controller
+          {/* <Controller
             name="name"
             control={control}
             defaultValue=""
@@ -185,7 +194,7 @@ export default function Register() {
                 helperText={error ? error.message : ""}
               />
             )}
-          />
+          /> */}
           <Controller
             name="email"
             control={control}
@@ -260,7 +269,7 @@ export default function Register() {
               />
             )}
           />
-          <Controller
+          {/* <Controller
             name="birthdate"
             control={control}
             render={({ field }) => (
@@ -282,7 +291,7 @@ export default function Register() {
                 </DemoContainer>
               </LocalizationProvider>
             )}
-          />
+          /> */}
           <Controller
             name="username"
             control={control}
@@ -422,7 +431,7 @@ export default function Register() {
             type="submit"
             fullWidth
             variant="contained"
-            className="bg-black my-3 py-3 bg-gradient-to-r from-indigo-500 to-pink-500"
+            className="bg-black my-3 py-3 bg-gradient-to-r from-indigo-200 via-blue-500 to-indigo-500"
           >
             Sign Up
           </Button>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import crazywinLogo from "../Assets/crazywinLogo.webp";
+import crazywinLogo from "../Assets/happy-logo-footer.png";
 import pagcorLogo from "../Assets/pagcor-logo.webp";
 import gcashLogo from "../Assets/gcash.webp";
 import ageRestricted from "../Assets/age-restrict.webp";
@@ -23,10 +23,10 @@ function Footer() {
   const logoDescription = {
     title: "The Best Slot Games Platform",
     caption:
-      "We offer vast range of Slot Games from popular vendors around the world. Play the award winning slot games in our international standards game-oriented platform. Only in CRAZYWIN!",
+      "We offer vast range of Slot Games from popular vendors around the world. Play the award winning slot games in our international standards game-oriented platform. Only in HAPPY BINGO!",
   };
   return (
-    <div className="border-2 border-red-600 text-white bg-green-600 w-full p-10 flex flex-col gap-2">
+    <div className="text-white bg-indigo-500 w-full p-10 flex flex-col gap-2">
       {/* <div className="links-container flex justify-between gap-2">
         {legalLink.map((item, index) => (
           <p key={index} className="border-2 border-red-600">
@@ -35,9 +35,13 @@ function Footer() {
         ))}
       </div> */}
       <div className="main-footer-container grid grid-cols-4 ">
-        <div className=" flex flex-col gap-2 w-full ">
+        <div className="flex flex-col gap-2 w-full h-[16rem]">
+          <div className="flex h-[30%] justify-center inline-block">
+            <img src={crazywinLogo} className="h-auto w-auto" alt="Crazy Win Logo" />
+          </div>
+
           <div className="logo-links flex flex-col w-[70%]">
-            <img src={crazywinLogo} className="" />
+
             <div className=" px-3">
               <IconButton aria-label="facebook">
                 <FacebookIcon className="text-white" />

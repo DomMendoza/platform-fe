@@ -6,6 +6,7 @@ import LoadGames from "../../Components/LoadGames";
 import { Button } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import bingo from "../../Assets/lottery.png"
 
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -37,14 +38,23 @@ function EbingoGames() {
   const handlePlayNow = async (gameName) => {
     const token = Cookies.get("token");
 
-    if (token) {
-      const result = await gamesService.bingoRedirect(gameName, user_id, token);
-      console.log("result: ", result.url);
-      navigate("/redirect", { state: { url: result.url } });
-    } else {
-      dispatch(handleLoginOpen());
-      console.log("No token.");
+    try {
+      if (token) {
+        const result = await gamesService.bingoRedirect(gameName, user_id, token);
+        console.log("result4: ", result.url);
+
+        console.log(result.data)
+        navigate("/redirect", { state: { url: result.url } });
+      } else {
+        dispatch(handleLoginOpen());
+        console.log("No token.");
+      }
+    } catch (error) {
+      console.error(error)
+      alert("The game is currently unavailable")
+
     }
+
   };
 
   //INITIALIZE GAME DATA
@@ -66,10 +76,14 @@ function EbingoGames() {
   }, [data, isLoading, isSuccess, isError, error]);
 
   return (
-    <div className=" flex flex-col gap-5">
+    <div className="container-home flex flex-col gap-5 border-2 p-4 rounded-md bg-gradient-to-b from-white via-blue-500 to-indigo-400 bg-opacity-50 text-gray-800 backdrop-blur-lg shadow-lg">
       <div className="text-container flex justify-between items-center gap-5">
-        <div className="flex gap-10">
-          <p className="text-2xl font-bold uppercase ">E-Bingo Games</p>
+        <div className="flex gap-10 items-center justify-center">
+          <div className="flex justify-center items-center gap-2">
+            <img src={bingo} className="h-12 transform rotate-12 animate-spin-slow"
+              alt="Slot Machine" />
+            <p className="text-2xl font-bold uppercase text-[#455983] text-shadow-lg">E-Bingo Games</p>
+          </div>
           <PushableButton
             text={"View All"}
             eventHandler={() => navigate("/ebingo")}
@@ -94,30 +108,28 @@ function EbingoGames() {
                 key={index}
               >
                 <div
-                  className={`flex justify-center items-center h-[5rem] rounded-lg transition duration-150 ease-out cursor-pointer ${
-                    active.provider !== item.provider ? "hover:scale-125" : ""
-                  }`}
+                  className={`flex justify-center items-center h-[5rem] rounded-lg transition duration-150 ease-out cursor-pointer ${active.provider !== item.provider ? "hover:scale-125" : ""
+                    }`}
                 >
                   <img
                     src={item.logo}
-                    className={`h-full w-full object-contain p-3 ${
-                      active.provider === item.provider
-                        ? "border-b-4 border-blue-600 ease-in-out duration-300"
-                        : ""
-                    }`}
+                    className={`h-full w-full object-contain p-3 ${active.provider === item.provider
+                      ? "border-b-4 border-blue-600 ease-in-out duration-300"
+                      : ""
+                      }`}
                   />
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
           <div className="absolute inset-0 flex justify-between items-center">
-            <div className="border-2 border-red-600 ebingoPrev flex justify-center items-center w-8 h-8 pl-2 rounded-full cursor-pointer">
-              <ArrowBackIosIcon fontSize=".9rem" style={{ color: "white" }} />
+            <div className="border-2 border-indigo-600 ebingoPrev flex justify-center items-center w-8 h-8 pl-2 rounded-full cursor-pointer">
+              <ArrowBackIosIcon fontSize=".9rem" style={{ color: "#4f46e5" }} />
             </div>
-            <div className="border-2 border-red-600 ebingoNext flex justify-center items-center w-8 h-8 rounded-full cursor-pointer">
+            <div className="border-2 border-indigo-600 ebingoNext flex justify-center items-center w-8 h-8 rounded-full cursor-pointer">
               <ArrowForwardIosIcon
                 fontSize=".9rem"
-                style={{ color: "white" }}
+                style={{ color: "#4f46e5" }}
               />
             </div>
           </div>

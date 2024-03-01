@@ -29,7 +29,7 @@ function Promotions() {
   ];
 
   return (
-    <div className="w-full flex flex-col gap-16 justify-center items-center bg-gray-400">
+    <div className="w-full flex flex-col gap-16 justify-center items-center bg-gradient-to-b from-white via-blue-400 to-indigo-100">
       <div className="w-[65rem] 2xl:w-[85rem] h-full flex flex-col gap-5 ">
         <GamesHeroBackground img={promotionalBanner} />
         <div className=" flex justify-between items-center gap-10">

@@ -6,6 +6,7 @@ import LoadGames from "../../Components/LoadGames";
 import { Button } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import casino from "../../Assets/poker-cards.png"
 
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -41,13 +42,21 @@ function CasinoGames() {
   const handlePlayNow = async (gameName) => {
     const token = Cookies.get("token");
 
-    if (token) {
-      const result = await gamesService.bingoRedirect(gameName, user_id, token);
-      console.log("result: ", result.url);
-      navigate("/redirect", { state: { url: result.url } });
-    } else {
-      dispatch(handleLoginOpen());
-      console.log("No token.");
+    try {
+      if (token) {
+        const result = await gamesService.bingoRedirect(gameName, user_id, token);
+        console.log("result3: ", result.url);
+
+        console.log(result.data)
+        navigate("/redirect", { state: { url: result.url } });
+      } else {
+        dispatch(handleLoginOpen());
+        console.log("No token.");
+      }
+    } catch (error) {
+      console.error(error)
+      alert("The game is currently unavailable")
+
     }
   };
 
@@ -70,10 +79,14 @@ function CasinoGames() {
   }, [data, isLoading, isSuccess, isError, error]);
 
   return (
-    <div className=" flex flex-col gap-5">
+    <div className="container-home flex flex-col gap-5 border-2 p-4 rounded-md bg-gradient-to-b from-white via-blue-500 to-indigo-400 bg-opacity-50 text-gray-800 backdrop-blur-lg shadow-lg">
       <div className="text-container flex justify-between items-center gap-5">
-        <div className="flex gap-10">
-          <p className="text-2xl font-bold uppercase ">Casino Games</p>
+        <div className="flex gap-10 justify-center items-center">
+        <div className="flex justify-center items-center gap-2">
+            <img src={casino} className="h-12 transform rotate-12 animate-spin-slow"
+              alt="Slot Machine" />
+            <p className="text-2xl font-bold uppercase text-[#455983] text-shadow-lg">Casino Games</p>
+          </div>
           <PushableButton
             text={"View All"}
             eventHandler={() => navigate("/casino")}
@@ -115,13 +128,13 @@ function CasinoGames() {
             ))}
           </Swiper>
           <div className="absolute inset-0 flex justify-between items-center">
-            <div className="border-2 border-red-600 slotPrev flex justify-center items-center w-8 h-8 pl-2 rounded-full cursor-pointer">
-              <ArrowBackIosIcon fontSize=".9rem" style={{ color: "white" }} />
+            <div className="border-2 border-indigo-600 slotPrev flex justify-center items-center w-8 h-8 pl-2 rounded-full cursor-pointer">
+              <ArrowBackIosIcon fontSize=".9rem" style={{ color: "#4f46e5" }} />
             </div>
-            <div className="border-2 border-red-600 slotNext flex justify-center items-center w-8 h-8 rounded-full cursor-pointer">
+            <div className="border-2 border-indigo-600 slotNext flex justify-center items-center w-8 h-8 rounded-full cursor-pointer">
               <ArrowForwardIosIcon
                 fontSize=".9rem"
-                style={{ color: "white" }}
+                style={{ color: "#4f46e5" }}
               />
             </div>
           </div>

@@ -23,6 +23,8 @@ function PushableButtonNav({ text, link, icon }) {
         className={`${selected ? "-translate-y-1 active:-translate-y-0" : ""}`}
         disableRipple
         style={{
+          border: "1px solid white",
+          boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px",
           width: "100%",
           padding: "10px 10px",
           borderRadius: "12px",
