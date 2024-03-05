@@ -72,7 +72,7 @@ function SlotsGamesSection() {
   }, [data, isLoading, isSuccess, isError, error]);
 
   return (
-    <div className=" flex flex-col gap-5 bg-gradient-to-b from-white via-blue-500 to-indigo-400 bg-opacity-50 text-gray-800 backdrop-blur-lg shadow-lg p-2">
+    <div className=" flex flex-col gap-5 bg-gradient-to-b p-8 rounded-lg from-white via-blue-500 to-indigo-400 bg-opacity-50 text-gray-800 backdrop-blur-lg shadow-lg">
       <div className="flex justify-center items-center gap-2">
         <img
           src={slotMachine}

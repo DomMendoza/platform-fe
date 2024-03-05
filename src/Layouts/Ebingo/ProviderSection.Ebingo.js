@@ -18,14 +18,12 @@ function ProviderSection() {
   const { ebingoGameData, active } = useSelector((state) => state.ebingo);
 
   return (
-    <div className="h-full flex justify-center items-center gap-2 px-4">
-      <IconButton className="bg-red-600 rounded-full ebingoNavPrev">
-        <ArrowBackIosIcon fontSize=".9rem" className="text-white" />
-      </IconButton>
+    <div className="h-full flex justify-center items-center gap-2 py-2 px-5 rounded-lg backdrop-blur-md bg-white/30 border-[1px] border-white">
+      <ArrowBackIosIcon className="text-red-600 ebingoNavPrev cursor-pointer" />
       <Swiper
         slidesPerView={5}
         modules={[Navigation]}
-        spaceBetween={30}
+        spaceBetween={25}
         navigation={{
           nextEl: ".ebingoNavNext",
           prevEl: ".ebingoNavPrev",
@@ -34,12 +32,12 @@ function ProviderSection() {
       >
         {ebingoGameData.map((item, index) => (
           <SwiperSlide
-            className="p-5 rounded-lg" //adjust this padding to change the dimension of logo providers
+            className="p-5 rounded-lg " //adjust this padding to change the dimension of logo providers
             key={index}
           >
             <div
-              className={`h-full flex justify-center items-center p-3 border-2 border-red-600 rounded-lg cursor-pointer ease-in-out duration-300 ${
-                active.provider === item.provider ? "-translate-y-3" : ""
+              className={`h-full flex justify-center items-center rounded-lg cursor-pointer ease-in-out duration-300 p-2 ${
+                active.provider === item.provider ? "" : ""
               }`}
               onClick={() =>
                 dispatch(
@@ -47,14 +45,17 @@ function ProviderSection() {
                 )
               }
             >
-              <img src={item.logo} />
+              <img
+                src={item.logo}
+                className={`w-[80%] ${
+                  active.provider === item.provider ? "" : "grayscale"
+                }`}
+              />
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
-      <IconButton className="bg-red-600 rounded-full ebingoNavNext">
-        <ArrowForwardIosIcon fontSize=".9rem" className="text-white" />
-      </IconButton>
+      <ArrowForwardIosIcon className="text-red-600 ebingoNavNext cursor-pointer" />
     </div>
   );
 }

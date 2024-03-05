@@ -81,7 +81,7 @@ function SlotsGames() {
   }, [data, isLoading, isSuccess, isError, error]);
 
   return (
-    <div className="container-home flex flex-col gap-5 border-2 p-4 rounded-md bg-gradient-to-b from-white via-blue-500 to-indigo-400 bg-opacity-50 text-gray-800 backdrop-blur-lg shadow-lg">
+    <div className="container-home flex flex-col gap-5 border-2 p-8 rounded-2xl bg-gradient-to-b from-white via-blue-500 to-indigo-400 bg-opacity-50 text-gray-800 backdrop-blur-lg shadow-lg">
       <div className="text-container flex justify-between items-center gap-5">
         <div className="flex gap-10 items-center">
           <div className="flex justify-center items-center gap-2">

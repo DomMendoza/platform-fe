@@ -54,18 +54,10 @@ function Home() {
         <div className="home-one swiper-container border-2 border-white">
           <PromotionCarousel />
         </div>
-        {/* <div className="home-two flex flex-col gap-4 border-2 border-red-600">
-          <div className="bg-white flex flex-col gap-2 p-5 rounded-lg border-2 border-green-600">
-            <PopularGamesSwiper />
-          </div>
-          <div className="bg-white px-1 rounded-full shadow-[inset_0px_0px_8px_1px_#000000]">
-            <MarqueeTextSlider />
-          </div>
-        </div> */}
         <div className="bg-white px-1 rounded-full shadow-[inset_0px_0px_8px_1px_#000000]">
           <MarqueeTextSlider />
         </div>
-        <div className="home-three px-2 py-2 flex flex-col gap-14 rounded-lg">
+        <div className="flex flex-col gap-14 rounded-lg">
           <SlotsGames />
           <CasinoGames />
           <EbingoGames />

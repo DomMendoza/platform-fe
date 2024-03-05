@@ -21,11 +21,11 @@ function JackpotPrize() {
     }
   }, [active]);
   return (
-    <div className="border-2 border-red-600 flex flex-col justify-center items-center">
+    <div className="rounded-lg flex flex-col justify-center items-center w-[70%] border-2 border-white">
       <p className="text-2xl font-bold uppercase">
-        {provider && provider} ebingo jackpot
+        {provider && provider} casino jackpot
       </p>
-      <div className="border-2 border-blue-600 p-5 rounded-lg flex justify-center items-center gap-2">
+      <div className=" p-3 rounded-lg flex justify-center items-center gap-2">
         {jackpot &&
           jackpot.split("").map((char, index) =>
             char === "," ? (

@@ -27,23 +27,19 @@ function Slots() {
 
   return (
     <div className="w-full flex flex-col gap-16 justify-center items-center bg-gradient-to-b from-white via-blue-400 to-indigo-100">
-      <div className="w-[65rem] 2xl:w-[85rem] h-full flex flex-col gap-5 border-2 border-red-600">
+      <div className="w-[65rem] 2xl:w-[85rem] h-full flex flex-col gap-5 ">
         <GamesHeroBackground img={slotsBgHero} />
-        <div className="home-two jackpot-container border-2 border-green-600">
-          <div className="bg-gray-300 rounded-lg h-[10rem] 2xl:h-[12rem]">
-            <div className="border-2 border-red-600 w-full h-full flex justify-center items-center">
-              <div className="border-2 border-blue-600 w-[70%]">
-                <JackpotPrize />
-              </div>
+        <div className="jackpot-container ">
+          <div className="bg-gradient-to-b from-blue-400 from-10% rounded-lg h-[10rem] 2xl:h-[12rem]">
+            <div className="w-full h-full flex justify-center items-center">
+              <JackpotPrize />
             </div>
           </div>
         </div>
-        <div className="home-three swiper-container border-2 border-green-600">
-          <div className="bg-gray-300 rounded-lg h-[7rem] 2xl:h-[10rem]">
-            <ProviderSection />
-          </div>
+        <div className="swiper-container rounded-2xl">
+          <ProviderSection />
         </div>
-        <div className="home-three swiper-container border-2 border-green-600">
+        <div className="swiper-container ">
           <SlotsGamesSection />
         </div>
       </div>
