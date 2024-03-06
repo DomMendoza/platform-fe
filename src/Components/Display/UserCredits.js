@@ -16,7 +16,7 @@ function UserCredits() {
 
   //Get
   useEffect(() => {
-    const socket = io("http://54.169.218.142", { query: { player_id } });
+    const socket = io("https://54.169.218.142", { query: { player_id } });
     socket.on("connect", () => {
       console.log("Connected to the server");
       socket.emit("getWalletBalance", player_id);
@@ -25,10 +25,10 @@ function UserCredits() {
       dispatch(setWallet(wallet_balance));
     });
 
-    socket.on("walletCashinUpdate", (data) =>{
-      console.log(data.balance)
-      dispatch(setWallet(data.balance))
-    })
+    socket.on("walletCashinUpdate", (data) => {
+      console.log(data.balance);
+      dispatch(setWallet(data.balance));
+    });
     return () => {
       socket.disconnect();
     };
