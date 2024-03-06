@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "https://54.169.218.142";
+const baseURL = "http://54.169.218.142";
 
 const cashin = async (amount, gateway_payment, token) => {
   const body = {
