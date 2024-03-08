@@ -9,6 +9,8 @@ import PushableButton from "./Inputs/PushableButton";
 import TextField from "@mui/material/TextField";
 import gcash_logo from "../Assets/gcash-logo.webp";
 import gcash_logo_white from "../Assets/gcash-logo-white.webp";
+import AddIcon from "@mui/icons-material/Add";
+import IconButton from "@mui/material/IconButton";
 
 //API
 import depositService from "../Services/deposit.service";
@@ -71,7 +73,15 @@ export default function DepositModal() {
 
   return (
     <div>
-      <PushableButton text={"Deposit"} eventHandler={handleOpen} />
+      <div className="hidden lg:block">
+        <PushableButton text={"Deposit"} eventHandler={handleOpen} />
+      </div>
+      <div className="lg:hidden">
+        <IconButton aria-label="add" className="bg-blue-500">
+          <AddIcon sx={{ color: "white" }} />
+        </IconButton>
+      </div>
+
       <Modal
         open={open}
         onClose={handleClose}

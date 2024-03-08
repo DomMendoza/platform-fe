@@ -25,8 +25,11 @@ export default function PromotionCarousel() {
       modules={[Pagination, Autoplay]}
     >
       {assetImg.map((item, index) => (
-        <SwiperSlide className="" key={index}>
-          <img src={item} className="w-full h-[20rem] 2xl:h-[25rem]" />
+        <SwiperSlide key={index}>
+          <img
+            src={item}
+            className="w-full h-[12rem] md:h-[18rem] lg:h-[20rem] 2xl:h-[25rem]"
+          />
         </SwiperSlide>
       ))}
     </Swiper>

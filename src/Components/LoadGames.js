@@ -4,7 +4,7 @@ function LoadGames({ loadGames }) {
   return (
     <div className=" w-full h-full py-[12%]">
       <div
-        className="bg-red-400 w-full h-full rounded-2xl cursor-pointer "
+        className="bg-red-400 w-full h-full rounded-lg cursor-pointer "
         onClick={loadGames}
       >
         <div className="w-full h-full flex flex-col justify-center items-center gap-2 rounded-lg">

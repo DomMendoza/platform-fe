@@ -25,14 +25,27 @@ import { handleUnavailableOpen } from "../../Slice/ModalSlice";
 //API
 import gamesService from "../../Services/games.service";
 
-// //Helper
-// import fetchCasinoGames from "../../Helpers/fetchCasinoGames";
-
 function CasinoGames() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [limit, setLimit] = useState(13);
+
+  //make limit to 8 on mobile res
+  useEffect(() => {
+    const updateLimit = () => {
+      const newLimit = window.innerWidth < 1024 ? 8 : 13;
+      setLimit(newLimit);
+    };
+
+    updateLimit();
+
+    window.addEventListener("resize", updateLimit);
+
+    return () => {
+      window.removeEventListener("resize", updateLimit);
+    };
+  }, []);
 
   const { casinoGameData, gameData, active } = useSelector(
     (state) => state.casino
@@ -82,16 +95,16 @@ function CasinoGames() {
   }, [data, isLoading, isSuccess, isError, error]);
 
   return (
-    <div className="container-home flex flex-col gap-5 border-2 p-8 rounded-2xl bg-gradient-to-b from-white via-blue-500 to-indigo-400 bg-opacity-50 text-gray-800 backdrop-blur-lg shadow-lg">
-      <div className="text-container flex justify-between items-center gap-5">
-        <div className="flex gap-10 justify-center items-center">
-          <div className="flex justify-center items-center gap-2">
+    <div className="container-home flex flex-col gap-2 lg:gap-5 border-2 p-5 lg:p-8 rounded-2xl bg-gradient-to-b from-white via-blue-500 to-indigo-400 bg-opacity-50 text-gray-800 backdrop-blur-lg shadow-lg">
+      <div className="text-container flex flex-col lg:flex-row justify-between items-center lg:gap-5 ">
+        <div className="flex gap-10 items-center justify-between lg:justify-start w-full lg:w-auto ">
+          <div className="flex justify-center items-center gap-2 ">
             <img
               src={casino}
-              className="h-12 transform rotate-12 animate-spin-slow"
-              alt="Slot Machine"
+              className="h-10 lg:h-12 transform rotate-12 animate-spin-slow"
+              alt="Casino"
             />
-            <p className="text-2xl font-bold uppercase text-[#455983] text-shadow-lg">
+            <p className="text-sm 2xl:text-2xl font-bold uppercase text-[#455983] text-shadow-lg">
               Casino Games
             </p>
           </div>
@@ -100,9 +113,16 @@ function CasinoGames() {
             eventHandler={() => navigate("/casino")}
           />
         </div>
-        <div className="swiper-container w-[55%] px-10 relative">
+        <div className="swiper-container w-full lg:w-[20rem] 2xl:w-[35rem] px-5 lg:px-10 relative ">
           <Swiper
-            slidesPerView={5}
+            breakpoints={{
+              375: {
+                slidesPerView: 3,
+              },
+              768: {
+                slidesPerView: 4,
+              },
+            }}
             navigation={{
               nextEl: ".slotNext",
               prevEl: ".slotPrev",
@@ -125,7 +145,7 @@ function CasinoGames() {
                 >
                   <img
                     src={item.logo}
-                    className={`h-full w-full object-contain p-3 ${
+                    className={`h-full w-16 md:w-20 lg:w-full object-contain p-0 lg:p-3 ${
                       active.provider === item.provider
                         ? "border-b-4 border-blue-600 ease-in-out duration-300"
                         : ""
@@ -136,10 +156,10 @@ function CasinoGames() {
             ))}
           </Swiper>
           <div className="absolute inset-0 flex justify-between items-center">
-            <div className="border-2 border-indigo-600 slotPrev flex justify-center items-center w-8 h-8 pl-2 rounded-full cursor-pointer">
+            <div className="slotPrev flex justify-center items-center w-8 h-8 pl-2 rounded-full cursor-pointer">
               <ArrowBackIosIcon fontSize=".9rem" style={{ color: "#4f46e5" }} />
             </div>
-            <div className="border-2 border-indigo-600 slotNext flex justify-center items-center w-8 h-8 rounded-full cursor-pointer">
+            <div className="slotNext flex justify-center items-center w-8 h-8 rounded-full cursor-pointer">
               <ArrowForwardIosIcon
                 fontSize=".9rem"
                 style={{ color: "#4f46e5" }}
@@ -148,7 +168,7 @@ function CasinoGames() {
           </div>
         </div>
       </div>
-      <div className="game-grid grid grid-cols-7 grid-rows-2 place-items-center gap-5">
+      <div className="game-grid grid grid-cols-3 lg:grid-cols-5 xl:grid-cols-7 place-items-center gap-5 ">
         {isSuccess ? (
           <>
             {gameData.slice(0, limit).map((item, index) => (

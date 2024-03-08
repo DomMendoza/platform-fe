@@ -6,8 +6,10 @@ import TopNavigation from "../Components/TopNavigation";
 function Navigation() {
   return (
     <div className="flex">
-      <SideNavigation />
-      <div className="flex-1 flex flex-col ">
+      <div className="hidden lg:block">
+        <SideNavigation />
+      </div>
+      <div className="flex-1 flex flex-col min-w-0 ">
         <TopNavigation />
         <Outlet />
       </div>

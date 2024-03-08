@@ -9,7 +9,7 @@ function PushableButton({ text, eventHandler }) {
         borderRadius: "10px",
         cursor: "pointer",
         outlineOffset: "4px",
-        height: "100%",
+        height: "auto",
       }}
     >
       <Button

@@ -41,7 +41,7 @@ function UserCredits() {
       </div>
       <div className="bg-white rounded-lg h-full pl-5 flex justify-center items-center gap-2">
         <img src={pesoSign} className="h-[70%]" />
-        <p className="pr-[7.5rem] font-[Poppins]">{wallet}</p>
+        <p className="pr-[5rem] lg:pr-[7.5rem] font-[Poppins]">{wallet}</p>
       </div>
     </div>
   );

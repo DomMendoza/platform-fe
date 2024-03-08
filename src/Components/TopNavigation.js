@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
+import Hamburger from "hamburger-react";
 
 import LoginModal from "./LoginModal";
 import RegisterModal from "./RegisterModal";
@@ -12,9 +13,11 @@ import UserCredits from "./Display/UserCredits";
 import { useDispatch } from "react-redux";
 import { setUser } from "../Slice/UserSlice";
 import GameUnavailableModal from "./GameUnavailableModal";
+import { HamburgerMenu } from "./HamburgerMenu";
 
 function TopNavigation() {
   const token = Cookies.get("token");
+  const [isOpen, setOpen] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -57,10 +60,15 @@ function TopNavigation() {
       {token ? (
         <>
           <GameUnavailableModal />
-          <div className="flex justify-center items-center absolute left-0 right-0 h-full">
+          <div className="flex lg:hidden justify-center items-center absolute lg:left-0 left-0 h-full p-2">
+            {/* <HamburgerMenu /> */}
+            {/* TODO: hamburger navbar in progress */}
+            <Hamburger toggled={isOpen} toggle={setOpen} />
+          </div>
+          <div className="flex justify-center items-center absolute lg:left-0 right-0 h-full">
             <UserCredits />
           </div>
-          <div className=" flex justify-center items-center">
+          <div className="hidden lg:flex justify-center items-center">
             <ProfileMenu />
           </div>
         </>

@@ -5,17 +5,17 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import LogoutIcon from "@mui/icons-material/Logout";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import Person2Icon from "@mui/icons-material/Person2";
 import userAvatar from "../../Assets/userAvatar.png";
 
 //redux
 import { useSelector } from "react-redux";
 
-const settings = ["Logout"];
-
 export default function ProfileMenu() {
   const { username } = useSelector((state) => state.user);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -28,6 +28,10 @@ export default function ProfileMenu() {
     Cookies.set("player_id", "", { expires: new Date(0) });
     window.location.reload();
   };
+
+  const menu = [
+    { name: "Logout", logo: <LogoutIcon />, function: handleLogout },
+  ];
 
   return (
     <div>
@@ -66,14 +70,14 @@ export default function ProfileMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleClose} sx={{ width: "10rem" }}>
+        {menu.map((item, index) => (
+          <MenuItem key={index} onClick={handleClose} sx={{ width: "10rem" }}>
             <div
-              onClick={() => handleLogout()}
-              className=" w-full flex gap-2 p-2 rounded-[5px]"
+              onClick={item.function} // Call the function here
+              className="w-full flex gap-2 p-2 rounded-[5px]"
             >
-              <LogoutIcon />
-              <p>{setting}</p>
+              {item.logo}
+              <p>{item.name}</p>
             </div>
           </MenuItem>
         ))}
