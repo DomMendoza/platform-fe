@@ -77,7 +77,7 @@ export default function Login() {
 
   return (
     <div className="flex rounded-lg bg-white">
-      <div>
+      <div className="hidden lg:block">
         <img src={login_modal_banner} className="h-full rounded-s-lg" />
       </div>
       <div className="  px-5 py-8 flex flex-col justify-center items-center gap-5 w-full">
@@ -226,9 +226,9 @@ export default function Login() {
             </Link>
           </div>
         </Box>
-        <div className="login-footer border-2 border-red-600 h-36 rounded-lg w-full  flex justify-center items-center">
+        {/* <div className="login-footer border-2 border-red-600 h-36 rounded-lg w-full  flex justify-center items-center">
           login footer
-        </div>
+        </div> */}
       </div>
     </div>
   );

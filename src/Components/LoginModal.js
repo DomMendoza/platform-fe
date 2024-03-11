@@ -14,7 +14,6 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  // width: 400,
   boxShadow: 24,
 };
 
@@ -40,7 +39,7 @@ export default function LoginModal() {
         aria-describedby="modal-modal-description"
         className="backdrop-blur-sm"
       >
-        <Box sx={style}>
+        <Box sx={style} className="w-[85%] lg:w-auto">
           <Login />
         </Box>
       </Modal>

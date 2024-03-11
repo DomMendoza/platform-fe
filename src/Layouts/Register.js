@@ -70,13 +70,12 @@ export default function Register() {
     mode: "onChange",
   });
   const onSubmit = async (data) => {
-
     try {
       // const name = data.name;
       const email = data.email;
       const phone = data.phone;
 
-      console.log("phone", phone)
+      console.log("phone", phone);
       // const birthdate = data.birthdate;
       const username = data.username;
       const password = data.password;
@@ -93,7 +92,7 @@ export default function Register() {
           password,
           // name,
           email,
-          phone,
+          phone
           // birthdate
         );
         if (result && result.success) {
@@ -109,10 +108,9 @@ export default function Register() {
         toast.error("Password does not match.");
       }
     } catch (error) {
-      console.error(error)
-      toast.error("Invalid phone number")
+      console.error(error);
+      toast.error("Invalid phone number");
     }
-
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -161,7 +159,7 @@ export default function Register() {
         onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
-        <div className="grid grid-cols-2 gap-4 place-items-center w-full ">
+        <div className="lg:grid lg:grid-cols-2 flex flex-col gap-4 place-items-center w-full ">
           {/* <Controller
             name="name"
             control={control}

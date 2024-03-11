@@ -40,7 +40,7 @@ export default function RegisterModal() {
         aria-describedby="modal-modal-description"
         className="backdrop-blur-sm"
       >
-        <Box sx={style}>
+        <Box sx={style} className="w-[85%] lg:w-auto">
           <Register />
         </Box>
       </Modal>

@@ -79,10 +79,7 @@ function SideNavigation() {
                   className="w-full flex-1 flex gap-2 py-1 px-2 justify-center items-center border-2 border-blue-600 rounded-lg cursor-pointer"
                   key={index}
                 >
-                  <div className="icon-container">
-                    {/* <CardGiftcardIcon style={{ fontSize: "2rem" }} /> */}
-                    {item.icon}
-                  </div>
+                  <div className="icon-container">{item.icon}</div>
                   <div className="flex-1 text-container">
                     <p className="text-sm font-bold capitalize">
                       {item.name} {index + 1}

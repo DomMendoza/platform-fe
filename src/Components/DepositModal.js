@@ -20,18 +20,16 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  //   width: 400,
   bgcolor: "background.paper",
-  //   border: "2px solid #000",
+  // border: "2px solid red",
   boxShadow: 24,
-  p: 4,
   borderRadius: 2,
 };
 
 const methodArray = [
   { name: "GCASH", logo: gcash_logo, white: gcash_logo_white },
 ];
-const amountArray = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+const amountArray = ["1", "2", "3", "4", "5", "6", "7", "8"];
 
 export default function DepositModal() {
   const token = Cookies.get("token");
@@ -77,7 +75,11 @@ export default function DepositModal() {
         <PushableButton text={"Deposit"} eventHandler={handleOpen} />
       </div>
       <div className="lg:hidden">
-        <IconButton aria-label="add" className="bg-blue-500">
+        <IconButton
+          aria-label="add"
+          className="bg-blue-500 hover:bg-blue-500"
+          onClick={handleOpen}
+        >
           <AddIcon sx={{ color: "white" }} />
         </IconButton>
       </div>
@@ -88,21 +90,25 @@ export default function DepositModal() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={style} className="w-[85%] lg:w-auto p-[30px] lg:p-[40px]">
           <div className="flex flex-col gap-4">
             <div className="flex flex-col justify-center items-center">
-              <p className="text-2xl font-[Poppins] font-bold">Add Credits</p>
-              <p className="text-sm font-[Poppins]">
+              <p className="text-lg lg:text-2xl font-[Poppins] font-bold">
+                Add Credits
+              </p>
+              <p className="text-xs lg:text-sm font-[Poppins]">
                 Top up your credits to play.
               </p>
             </div>
             <div className="flex flex-col gap-1">
-              <p className="text-sm font-[Poppins]">Select method:</p>
+              <p className="text-xs lg:text-sm font-[Poppins]">
+                Select method:
+              </p>
               <div className="grid grid-cols-5 grid-rows-1 gap-2">
                 {methodArray &&
                   methodArray.map((item, index) => (
                     <div
-                      className={`rounded-md border-[1px] border-blue-300 cursor-pointer h-20 w-20 ${
+                      className={`rounded-md border-[1px] border-blue-300 cursor-pointer h-16 lg:h-20 w-16 lg:w-20 ${
                         method === item.name ? "bg-blue-500" : ""
                       }`}
                       key={index}
@@ -119,15 +125,17 @@ export default function DepositModal() {
               </div>
             </div>
             <div className="flex flex-col gap-1">
-              <p className="text-sm font-[Poppins]">Select amount:</p>
-              <div className="grid grid-cols-5 grid-rows-2 gap-2">
+              <p className="text-xs lg:text-sm font-[Poppins]">
+                Select amount:
+              </p>
+              <div className="grid grid-cols-4 grid-rows-2 gap-2">
                 {amountArray &&
                   amountArray.map((item, index) => (
                     <Button
                       variant={`${amount === item ? "contained" : "outlined"}`}
                       className={`${
                         amount === item ? "bg-blue-500" : "outlined"
-                      } px-6 py-4`}
+                      } px-3 lg:px-6 py-3 lg:py-4`}
                       key={index}
                       onClick={() => setSelectedAmount(item)}
                     >
@@ -137,7 +145,7 @@ export default function DepositModal() {
               </div>
             </div>
             <div className="flex flex-col gap-1">
-              <p className="text-sm font-[Poppins]">Enter amount:</p>
+              <p className="text-xs lg:text-sm font-[Poppins]">Enter amount:</p>
               <TextField
                 variant="outlined"
                 value={amount}
@@ -159,7 +167,9 @@ export default function DepositModal() {
             </div>
 
             <div className="flex flex-col gap-1">
-              <p className="text-sm font-[Poppins]">Total Payment:</p>
+              <p className="text-xs lg:text-sm font-[Poppins]">
+                Total Payment:
+              </p>
               <p className="text-2xl font-[Poppins] font-bold text-green-500">
                 {amount ? amount : 0}
               </p>

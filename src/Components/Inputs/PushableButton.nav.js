@@ -27,9 +27,8 @@ function PushableButtonNav({ text, link, icon }) {
           boxShadow:
             "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px",
           width: "100%",
-          padding: "10px 10px",
+          padding: "8px 10px",
           borderRadius: "12px",
-          fontSize: ".75rem",
           color: selected ? "white" : "hsl(210deg 100% 30%)",
           background: selected
             ? "hsl(210deg 100% 50%)"
@@ -41,7 +40,7 @@ function PushableButtonNav({ text, link, icon }) {
       >
         <div className="flex gap-2 justify-center items-center">
           <p className="text-[.95rem]">{icon}</p>
-          <p className="text-base font-bold capitalize">{text}</p>
+          <p className="text-sm lg:text-base font-bold capitalize">{text}</p>
         </div>
       </Button>
     </div>
