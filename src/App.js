@@ -19,7 +19,7 @@ import GameWindow from "./Pages/GameWindow";
 function App() {
   return (
     <BrowserRouter>
-      <ToastContainer position="top-center" />
+      <ToastContainer position="top-center" autoClose={1500} stacked />
       <Routes>
         <Route path="/" element={<Navigation />}>
           <Route index element={<Home />} />
