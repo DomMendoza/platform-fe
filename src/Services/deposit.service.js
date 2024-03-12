@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://54.169.218.142";
+const baseURL = process.env.REACT_APP_API_URL;
 
 const cashin = async (amount, gateway_payment, token) => {
   const body = {

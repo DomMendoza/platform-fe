@@ -14,9 +14,11 @@ function UserCredits() {
   const player_id = useSelector((state) => state.user.uid);
   const wallet = useSelector((state) => state.user.wallet);
 
+  const baseURL = process.env.REACT_APP_API_URL;
+
   //Get
   useEffect(() => {
-    const socket = io("http://54.169.218.142", { query: { player_id } });
+    const socket = io(baseURL, { query: { player_id } });
     socket.on("connect", () => {
       console.log("Connected to the server");
       socket.emit("getWalletBalance", player_id);

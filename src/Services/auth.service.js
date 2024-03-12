@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://54.169.218.142/api";
+const baseURL = `${process.env.REACT_APP_API_URL}/api`;
 
 const registerUser = async (
   username,

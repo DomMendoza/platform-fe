@@ -1,8 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+const baseURL = process.env.REACT_APP_API_URL;
+
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://54.169.218.142" }),
+  baseQuery: fetchBaseQuery({ baseUrl: baseURL }),
   endpoints: (builder) => ({
     getGameProvider: builder.query({
       query: (id) => ({ url: `${id}` }),

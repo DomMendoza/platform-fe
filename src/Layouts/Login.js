@@ -88,8 +88,8 @@ export default function Login() {
             sx={{
               fontFamily: "Poppins, sans-serif",
               fontWeight: "600",
-              fontSize: "2rem",
             }}
+            className="text-[1.5rem] lg:text-[2rem]"
           >
             Platform Login
           </Typography>
@@ -188,9 +188,7 @@ export default function Login() {
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label={
-                  <Typography
-                    sx={{ fontSize: 14, fontFamily: "Poppins, sans serif" }}
-                  >
+                  <Typography className="font-[Poppins] text-xs lg:text-sm">
                     Remember Me
                   </Typography>
                 }
@@ -209,7 +207,7 @@ export default function Login() {
               type="submit"
               fullWidth
               variant="contained"
-              className="bg-black my-3 py-3 bg-gradient-to-r from-indigo-200 via-blue-500 to-indigo-500"
+              className="bg-black my-3 py-3 bg-gradient-to-r from-indigo-200 via-blue-500 to-indigo-500 text-xs lg:text-base"
             >
               Sign In
             </Button>

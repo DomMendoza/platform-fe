@@ -125,7 +125,7 @@ export default function Register() {
   };
 
   return (
-    <div className=" bg-white p-8 rounded-lg flex flex-col justify-center items-center gap-5">
+    <div className=" bg-white p-6 lg:p-8 rounded-lg flex flex-col justify-center items-center gap-5">
       <div
         className="header-container flex flex-col mb-2
        justify-center items-center"
@@ -136,8 +136,8 @@ export default function Register() {
           sx={{
             fontFamily: "Poppins, sans-serif",
             fontWeight: "600",
-            fontSize: "2rem",
           }}
+          className="text-[1.5rem] lg:text-[2rem]"
         >
           Platform Register
         </Typography>
@@ -159,7 +159,7 @@ export default function Register() {
         onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
-        <div className="lg:grid lg:grid-cols-2 flex flex-col gap-4 place-items-center w-full ">
+        <div className="lg:grid lg:grid-cols-2 flex flex-col gap-3 lg:gap-4 place-items-center w-full ">
           {/* <Controller
             name="name"
             control={control}
@@ -429,7 +429,7 @@ export default function Register() {
             type="submit"
             fullWidth
             variant="contained"
-            className="bg-black my-3 py-3 bg-gradient-to-r from-indigo-200 via-blue-500 to-indigo-500"
+            className="bg-black my-3 py-3 bg-gradient-to-r from-indigo-200 via-blue-500 to-indigo-500 text-xs lg:text-base"
           >
             Sign Up
           </Button>

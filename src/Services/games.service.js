@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://54.169.218.142";
+const baseURL = process.env.REACT_APP_API_URL;
 const api_key =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgwYTIzNmMwLTkxMzAtNGI4NC1iYjQwLTBlODlmMWI1YWUxYSIsIm5hbWUiOiJNZWdhYmluZ28iLCJpYXQiOjE2NzM5MzU3NzR9.OQim1QvWGmhuxN_E6Bh-Wf6ev0zJY7lEBhamexbebD8";
 
