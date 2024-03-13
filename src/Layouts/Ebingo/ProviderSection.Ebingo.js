@@ -39,7 +39,7 @@ function ProviderSection() {
       >
         {ebingoGameData.map((item, index) => (
           <SwiperSlide
-            className="lg:p-5 rounded-lg" //adjust this padding to change the dimension of logo providers
+            className="lg:p-3 rounded-lg" //adjust this padding to change the dimension of logo providers
             key={index}
           >
             <div
@@ -54,7 +54,7 @@ function ProviderSection() {
             >
               <img
                 src={item.logo}
-                className={`w-[80%] ${
+                className={`w-[80%] lg:w-[65%] ${
                   active.provider === item.provider ? "" : "grayscale"
                 }`}
               />

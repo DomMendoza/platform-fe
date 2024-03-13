@@ -185,7 +185,7 @@ function SlotsGames() {
                 />
                 <Button
                   variant="contained"
-                  className="bg-black hover:bg-black absolute group-hover:block hidden"
+                  className="bg-black hover:bg-black absolute group-hover:block hidden text-xs lg:text-base"
                   style={{ animation: "fadeMe 500ms" }}
                   onClick={() => handlePlayNow(item.name)}
                 >
@@ -198,9 +198,7 @@ function SlotsGames() {
             )}
           </>
         ) : (
-          <div className="h-[10rem] w-[10rem] border-2 border-black rounded-lg flex justify-center items-center">
-            <p className="font-[Poppins]">No listed game.</p>
-          </div>
+          <p>No games listed.</p>
         )}
       </div>
     </div>

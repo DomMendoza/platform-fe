@@ -69,6 +69,7 @@ const promotions = [
 
 export default function HamburgerMenu() {
   const [open, setOpen] = React.useState(false);
+  const token = Cookies.get("token");
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -126,11 +127,13 @@ export default function HamburgerMenu() {
             </div>
           </div>
         </div>
-        <div className="w-full flex justify-center items-center">
-          <Button variant="outlined" onClick={handleLogout}>
-            Logout
-          </Button>
-        </div>
+        {token && (
+          <div className="w-full flex justify-center items-center">
+            <Button variant="outlined" onClick={handleLogout}>
+              Logout
+            </Button>
+          </div>
+        )}
       </div>
     </Box>
   );

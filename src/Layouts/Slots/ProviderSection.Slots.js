@@ -39,11 +39,11 @@ function ProviderSection() {
       >
         {slotsGameData.map((item, index) => (
           <SwiperSlide
-            className="lg:p-5 rounded-lg" //adjust this padding to change the dimension of logo providers
+            className="lg:p-3 rounded-lg" //adjust this padding to change the dimension of logo providers
             key={index}
           >
             <div
-              className={`h-full flex justify-center items-center rounded-lg cursor-pointer ease-in-out duration-300 p-0 lg:p-2   ${
+              className={`h-full flex justify-center items-center rounded-lg cursor-pointer ease-in-out duration-300 p-0 lg:p-2 ${
                 active.provider === item.provider ? "" : ""
               }`}
               onClick={() =>
@@ -54,7 +54,7 @@ function ProviderSection() {
             >
               <img
                 src={item.logo}
-                className={`w-[80%] ${
+                className={`w-[80%] lg:w-[65%] ${
                   active.provider === item.provider ? "" : "grayscale"
                 }`}
               />

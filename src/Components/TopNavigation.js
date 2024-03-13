@@ -72,13 +72,16 @@ function TopNavigation() {
         </div>
       ) : (
         <div className="bg-indigo-100/50 h-[4rem] p-0 lg:px-10 flex justify-between z-10 backdrop-blur-sm border-b border-indigo-300 relative">
-          <img
+          {/* <img
             className="object-contain w-[15%] absolute left-2 top-3 bottom-0 lg:hidden"
             src={happyLogo}
             alt="Happy Logo"
-          />
+          /> */}
+          <div className="flex lg:hidden justify-center items-center absolute lg:left-0 left-0 h-full p-2">
+            <HamburgerMenu />
+          </div>
           <div className="flex justify-center items-center gap-2 px-0 lg:px-5 pt-2 lg:pt-0 absolute right-2 top-0 bottom-0">
-            <OtpModal />
+            {/* <OtpModal /> */}
             <LoginModal />
             <RegisterModal />
           </div>

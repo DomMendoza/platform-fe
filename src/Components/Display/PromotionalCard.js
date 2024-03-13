@@ -10,8 +10,14 @@ export default function PromotionalCard({ title, details, img }) {
     <Card className="rounded-2xl">
       <CardMedia component="img" alt="green iguana" height="140" image={img} />
       <CardContent>
-        <p className="font-[Poppins] text-lg font-bold"> {title}</p>
-        <p className="font-[Poppins] text-sm text-gray-600"> {details}</p>
+        <p className="font-[Poppins] text-base lg:text-lg font-bold">
+          {" "}
+          {title}
+        </p>
+        <p className="font-[Poppins] text-xs lg:text-sm text-gray-600">
+          {" "}
+          {details}
+        </p>
       </CardContent>
       <CardActions>
         <PushableButton

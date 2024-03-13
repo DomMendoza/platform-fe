@@ -1,21 +1,18 @@
 import React from "react";
+import IconButton from "@mui/material/IconButton";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 function LoadGames({ loadGames }) {
   return (
-    <div className=" w-full h-full py-[12%]">
-      <div
-        className="bg-red-400 w-full h-full rounded-lg cursor-pointer "
+    <div className=" w-full h-full py-[12%] flex justify-center items-center">
+      <IconButton
+        aria-label="delete"
+        size="large"
+        className="bg-red-400"
         onClick={loadGames}
       >
-        <div className="w-full h-full flex flex-col justify-center items-center gap-2 rounded-lg">
-          <div className="flex justify-center items-center gap-2">
-            <div className="bg-white rounded-full w-3 h-3"></div>
-            <div className="bg-white rounded-full w-3 h-3"></div>
-            <div className="bg-white rounded-full w-3 h-3"></div>
-          </div>
-          <p className="font-bold text-lg font-[Poppins] text-white">More</p>
-        </div>
-      </div>
+        <MoreHorizIcon fontSize="inherit" sx={{ color: "white" }} />
+      </IconButton>
     </div>
   );
 }

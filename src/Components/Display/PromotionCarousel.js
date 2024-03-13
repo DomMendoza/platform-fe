@@ -9,7 +9,7 @@ import { Pagination, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 export default function PromotionCarousel() {
-  const assetImg = [promo1, promo2, promo3, promo4];
+  const assetImg = [promo2, promo3, promo4];
 
   return (
     <Swiper

@@ -98,9 +98,9 @@ export default function Register() {
         if (result && result.success) {
           const { player_id } = result.user;
           Cookies.set("player_id", player_id, { expires: 1 });
-          // toast.success("Successfully Registered!");
+          toast.success("Successfully Registered!");
           dispatch(handleRegisterClose());
-          dispatch(handleOtpOpen());
+          // dispatch(handleOtpOpen());
         } else {
           toast.error("An error occured while registering user.");
         }

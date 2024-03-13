@@ -14,7 +14,6 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
   bgcolor: "background.paper",
   //   border: "2px solid #000",
   boxShadow: 24,
@@ -41,12 +40,12 @@ export default function GameUnavailableModal() {
       >
         <Box
           sx={style}
-          className="flex flex-col gap-2 justify-center items-center font-[Poppins]"
+          className="flex flex-col gap-2 justify-center items-center font-[Poppins] w-[70%] lg:w-[400px]"
         >
           <img src={unavailableBanner} />
-          <p className="text-4xl font-bold">Oops!</p>
-          <p className="w-[85%] text-center">
-            The game is currently unavailabl.
+          <p className="text-3xl lg:text-4xl font-bold">Oops!</p>
+          <p className="w-[85%] text-center text-sm lg:text-base">
+            The game is currently unavailable.
           </p>
         </Box>
       </Modal>

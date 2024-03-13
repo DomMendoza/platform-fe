@@ -23,7 +23,7 @@ function JackpotPrize() {
 
   return (
     <div className="rounded-lg flex flex-col justify-center items-center w-[70%]">
-      <p className="text-2xl font-bold uppercase">
+      <p className="text-xl lg:text-2xl font-bold uppercase">
         {provider && provider} slots jackpot
       </p>
       <div className="p-3 rounded-lg flex justify-center items-center gap-1 lg:gap-2">

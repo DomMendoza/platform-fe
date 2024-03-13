@@ -116,7 +116,7 @@ function CasinoGamesSection() {
             />
             <Button
               variant="contained"
-              className="bg-black hover:bg-black absolute group-hover:block hidden"
+              className="bg-black hover:bg-black absolute group-hover:block hidden text-xs lg:text-base"
               style={{ animation: "fadeMe 500ms" }}
               onClick={() => handlePlayNow(item.name)}
             >

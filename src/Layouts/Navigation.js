@@ -9,7 +9,7 @@ function Navigation() {
       <div className="hidden lg:block">
         <SideNavigation />
       </div>
-      <div className="flex-1 flex flex-col min-w-0 ">
+      <div className="flex-1 flex flex-col min-w-0 min-h-screen">
         <TopNavigation />
         <Outlet />
       </div>
