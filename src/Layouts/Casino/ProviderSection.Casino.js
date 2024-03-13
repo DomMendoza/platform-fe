@@ -18,25 +18,32 @@ function ProviderSection() {
   const { casinoGameData, active } = useSelector((state) => state.casino);
 
   return (
-    <div className="h-full flex justify-center items-center gap-2 py-2 px-5 rounded-lg backdrop-blur-md bg-white/30 border-[1px] border-white">
+    <div className="h-full flex justify-center items-center gap-2 py-2 px-5 rounded-lg backdrop-blur-md bg-white/30 border-[1px] border-white ">
       <ArrowBackIosIcon className="text-red-600 casinoNavPrev cursor-pointer" />
       <Swiper
-        slidesPerView={5}
+        breakpoints={{
+          375: {
+            slidesPerView: 3,
+          },
+          768: {
+            slidesPerView: 4,
+          },
+        }}
         modules={[Navigation]}
         spaceBetween={25}
         navigation={{
           nextEl: ".casinoNavNext",
           prevEl: ".casinoNavPrev",
         }}
-        className="mySwiper h-[100%] "
+        className="mySwiper h-[100%] m-2 lg:m-0"
       >
         {casinoGameData.map((item, index) => (
           <SwiperSlide
-            className="p-5 rounded-lg " //adjust this padding to change the dimension of logo providers
+            className="lg:p-5 rounded-lg" //adjust this padding to change the dimension of logo providers
             key={index}
           >
             <div
-              className={`h-full flex justify-center items-center rounded-lg cursor-pointer ease-in-out duration-300 p-2 ${
+              className={`h-full flex justify-center items-center rounded-lg cursor-pointer ease-in-out duration-300 p-0 lg:p-2   ${
                 active.provider === item.provider ? "" : ""
               }`}
               onClick={() =>

@@ -22,23 +22,28 @@ function JackpotPrize() {
   }, [active]);
 
   return (
-    <div className="rounded-lg flex flex-col justify-center items-center w-[70%] border-2 border-white">
+    <div className="rounded-lg flex flex-col justify-center items-center w-[70%]">
       <p className="text-2xl font-bold uppercase">
         {provider && provider} slots jackpot
       </p>
-      <div className="p-3 rounded-lg flex justify-center items-center gap-2">
+      <div className="p-3 rounded-lg flex justify-center items-center gap-1 lg:gap-2">
         {jackpot &&
           jackpot.split("").map((char, index) =>
             char === "," ? (
-              <span key={index} className="text-3xl 2xl:text-5xl font-bold">
+              <span
+                key={index}
+                className="text-lg lg:text-3xl 2xl:text-5xl font-bold"
+              >
                 {char}
               </span>
             ) : (
               <div
                 key={index}
-                className="bg-white shadow-[inset_0px_0px_10px_1px_#2D3748] p-3 2xl:p-5 rounded-lg"
+                className="bg-white shadow-[inset_0px_0px_10px_1px_#2D3748] p-2 lg:p-3 2xl:p-5 rounded-lg"
               >
-                <p className="text-3xl 2xl:text-5xl font-bold">{char}</p>
+                <p className="text-2xl lg:text-3xl 2xl:text-5xl font-bold">
+                  {char}
+                </p>
               </div>
             )
           )}
