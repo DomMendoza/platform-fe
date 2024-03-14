@@ -58,7 +58,7 @@ function TopNavigation() {
   return (
     <>
       {token ? (
-        <div className="bg-indigo-100/50 h-[4rem] p-0 lg:px-10 flex flex-row-reverse sticky top-0 right-0 left-0 z-10 backdrop-blur-sm border-b border-indigo-300 ">
+        <div className="bg-blue-200/50 h-[4rem] p-0 lg:px-10 flex flex-row-reverse sticky top-0 right-0 left-0 z-10 backdrop-blur-sm border-b border-blue-300 ">
           <GameUnavailableModal />
           <div className="flex lg:hidden justify-center items-center absolute lg:left-0 left-0 h-full p-2">
             <HamburgerMenu />
@@ -71,7 +71,7 @@ function TopNavigation() {
           </div>
         </div>
       ) : (
-        <div className="bg-indigo-100/50 h-[4rem] p-0 lg:px-10 flex justify-between z-10 backdrop-blur-sm border-b border-indigo-300 relative">
+        <div className="bg-blue-200/50 h-[4rem] p-0 lg:px-10 flex justify-between sticky top-0 right-0 left-0 z-10 backdrop-blur-sm border-b border-blue-300">
           {/* <img
             className="object-contain w-[15%] absolute left-2 top-3 bottom-0 lg:hidden"
             src={happyLogo}

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
+import PlayNowButton from "../../Components/PlayNowButton";
 import PushableButton from "../../Components/Inputs/PushableButton";
 import LoadGames from "../../Components/LoadGames";
-import { Button } from "@mui/material";
+import bingo from "../../Assets/lottery.png";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import bingo from "../../Assets/lottery.png";
+import Skeleton from "@mui/material/Skeleton";
 
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,14 +16,9 @@ import "swiper/css/navigation";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
-import { handleLoginOpen } from "../../Slice/ModalSlice";
 import { useGetGameProviderQuery } from "../../Slice/apiSlice";
 import { setActive } from "../../Slice/EbingoSlice";
 import { setGameData } from "../../Slice/EbingoSlice";
-import { handleUnavailableOpen } from "../../Slice/ModalSlice";
-
-//API
-import gamesService from "../../Services/games.service";
 
 function EbingoGames() {
   const navigate = useNavigate();
@@ -50,30 +45,6 @@ function EbingoGames() {
   const { ebingoGameData, gameData, active } = useSelector(
     (state) => state.ebingo
   );
-  const user_id = useSelector((state) => state.user.uid);
-
-  const handlePlayNow = async (gameName) => {
-    const token = Cookies.get("token");
-
-    try {
-      if (token) {
-        const result = await gamesService.bingoRedirect(
-          gameName,
-          user_id,
-          token
-        );
-        console.log("result4: ", result.url);
-
-        console.log(result.data);
-        navigate("/redirect", { state: { url: result.url } });
-      } else {
-        dispatch(handleLoginOpen());
-        console.log("No token.");
-      }
-    } catch (error) {
-      dispatch(handleUnavailableOpen());
-    }
-  };
 
   //INITIALIZE GAME DATA
   const { data, isLoading, isSuccess, isError, error } =
@@ -169,38 +140,48 @@ function EbingoGames() {
       </div>
       <div className="game-grid grid grid-cols-3 lg:grid-cols-5 xl:grid-cols-7 place-items-center gap-5 ">
         {isSuccess ? (
-          <>
-            {gameData.slice(0, limit).map((item, index) => (
-              <div
-                key={index}
-                className="group flex justify-center items-center relative"
-              >
-                <img
-                  src={`https://uat.888bingo.ph/${item.icon.bg}`}
-                  className="group-hover:brightness-75 duration-300 ease-in-out"
-                />
-                <img
-                  src={`https://uat.888bingo.ph/${item.icon.logo}`}
-                  className="group-hover:brightness-75 duration-300 ease-in-out absolute w-[75%]"
-                />
-                <Button
-                  variant="contained"
-                  className="bg-black hover:bg-black absolute group-hover:block hidden text-xs lg:text-base"
-                  style={{ animation: "fadeMe 500ms" }}
-                  onClick={() => handlePlayNow(item.name)}
+          gameData.length > 0 ? (
+            <>
+              {gameData.slice(0, limit).map((item, index) => (
+                <div
+                  key={index}
+                  className="group flex justify-center items-center relative"
                 >
-                  PLAY NOW
-                </Button>
-              </div>
-            ))}
-            {limit < gameData.length && (
-              <LoadGames loadGames={() => navigate("/ebingo")} />
-            )}
-          </>
+                  <img
+                    src={`https://uat.888bingo.ph/${item.icon.bg}`}
+                    className="group-hover:brightness-75 duration-300 ease-in-out"
+                  />
+                  <img
+                    src={`https://uat.888bingo.ph/${item.icon.logo}`}
+                    className="group-hover:brightness-75 duration-300 ease-in-out absolute w-[75%]"
+                  />
+                  <PlayNowButton
+                    text={"PLAY NOW"}
+                    eventHandler={item.name}
+                    className="absolute group-hover:block hidden text-xs lg:text-base"
+                  />
+                </div>
+              ))}
+              {limit < gameData.length && (
+                <LoadGames loadGames={() => navigate("/ebingo")} />
+              )}
+            </>
+          ) : (
+            <div className="h-[10rem] w-[10rem] border-2 border-black rounded-lg flex justify-center items-center">
+              <p className="font-[Poppins]">No listed game.</p>
+            </div>
+          )
         ) : (
-          <div className="h-[10rem] w-[10rem] border-2 border-black rounded-lg flex justify-center items-center">
-            <p className="font-[Poppins]">No listed game.</p>
-          </div>
+          Array.from(
+            { length: window.innerWidth < 768 ? 6 : 14 },
+            (v, i) => i
+          ).map((item) => (
+            <Skeleton
+              variant="rounded"
+              className="h-[7rem] lg:h-[10rem] w-[7rem] lg:w-[10rem] rounded-lg"
+              key={item}
+            />
+          ))
         )}
       </div>
     </div>

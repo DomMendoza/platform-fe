@@ -76,7 +76,7 @@ function SideNavigation() {
             <div className="promo-container flex flex-col gap-1 ">
               {promotions.map((item, index) => (
                 <div
-                  className="w-full flex-1 flex gap-2 py-1 px-2 justify-center items-center border-2 border-blue-600 rounded-lg cursor-pointer"
+                  className="w-full flex-1 flex gap-2 py-1 px-2 justify-center items-center border-[1px] border-blue-600 rounded-lg cursor-pointer"
                   key={index}
                 >
                   <div className="icon-container">{item.icon}</div>
@@ -102,8 +102,8 @@ function SideNavigation() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-10 p-4 ">
-        <div className="logo  h-[4rem] justify-center">
+      <div className="flex flex-col gap-10 p-4 text-sm">
+        <div className="logo h-[4rem] justify-center items-center text-center text-sm">
           <p className="text-blue-900">
             Join Our Community.<br></br>
             <span className="underline cursor-pointer">HAPPY BINGO PH</span>

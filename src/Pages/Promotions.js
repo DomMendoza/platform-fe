@@ -3,6 +3,7 @@ import GamesHeroBackground from "../Components/Display/GamesHeroBackground";
 import promotionalBanner from "../Assets/promotions-banner.webp";
 import Footer from "../Layouts/Footer";
 import PromotionalCard from "../Components/Display/PromotionalCard";
+import backgroundPattern from "../Assets/background_pattern.webp";
 
 //Assets
 import dailyDeposit from "../Assets/dailyDeposit.png";
@@ -29,7 +30,13 @@ function Promotions() {
   ];
 
   return (
-    <div className="w-full flex flex-col gap-16 justify-center items-center bg-gradient-to-b from-white via-blue-400 to-indigo-100">
+    <div className="w-full flex flex-col gap-16 justify-center items-center relative">
+      <img
+        src={backgroundPattern}
+        alt="Picture"
+        className="absolute inset-0 w-full h-full object-cover -z-10 grayscale-[50%]"
+      />
+      <div className="absolute inset-0 w-full h-full object-cover -z-10 bg-gradient-to-b from-white via-blue-400 to-indigo-100 opacity-75" />
       <div className="w-full xl:px-40 h-full flex flex-col gap-5">
         <GamesHeroBackground img={promotionalBanner} />
         <div className=" flex flex-col lg:flex-row justify-between items-center gap-10 p-10">

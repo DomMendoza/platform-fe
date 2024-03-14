@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
+import backgroundPattern from "../Assets/background_pattern.webp";
 import PromotionCarousel from "../Components/Display/PromotionCarousel";
-import PopularGamesSwiper from "../Components/Display/PopularGamesSwiper";
 import MarqueeTextSlider from "../Components/Display/MarqueeTextSlider";
 
 import SlotsGames from "../Layouts/Home/SlotsGamesSection.Home";
@@ -49,12 +49,19 @@ function Home() {
   }, [casinoGameData]);
 
   return (
-    <div className="w-full flex flex-col gap-16 justify-center items-center bg-gradient-to-b from-white via-blue-400 to-indigo-100">
+    <div className="w-full flex flex-col gap-16 justify-center items-center  relative">
+      <img
+        src={backgroundPattern}
+        alt="Picture"
+        className="absolute inset-0 w-full h-full object-cover -z-10 grayscale-[50%]"
+      />
+      <div className="absolute inset-0 w-full h-full object-cover -z-10 bg-gradient-to-b from-indigo-100 via-blue-400 to-white opacity-65" />
+
       <div className="w-full xl:px-40 flex flex-col gap-5 lg:gap-10">
         <div className="border-2 border-white">
           <PromotionCarousel />
         </div>
-        <div className="bg-white px-1 mx-4 rounded-full shadow-[inset_0px_0px_8px_1px_#000000]">
+        <div className="bg-white px-1 mx-4 lg:mx-0 rounded-full shadow-[inset_0px_0px_8px_1px_#000000]">
           <MarqueeTextSlider />
         </div>
         <div className="flex flex-col mx-4 xl:mx-0 gap-14 rounded-lg">

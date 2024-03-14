@@ -18,7 +18,7 @@ function ProviderSection() {
   const { ebingoGameData, active } = useSelector((state) => state.ebingo);
 
   return (
-    <div className="h-full flex justify-center items-center gap-2 py-2 px-5 rounded-lg backdrop-blur-md bg-white/30 border-[1px] border-white ">
+    <div className="h-full flex justify-center items-center gap-2 py-2 px-5 rounded-lg backdrop-blur-md bg-white/50 border-[1px] border-white ">
       <ArrowBackIosIcon className="text-red-600 ebingoNavPrev cursor-pointer" />
       <Swiper
         breakpoints={{

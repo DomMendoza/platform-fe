@@ -87,7 +87,7 @@ export default function HamburgerMenu() {
       className="w-[280px] h-screen "
       onClick={toggleDrawer(false)}
     >
-      <div className="bg-indigo-100 w-full h-full px-3 py-5 flex flex-col justify-between">
+      <div className="bg-blue-100 w-full h-full px-3 py-5 flex flex-col justify-between">
         <div className="w-full">
           <div className="flex justify-center items-center">
             <img

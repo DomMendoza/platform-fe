@@ -28,7 +28,7 @@ function App() {
           <Route path="slots" element={<Slots />} />
           <Route path="casino" element={<Casino />} /> */}
           <Route path="promotions" element={<Promotions />} />
-          <Route path="redirect" element={<GameWindow />} />
+          <Route path="redirect/:gameName" element={<GameWindow />} />
         </Route>
       </Routes>
     </BrowserRouter>

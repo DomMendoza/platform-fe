@@ -22,7 +22,7 @@ function JackpotPrize() {
   }, [active]);
   return (
     <div className="rounded-lg flex flex-col justify-center items-center w-[70%]">
-      <p className="text-xl lg:text-2xl font-bold uppercase">
+      <p className="text-xl lg:text-3xl font-bold uppercase">
         {provider && provider} casino jackpot
       </p>
       <div className="p-3 rounded-lg flex justify-center items-center gap-1 lg:gap-2">
