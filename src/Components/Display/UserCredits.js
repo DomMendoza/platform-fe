@@ -31,6 +31,10 @@ function UserCredits() {
       console.log(data.balance);
       dispatch(setWallet(data.balance));
     });
+
+    socket.on("logoutSession", () => {
+      console.log("LOGOUT SESSION")
+    })
     return () => {
       socket.disconnect();
     };
