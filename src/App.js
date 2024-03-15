@@ -24,9 +24,9 @@ function App() {
         <Route path="/" element={<Navigation />}>
           <Route index element={<Home />} />
           <Route path="ebingo" element={<Ebingo />} />
-          {/* <Route path="sports" element={<Sports />} />
+          <Route path="sports" element={<Sports />} />
           <Route path="slots" element={<Slots />} />
-          <Route path="casino" element={<Casino />} /> */}
+          <Route path="casino" element={<Casino />} />
           <Route path="promotions" element={<Promotions />} />
           <Route path="redirect/:gameName" element={<GameWindow />} />
         </Route>

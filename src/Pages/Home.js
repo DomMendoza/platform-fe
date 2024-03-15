@@ -65,8 +65,8 @@ function Home() {
           <MarqueeTextSlider />
         </div>
         <div className="flex flex-col mx-4 xl:mx-0 gap-14 rounded-lg">
-          {/* <SlotsGames />
-          <CasinoGames /> */}
+          <SlotsGames />
+          <CasinoGames />
           <EbingoGames />
         </div>
       </div>

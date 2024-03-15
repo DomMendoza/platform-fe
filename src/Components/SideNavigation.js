@@ -16,26 +16,26 @@ function SideNavigation() {
       link: "/",
       icon: <FontAwesomeIcon icon={faHouse} />,
     },
-    // {
-    //   name: "Slots",
-    //   link: "/slots",
-    //   icon: <FontAwesomeIcon icon={faCheckToSlot} />,
-    // },
-    // {
-    //   name: "Casino",
-    //   link: "/casino",
-    //   icon: <FontAwesomeIcon icon={faClover} />,
-    // },
+    {
+      name: "Slots",
+      link: "/slots",
+      icon: <FontAwesomeIcon icon={faCheckToSlot} />,
+    },
+    {
+      name: "Casino",
+      link: "/casino",
+      icon: <FontAwesomeIcon icon={faClover} />,
+    },
     {
       name: "E-Bingo",
       link: "/ebingo",
       icon: <FontAwesomeIcon icon={faDice} />,
     },
-    // {
-    //   name: "Sports",
-    //   link: "/sports",
-    //   icon: <FontAwesomeIcon icon={faBasketball} />,
-    // },
+    {
+      name: "Sports",
+      link: "/sports",
+      icon: <FontAwesomeIcon icon={faBasketball} />,
+    },
     {
       name: "Promotions",
       link: "/promotions",
