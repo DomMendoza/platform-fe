@@ -33,8 +33,8 @@ function UserCredits() {
     });
 
     socket.on("logoutSession", () => {
-      console.log("LOGOUT SESSION")
-    })
+      console.log("LOGOUT SESSION");
+    });
     return () => {
       socket.disconnect();
     };
@@ -45,9 +45,11 @@ function UserCredits() {
       <div className="h-full absolute rounded-lg right-0 flex justify-center items-center">
         <DepositModal />
       </div>
-      <div className="bg-white rounded-lg h-full pl-5 flex justify-center items-center gap-2">
-        <img src={pesoSign} className="h-[70%]" />
-        <p className="pr-[5rem] lg:pr-[7.5rem] font-[Poppins]">{wallet}</p>
+      <div className="bg-white rounded-lg h-full pl-3 lg:pl-5 mr-2 lg:mr-0 flex justify-center items-center gap-2">
+        <img src={pesoSign} className="h-[60%] lg:h-[70%]" />
+        <p className="pr-[5rem] lg:pr-[8.5rem] font-[Poppins] text-sm lg:text-base">
+          {wallet}
+        </p>
       </div>
     </div>
   );

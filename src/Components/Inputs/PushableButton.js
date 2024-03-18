@@ -13,16 +13,14 @@ function PushableButton({ text, eventHandler }) {
       }}
     >
       <Button
-        className="-translate-y-1 active:-translate-y-0 bg-black bg-gradient-to-r from-indigo-400 via-blue-500 to-indigo-500"
+        className="py-[5px] lg:py-[7px] px-[20px] lg:px-[30px] text-[.6rem] lg:text-[.75rem] -translate-y-1 active:-translate-y-0 bg-black bg-gradient-to-r from-indigo-400 via-blue-500 to-indigo-500"
         disableRipple
         style={{
           height: "100%",
           width: "100%",
-          padding: "7px 30px",
+          // padding: "7px 30px",
           borderRadius: "10px",
-          fontSize: ".75rem",
           color: "white",
-          // background: "hsl(210deg 100% 30%)",
         }}
         onClick={eventHandler}
       >

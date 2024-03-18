@@ -63,7 +63,7 @@ function TopNavigation() {
           <div className="flex lg:hidden justify-center items-center absolute lg:left-0 left-0 h-full p-2">
             <HamburgerMenu />
           </div>
-          <div className="flex justify-center items-center absolute lg:left-0 right-0 h-full">
+          <div className="flex justify-center items-center absolute lg:left-0 right-2 lg:right-0 h-full">
             <UserCredits />
           </div>
           <div className="hidden lg:flex justify-center items-center">
