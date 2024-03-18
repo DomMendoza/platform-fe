@@ -3,6 +3,7 @@ import LoadGames from "../../Components/LoadGames";
 import slotMachine from "../../Assets/slot-machine.png";
 import PlayNowButton from "../../Components/PlayNowButton";
 import { Skeleton } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -14,22 +15,8 @@ function SlotsGamesSection() {
 
   const { gameData, active } = useSelector((state) => state.slots); //load games
 
-  const [limit, setLimit] = useState(13);
-
-  useEffect(() => {
-    const updateLimit = () => {
-      const newLimit = window.innerWidth < 1024 ? 8 : 13;
-      setLimit(newLimit);
-    };
-
-    updateLimit();
-
-    window.addEventListener("resize", updateLimit);
-
-    return () => {
-      window.removeEventListener("resize", updateLimit);
-    };
-  }, []);
+  const isDesktop = useMediaQuery("(min-width:1024px)");
+  const [limit, setLimit] = useState(isDesktop ? 13 : 8);
 
   //INITIALIZE SELECTED GAMEDATA
   const { data, isLoading, isSuccess, isError, error } =
