@@ -53,12 +53,11 @@ function PlayNowButton({ text, eventHandler }) {
       className="absolute group-hover:block hidden text-xs lg:text-base"
     >
       <Button
-        className="-translate-y-1 active:-translate-y-0 bg-black bg-gradient-to-r from-indigo-400 via-blue-500 to-indigo-500 text-[.5rem] lg:text-[.75rem]"
+        className="-translate-y-1 active:-translate-y-0 bg-black bg-gradient-to-r from-indigo-400 via-blue-500 to-indigo-500 text-[.5rem] lg:text-[.75rem] py-[7px] lg:px-[30px]"
         disableRipple
         style={{
           height: "100%",
           width: "100%",
-          padding: "7px 30px",
           borderRadius: "10px",
           color: "white",
         }}
