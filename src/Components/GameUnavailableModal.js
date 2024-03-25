@@ -47,6 +47,15 @@ export default function GameUnavailableModal() {
           <p className="w-[85%] text-center text-sm lg:text-base">
             The game is currently unavailable.
           </p>
+          <Button
+            variant="contained"
+            className="bg-black hover:bg-black mt-2 w-[90%]"
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            I undestand
+          </Button>
         </Box>
       </Modal>
     </div>

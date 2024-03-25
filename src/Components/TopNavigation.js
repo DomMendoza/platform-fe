@@ -62,9 +62,14 @@ function TopNavigation() {
         <div className="bg-blue-200/50 h-[4rem] p-0 lg:px-10 flex flex-row-reverse sticky top-0 right-0 left-0 z-10 backdrop-blur-sm border-b border-blue-300 ">
           <GameUnavailableModal />
           <ExpiredSessionModal />
-          <div className="flex lg:hidden justify-center items-center absolute lg:left-0 left-0 h-full p-2">
+          <div className="flex lg:hidden justify-center items-center absolute left-0 h-full p-2">
             <HamburgerMenu />
           </div>
+          <img
+            className="object-contain w-[15%] absolute left-16 top-2 bottom-0 lg:hidden"
+            src={happyLogo}
+            alt="Happy Logo"
+          />
           <div className="flex justify-center items-center absolute lg:left-0 right-2 lg:right-0 h-full">
             <UserCredits />
           </div>
@@ -74,11 +79,11 @@ function TopNavigation() {
         </div>
       ) : (
         <div className="bg-blue-200/50 h-[4rem] p-0 lg:px-10 flex justify-between sticky top-0 right-0 left-0 z-10 backdrop-blur-sm border-b border-blue-300">
-          {/* <img
+          <img
             className="object-contain w-[15%] absolute left-2 top-3 bottom-0 lg:hidden"
             src={happyLogo}
             alt="Happy Logo"
-          /> */}
+          />
           <div className="flex lg:hidden justify-center items-center absolute lg:left-0 left-0 h-full p-2">
             <HamburgerMenu />
           </div>

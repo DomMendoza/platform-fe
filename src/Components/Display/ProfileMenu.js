@@ -1,17 +1,19 @@
 import React, { useEffect } from "react";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import LogoutIcon from "@mui/icons-material/Logout";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import Person2Icon from "@mui/icons-material/Person2";
+import PersonIcon from "@mui/icons-material/Person";
 import userAvatar from "../../Assets/userAvatar.png";
 
 //redux
 import { useSelector } from "react-redux";
 
 export default function ProfileMenu() {
+  const navigate = useNavigate();
   const { username } = useSelector((state) => state.user);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -29,7 +31,12 @@ export default function ProfileMenu() {
     window.location.reload();
   };
 
+  const handleUserProfile = () => {
+    navigate(`/profile/${username}`);
+  };
+
   const menu = [
+    { name: "Profile", logo: <PersonIcon />, function: handleUserProfile },
     { name: "Logout", logo: <LogoutIcon />, function: handleLogout },
   ];
 

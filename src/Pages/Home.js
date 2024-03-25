@@ -49,7 +49,7 @@ function Home() {
   }, [casinoGameData]);
 
   return (
-    <div className="w-full flex flex-col gap-16 justify-center items-center  relative">
+    <div className="w-full flex flex-col gap-16 justify-center items-center relative">
       <img
         src={backgroundPattern}
         alt="Picture"
