@@ -105,7 +105,7 @@ export default function HamburgerMenu() {
                 />
               </div>
               <div className="font-[Poppins]">
-                <p className="text-lg font-bold">Josh Mojica</p>
+                <p className="text-lg font-bold">{username}</p>
                 <p
                   className="text-sm underline cursor-pointer"
                   onClick={() => navigate(`/profile/${username}`)}
