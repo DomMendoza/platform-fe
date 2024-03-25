@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import pesoSign from "../../Assets/pesoSign.png";
 import DepositModal from "../DepositModal";
+import Cookies from "js-cookie";
 
 //Socket
 import { io } from "socket.io-client";
@@ -8,6 +9,7 @@ import { io } from "socket.io-client";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { setWallet } from "../../Slice/UserSlice";
+import { handleExpiredSessionOpen } from "../../Slice/ModalSlice";
 
 function UserCredits() {
   const dispatch = useDispatch();
@@ -33,8 +35,11 @@ function UserCredits() {
     });
 
     socket.on("logoutSession", () => {
-      console.log("LOGOUT SESSION");
+      Cookies.set("token", "", { expires: new Date(0) });
+      Cookies.set("player_id", "", { expires: new Date(0) });
+      dispatch(handleExpiredSessionOpen());
     });
+
     return () => {
       socket.disconnect();
     };

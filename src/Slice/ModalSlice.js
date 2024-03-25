@@ -5,6 +5,7 @@ const initialState = {
   registerOpen: false,
   otpOpen: false,
   unavailableOpen: false,
+  expiredSessionOpen: false,
 };
 
 const ModalSlice = createSlice({
@@ -35,6 +36,12 @@ const ModalSlice = createSlice({
     handleUnavailableClose: (state) => {
       state.unavailableOpen = false;
     },
+    handleExpiredSessionOpen: (state) => {
+      state.expiredSessionOpen = true;
+    },
+    handleExpiredSessionClose: (state) => {
+      state.expiredSessionOpen = false;
+    },
   },
 });
 
@@ -47,6 +54,8 @@ export const {
   handleOtpClose,
   handleUnavailableOpen,
   handleUnavailableClose,
+  handleExpiredSessionOpen,
+  handleExpiredSessionClose,
 } = ModalSlice.actions;
 
 export default ModalSlice.reducer;

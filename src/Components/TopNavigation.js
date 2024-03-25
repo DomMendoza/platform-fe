@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../Slice/UserSlice";
 import GameUnavailableModal from "./GameUnavailableModal";
 import HamburgerMenu from "./HamburgerMenu";
+import ExpiredSessionModal from "./ExpiredSessionModal";
 
 function TopNavigation() {
   const token = Cookies.get("token");
@@ -60,6 +61,7 @@ function TopNavigation() {
       {token ? (
         <div className="bg-blue-200/50 h-[4rem] p-0 lg:px-10 flex flex-row-reverse sticky top-0 right-0 left-0 z-10 backdrop-blur-sm border-b border-blue-300 ">
           <GameUnavailableModal />
+          <ExpiredSessionModal />
           <div className="flex lg:hidden justify-center items-center absolute lg:left-0 left-0 h-full p-2">
             <HamburgerMenu />
           </div>
