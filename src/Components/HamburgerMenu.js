@@ -97,24 +97,30 @@ export default function HamburgerMenu() {
       <div className="bg-blue-100 w-full h-full px-3 py-6 flex flex-col justify-between">
         <div className="flex flex-col gap-5 p-4">
           <div className="promo-nav flex flex-col gap-5">
-            <div className="promo-container flex flex-col gap-4 p-1">
-              <div className="size-20">
-                <img
-                  src={userAvatar}
-                  className="h-full ring-offset-2 ring-4 rounded-full"
-                />
-              </div>
-              <div className="font-[Poppins]">
-                <p className="text-lg font-bold">{username}</p>
-                <p
-                  className="text-sm underline cursor-pointer"
-                  onClick={() => navigate(`/profile/${username}`)}
-                >
-                  view profile
-                </p>
-              </div>
-            </div>
-            <div className="border-[1px] border-gray-400" />
+            {token && (
+              <>
+                <div className="promo-container flex flex-col gap-4 p-1">
+                  <div className="size-20">
+                    <img
+                      src={userAvatar}
+                      className="h-full ring-offset-2 ring-4 rounded-full"
+                      alt="User Avatar"
+                    />
+                  </div>
+                  <div className="font-[Poppins]">
+                    <p className="text-lg font-bold">{username}</p>
+                    <p
+                      className="text-sm underline cursor-pointer"
+                      onClick={() => navigate(`/profile/${username}`)}
+                    >
+                      view profile
+                    </p>
+                  </div>
+                </div>
+                <div className="border-[1px] border-gray-400" />
+              </>
+            )}
+
             <div className="nav-container flex flex-col gap-2">
               {navLinks.map((item, index) => (
                 <PushableButtonNav
@@ -128,7 +134,7 @@ export default function HamburgerMenu() {
           </div>
         </div>
         <div className=" p-4 space-y-5">
-          <div className="promo-container flex flex-col gap-1 ">
+          <div className="promo-container lg:flex flex-col gap-1 hidden ">
             {promotions.map((item, index) => (
               <div
                 className="w-full flex-1 flex gap-2 py-1 px-2 justify-center items-center border-[1px] border-blue-600 rounded-lg cursor-pointer"

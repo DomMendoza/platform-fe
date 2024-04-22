@@ -4,23 +4,23 @@
 .swiper-button-next:after {
   display: none;
 }
-.swiper-pagination-bullet{
-    background-color: white !important;
+.swiper-pagination-bullet {
+  background-color: white !important;
 }
 .header-style-bold {
-  font-family: 'Poppins';
+  font-family: "Poppins";
   text-transform: uppercase;
   font-weight: 600;
   font-size: 1.1rem;
 }
 .header-style {
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-weight: 600;
   justify-content: center;
 }
 .cell-style {
-font-family: 'Poppins';
-text-align: center;
+  font-family: "Poppins";
+  text-align: center;
 }
 
 @keyframes fadeMe {
@@ -41,8 +41,9 @@ text-align: center;
   }
 }
 
-.container-home{
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+.container-home {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
 @keyframes spin-slow {
@@ -59,4 +60,15 @@ text-align: center;
 
 .animate-spin-slow {
   animation: spin-slow 1s linear infinite;
+}
+
+.header-style {
+  font-family: "Poppins";
+  font-weight: 600;
+  justify-content: center;
+  background-color: hsl(210deg 100% 90%);
+}
+.cell-style {
+  font-family: "Poppins";
+  text-align: center;
 }
