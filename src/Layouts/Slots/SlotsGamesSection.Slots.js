@@ -26,19 +26,11 @@ function SlotsGamesSection() {
     if (isLoading) {
       // console.log("loading...");
     } else if (isSuccess) {
-      if (active.provider === "dg") {
-        const transformedData = Object.values(data.data).reduce(
-          (acc, val) => acc.concat(val),
-          []
-        );
-        dispatch(setGameData(transformedData));
-      } else {
-        const transformedData = Object.values(data.data).reduce(
-          (acc, val) => acc.concat(val),
-          []
-        );
-        dispatch(setGameData(transformedData));
-      }
+      const transformedData = Object.values(data.data).reduce(
+        (acc, val) => acc.concat(val),
+        []
+      );
+      dispatch(setGameData(transformedData));
     } else if (isError) {
       console.log(error);
     }
@@ -56,33 +48,41 @@ function SlotsGamesSection() {
           Slot Games
         </p>
       </div>
-      <div className="game-grid grid grid-cols-3 lg:grid-cols-7 lg:grid-rows-2 place-items-center gap-5 ">
-        {gameData.length > 0 ? (
-          <>
-            {gameData.slice(0, limit).map((item, index) => (
-              <div
-                key={index}
-                className="group flex justify-center items-center relative "
-              >
-                <img
-                  src={`https://uat.888bingo.ph/${item.icon.bg}`}
-                  className="group-hover:brightness-75 duration-300 ease-in-out"
-                />
-                <img
-                  src={`https://uat.888bingo.ph/${item.icon.logo}`}
-                  className="group-hover:brightness-75 duration-300 ease-in-out absolute w-[75%]"
-                />
-                <PlayNowButton
-                  text={"PLAY NOW"}
-                  eventHandler={item.name}
-                  className="absolute group-hover:block hidden text-xs lg:text-base"
-                />
-              </div>
-            ))}
-            {limit < gameData.length && (
-              <LoadGames loadGames={() => setLimit(limit + 14)} />
-            )}
-          </>
+      <div className="game-grid grid grid-cols-3 lg:grid-cols-5 xl:grid-cols-7 place-items-center gap-5 ">
+        {isSuccess ? (
+          gameData.length > 0 ? (
+            <>
+              {gameData.slice(0, limit).map((item, index) => (
+                <div
+                  key={index}
+                  className="group flex justify-center items-center relative"
+                >
+                  <img
+                    src={`https://uat.888bingo.ph/${item.icon.bg}`}
+                    className="group-hover:brightness-75 duration-300 ease-in-out"
+                  />
+                  <img
+                    src={`https://uat.888bingo.ph/${item.icon.logo}`}
+                    className="group-hover:brightness-75 duration-300 ease-in-out absolute w-[75%]"
+                  />
+                  <PlayNowButton
+                    text={"PLAY NOW"}
+                    eventHandler={item.name}
+                    className="absolute group-hover:block hidden text-xs lg:text-base"
+                  />
+                </div>
+              ))}
+              {limit < gameData.length && (
+                <LoadGames loadGames={() => setLimit(limit + 14)} />
+              )}
+            </>
+          ) : (
+            <div className="h-[10rem] w-[10rem] border-2 border-black rounded-lg flex justify-center items-center">
+              <p className="font-[Poppins]">No listed game.</p>
+            </div>
+          )
+        ) : isError ? (
+          <p className="text-xl font-bold font-['Poppins']">Coming soon.</p>
         ) : (
           Array.from(
             { length: window.innerWidth < 768 ? 6 : 14 },

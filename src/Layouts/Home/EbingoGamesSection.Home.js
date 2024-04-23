@@ -171,6 +171,8 @@ function EbingoGames() {
               <p className="font-[Poppins]">No listed game.</p>
             </div>
           )
+        ) : isError ? (
+          <p className="text-xl font-bold font-['Poppins']">Coming soon.</p>
         ) : (
           Array.from(
             { length: window.innerWidth < 768 ? 6 : 14 },

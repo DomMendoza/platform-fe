@@ -23,31 +23,31 @@ const initialState = {
     {
       provider: "jili",
       logo: jili,
-      link: "https://uat.888bingo.ph/api/games/1671070084897",
+      link: "",
       jackpot: 24654326,
     },
     {
       provider: "cq9",
       logo: cq9,
-      link: "https://uat.888bingo.ph/api/games/1671070084897",
+      link: "",
       jackpot: 454324523,
     },
     {
       provider: "fachai",
       logo: fachai,
-      link: "https://uat.888bingo.ph/api/games/1671070084897",
+      link: "",
       jackpot: 35467358,
     },
     {
       provider: "jdb",
       logo: jdb,
-      link: "https://uat.888bingo.ph/api/games/1671070084897",
+      link: "",
       jackpot: 21315345,
     },
     {
       provider: "playtech",
       logo: playtech_1,
-      link: "https://uat.888bingo.ph/api/games/1671070084897",
+      link: "",
       jackpot: 13436146,
     },
   ], //assets of each provider
