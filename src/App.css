@@ -7,21 +7,6 @@
 .swiper-pagination-bullet {
   background-color: white !important;
 }
-.header-style-bold {
-  font-family: "Poppins";
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-.header-style {
-  font-family: "Poppins";
-  font-weight: 600;
-  justify-content: center;
-}
-.cell-style {
-  font-family: "Poppins";
-  text-align: center;
-}
 
 @keyframes fadeMe {
   from {
@@ -62,11 +47,31 @@
   animation: spin-slow 1s linear infinite;
 }
 
+/* AG grid styles */
+/* .ag-center-cols-container {
+  min-width: 100%;
+} */
+
 .header-style {
   font-family: "Poppins";
   font-weight: 600;
   justify-content: center;
   background-color: hsl(210deg 100% 90%);
+}
+
+.header-style-bold {
+  font-family: "Poppins";
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.ag-header-cell-label {
+  justify-content: center;
+}
+.header-style {
+  font-family: "Poppins";
+  font-weight: 600;
+  justify-content: center;
 }
 .cell-style {
   font-family: "Poppins";

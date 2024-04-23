@@ -7,6 +7,7 @@ import totalDeposit from "../../Assets/deposit.webp";
 
 //redux
 import { useSelector } from "react-redux";
+import DepositModal2 from "../DepositModal2";
 
 function PersonalInformation() {
   const { username, wallet, email, phone, birthdate } = useSelector(
@@ -35,14 +36,7 @@ function PersonalInformation() {
                 {username}
               </p>
               <div className="flex flex-col lg:flex-row justify-center items-center gap-2">
-                {/* <p className="font-bold text-sm xl:text-base">₱ {wallet} </p>
-                  <DepositModalProfile /> */}
-                <Button
-                  variant="contained"
-                  className="bg-green-600 hover:bg-green-600 text-xs"
-                >
-                  Deposit
-                </Button>
+                <DepositModal2 />
                 <Button
                   variant="outlined"
                   className="text-xs text-white border-white"

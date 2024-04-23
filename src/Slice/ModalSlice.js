@@ -6,6 +6,11 @@ const initialState = {
   otpOpen: false,
   unavailableOpen: false,
   expiredSessionOpen: false,
+  personalInfoOpen: false,
+  accountVerOpen: false,
+  phoneVerOpen: false,
+  transacPassOpen: false,
+  loginPassOpen: false,
 };
 
 const ModalSlice = createSlice({
@@ -42,6 +47,37 @@ const ModalSlice = createSlice({
     handleExpiredSessionClose: (state) => {
       state.expiredSessionOpen = false;
     },
+    // Profile Progress
+    handlePersonalInfoOpen: (state) => {
+      state.personalInfoOpen = true;
+    },
+    handlePersonalInfoClose: (state) => {
+      state.personalInfoOpen = false;
+    },
+    handleAccountVerOpen: (state) => {
+      state.accountVerOpen = true;
+    },
+    handleAccountVerClose: (state) => {
+      state.accountVerOpen = false;
+    },
+    handlePhoneVerOpen: (state) => {
+      state.phoneVerOpen = true;
+    },
+    handlePhoneVerClose: (state) => {
+      state.phoneVerOpen = false;
+    },
+    handleTransacPassOpen: (state) => {
+      state.transacPassOpen = true;
+    },
+    handleTransacPassClose: (state) => {
+      state.transacPassOpen = false;
+    },
+    handleLoginPassOpen: (state) => {
+      state.loginPassOpen = true;
+    },
+    handleLoginPassClose: (state) => {
+      state.loginPassOpen = false;
+    },
   },
 });
 
@@ -56,6 +92,16 @@ export const {
   handleUnavailableClose,
   handleExpiredSessionOpen,
   handleExpiredSessionClose,
+  handlePersonalInfoOpen,
+  handlePersonalInfoClose,
+  handleAccountVerOpen,
+  handleAccountVerClose,
+  handlePhoneVerOpen,
+  handlePhoneVerClose,
+  handleTransacPassOpen,
+  handleTransacPassClose,
+  handleLoginPassOpen,
+  handleLoginPassClose,
 } = ModalSlice.actions;
 
 export default ModalSlice.reducer;

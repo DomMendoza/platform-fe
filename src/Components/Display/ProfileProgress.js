@@ -4,8 +4,103 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import ScreenLockPortraitIcon from "@mui/icons-material/ScreenLockPortrait";
 import WifiPasswordIcon from "@mui/icons-material/WifiPassword";
 import PasswordIcon from "@mui/icons-material/Password";
+import ProgressModal from "../ProgressModal";
+
+// components
+import Login from "../../Layouts/Login";
+import PersonalInfo from "../ProfileProgress/PersonalInfo";
+
+//redux
+import { useSelector } from "react-redux";
+import {
+  handlePersonalInfoOpen,
+  handlePersonalInfoClose,
+  handleAccountVerOpen,
+  handleAccountVerClose,
+  handlePhoneVerOpen,
+  handlePhoneVerClose,
+  handleTransacPassOpen,
+  handleTransacPassClose,
+  handleLoginPassOpen,
+  handleLoginPassClose,
+} from "../../Slice/ModalSlice";
 
 function ProfileProgress() {
+  const {
+    personalInfoOpen,
+    accountVerOpen,
+    phoneVerOpen,
+    transacPassOpen,
+    loginPassOpen,
+  } = useSelector((state) => ({
+    personalInfoOpen: state.modal.personalInfoOpen,
+    accountVerOpen: state.modal.accountVerOpen,
+    phoneVerOpen: state.modal.phoneVerOpen,
+    transacPassOpen: state.modal.transacPassOpen,
+    loginPassOpen: state.modal.loginPassOpen,
+  }));
+
+  const modalConfigs = [
+    {
+      openAction: handlePersonalInfoOpen,
+      closeAction: handlePersonalInfoClose,
+      selector: personalInfoOpen,
+      icon: <FingerprintIcon />,
+      title: "Personal Information",
+      subtitle: "Complete the personal information.",
+      component: <PersonalInfo />,
+    },
+    {
+      openAction: handleAccountVerOpen,
+      closeAction: handleAccountVerClose,
+      selector: accountVerOpen,
+      icon: <AdminPanelSettingsIcon />,
+      title: "Account Verification",
+      subtitle: "Complete the personal information.",
+      component: <PersonalInfo />,
+    },
+    {
+      openAction: handlePhoneVerOpen,
+      closeAction: handlePhoneVerClose,
+      selector: phoneVerOpen,
+      icon: <ScreenLockPortraitIcon />,
+      title: "Phone Verification",
+      subtitle: "Bind your phone to retrieve password.",
+      component: <PersonalInfo />,
+    },
+    {
+      openAction: handleTransacPassOpen,
+      closeAction: handleTransacPassClose,
+      selector: transacPassOpen,
+      icon: <WifiPasswordIcon />,
+      title: "Transaction Password",
+      subtitle: "Verify identity for any fund operation.",
+      component: <PersonalInfo />,
+    },
+    {
+      openAction: handleLoginPassOpen,
+      closeAction: handleLoginPassClose,
+      selector: loginPassOpen,
+      icon: <PasswordIcon />,
+      title: "Login Password",
+      subtitle: "Verify identity for any fund operation.",
+      component: <PersonalInfo />,
+    },
+  ];
+
+  const modals = modalConfigs.map((config) => (
+    <ProgressModal
+      key={config.title}
+      open={config.openAction}
+      close={config.closeAction}
+      selector={config.selector}
+      icon={config.icon}
+      title={config.title}
+      subtitle={config.subtitle}
+      component={config.component}
+    />
+  ));
+
   return (
     <div className="rounded-lg bg-indigo-100 flex flex-col lg:flex-row gap-2 py-4 px-2 h-full">
       <div className="left-container flex-1 flex flex-col gap-2 px-1">
@@ -23,71 +118,7 @@ function ProfileProgress() {
         </div>
       </div>
       <div className="right-container lg:w-[75%] w-full grid grid-cols-5 px-2 ">
-        <div className="categories flex flex-col xl:flex-row items-center justify-center xl:justify-start px-1 h-full gap-2">
-          <div className="size-10 xl:size-12 rounded-full border-[1px] border-blue-600 flex justify-center items-center">
-            <FingerprintIcon />
-          </div>
-          <div className="xl:flex-1">
-            <p className="text-[9px] lg:text-xs xl:text-sm font-bold text-center xl:text-start">
-              Personal Information
-            </p>
-            <p className="text-[10px] hidden xl:block">
-              Complete the personal information.
-            </p>
-          </div>
-        </div>
-        <div className="categories flex flex-col xl:flex-row items-center justify-center xl:justify-start px-2 h-full gap-2">
-          <div className="size-10 xl:size-12 rounded-full border-[1px] border-blue-600 flex justify-center items-center">
-            <AdminPanelSettingsIcon />
-          </div>
-          <div className="xl:flex-1">
-            <p className="text-[9px] lg:text-xs xl:text-sm font-bold text-center xl:text-start">
-              Account Verification
-            </p>
-            <p className="text-[10px] hidden xl:block">
-              Complete the personal information.
-            </p>
-          </div>
-        </div>
-        <div className="categories flex flex-col xl:flex-row items-center justify-center xl:justify-start px-2 h-full gap-2">
-          <div className="size-10 xl:size-12 rounded-full border-[1px] border-blue-600 flex justify-center items-center">
-            <ScreenLockPortraitIcon />
-          </div>
-          <div className="xl:flex-1">
-            <p className="text-[9px] lg:text-xs xl:text-sm font-bold text-center xl:text-start">
-              Phone Verification
-            </p>
-            <p className="text-[10px] hidden xl:block">
-              Bind your phone to retrieve password.
-            </p>
-          </div>
-        </div>
-        <div className="categories flex flex-col xl:flex-row items-center justify-center xl:justify-start px-2 h-full gap-2">
-          <div className="size-10 xl:size-12 rounded-full border-[1px] border-blue-600 flex justify-center items-center">
-            <WifiPasswordIcon />
-          </div>
-          <div className="xl:flex-1">
-            <p className="text-[9px] lg:text-xs xl:text-sm font-bold text-center xl:text-start">
-              Transaction Password
-            </p>
-            <p className="text-[10px] hidden xl:block">
-              Verify identity for any fund operation
-            </p>
-          </div>
-        </div>
-        <div className="categories flex flex-col xl:flex-row items-center justify-center xl:justify-start px-2 h-full gap-2">
-          <div className="size-10 xl:size-12 rounded-full border-[1px] border-blue-600 flex justify-center items-center">
-            <PasswordIcon />
-          </div>
-          <div className="xl:flex-1">
-            <p className="text-[9px] lg:text-xs xl:text-sm font-bold text-center xl:text-start">
-              Login Password
-            </p>
-            <p className="text-[10px] hidden xl:block">
-              Verify identity for any fund operation
-            </p>
-          </div>
-        </div>
+        {modals}
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import PushableButton from "../Components/Inputs/PushableButton";
+import PushableButton from "./Inputs/PushableButton";
 import TextField from "@mui/material/TextField";
 import gcash_logo from "../Assets/gcash-logo.webp";
 import gcash_logo_white from "../Assets/gcash-logo-white.webp";
@@ -31,7 +31,7 @@ const methodArray = [
 ];
 const amountArray = ["1", "2", "3", "4", "5", "6", "7", "8"];
 
-export default function DepositModal() {
+export default function DepositModal2() {
   const token = Cookies.get("token");
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -71,18 +71,13 @@ export default function DepositModal() {
 
   return (
     <div>
-      <div className="hidden lg:block">
-        <PushableButton text={"Deposit"} eventHandler={handleOpen} />
-      </div>
-      <div className="lg:hidden">
-        <IconButton
-          aria-label="add"
-          className="bg-blue-500 hover:bg-blue-500"
-          onClick={handleOpen}
-        >
-          <AddIcon sx={{ color: "white" }} />
-        </IconButton>
-      </div>
+      <Button
+        variant="contained"
+        className="bg-green-600 hover:bg-green-600 text-xs"
+        onClick={handleOpen}
+      >
+        Deposit
+      </Button>
 
       <Modal
         open={open}
